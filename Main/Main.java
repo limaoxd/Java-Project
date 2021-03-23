@@ -1,11 +1,11 @@
 import java.util.*;
+import java.math.BigInteger;
+import static java.lang.System.out;
 
-public class Class{
+public class Main{
+
     public static void main(String[] args){
-        
-        Class hi = new Class();
-        System.out.println(hi.port);
-        System.out.println(Class.port);
-        
+        out.println("test");  
     }
+
 }
