@@ -4,6 +4,6 @@ NCKU CSIE
 
 Program-Design II project
 
-well,We don't know how to start.
+Well,We don't know how to start.
 
 <(_ _)>
