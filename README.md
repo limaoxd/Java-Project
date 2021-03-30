@@ -4,6 +4,6 @@ NCKU CSIE
 
 Program-Design II project
 
-Well,we don't know how to start.
+我們可能要做成2D橫向了~~
 
 <(_ _)>
