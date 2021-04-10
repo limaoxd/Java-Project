@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;  
 import javafx.stage.Stage;  
+import javafx.stage.Screen;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -47,6 +48,11 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = false;
       });
 
+      Screen screen = Screen.getPrimary();
+      double dpi = screen.getDpi();
+      double scaleX = screen.getOutputScaleX();
+      double scaleY = screen.getOutputScaleY();
+
       stage.setFullScreen(true);
       stage.setTitle("test");  
       stage.setScene(scene);
@@ -55,9 +61,12 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
+            out.println(stage.getWidth()+" "+stage.getHeight());
+            p.SetScreenSize(stage.getWidth(),stage.getHeight());
             p.act();
          }
       };
+
       mainloop.start();
    }
 
@@ -68,6 +77,7 @@ class Player {
    private double[] Pos = {0,0};
    private double[] Motion = {0,0};
    private int Width = 0,Height = 0;
+   private double[] ratio={1,1};
    
    public boolean Rightpress = false ,Leftpress = false ,Jump = false,Jumped = false;
    public ImageView player;
@@ -83,15 +93,15 @@ class Player {
    public void Setpos(double x,double y){
       Pos[0] = x;
       Pos[1] = y;
-      player.setX(Pos[0]-Width/2); 
-      player.setY(1080-Pos[1]-Height); 
+      player.setFitWidth(Width*ratio[0]); 
+      player.setFitHeight(Height*ratio[1]);
+      player.setX((Pos[0]-Width/2)*ratio[0]); 
+      player.setY((1080-Pos[1]-Height)*ratio[1]); 
    }
 
    public void Setsize(int w,int h){
       Width = w;
       Height = h;
-      player.setFitWidth(Width); 
-      player.setFitHeight(Height);
    }
 
    public double Getx(){
@@ -100,6 +110,11 @@ class Player {
 
    public double Gety(){
       return Pos[1];
+   }
+
+   public void SetScreenSize(double x,double y){
+      ratio[0]=x/1920;
+      ratio[1]=y/1080;
    }
 
    public void act(){
