@@ -6,14 +6,20 @@ import static java.lang.System.out;
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException; 
 import javafx.application.Application; 
+
 import javafx.scene.Group; 
 import javafx.scene.Scene; 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;  
-import javafx.stage.Stage;  
-import javafx.animation.AnimationTimer;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
+import javafx.scene.image.PixelWriter;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color; 
+
+import javafx.stage.Stage;  
+import javafx.animation.AnimationTimer;
 
 public class Main extends Application {  
    public static Player p;
@@ -67,6 +73,7 @@ public class Main extends Application {
 
 class Player {  
    private Image image;
+   private WritableImage flipimage;
    private double[] Pos = {0,0};
    private double[] Motion = {0,0};
    private int Width = 0,Height = 0;
@@ -77,10 +84,23 @@ class Player {
 
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
+      int w=(int)image.getWidth(),h=(int)image.getHeight();
+      flipimage = new WritableImage(w,h);
+
+      PixelReader pixelReader = image.getPixelReader(); 
+      PixelWriter writer = flipimage.getPixelWriter(); 
+
+      for(int col=0;col<h;col++){
+         for(int row=0;row<w;row++){
+            Color color = pixelReader.getColor(row,col); 
+            writer.setColor(w-row-1, col, color);
+         }
+      }
       player = new ImageView(image);
+      player.setSmooth(true);
+      player.setPreserveRatio(true);
       Setsize(336,231);
-      Setpos(x,y);
-      player.setPreserveRatio(true); 
+      Setpos(x,y); 
    }
 
    public void Setpos(double x,double y){
@@ -133,11 +153,12 @@ class Player {
 
       if(Rightpress == true){
          Motion[0] = 3;
+         player.setImage(image);
       }
       else if(Leftpress == true){
          Motion[0] = -3;
+         player.setImage(flipimage);
       }
-
       Setpos(Getx()+Motion[0],Gety()+Motion[1]);
    }
 }
