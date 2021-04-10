@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;  
 import javafx.stage.Stage;  
-import javafx.stage.Screen;
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -52,11 +51,6 @@ public class Main extends Application {
       double dpi = screen.getDpi();
       double scaleX = screen.getOutputScaleX();
       double scaleY = screen.getOutputScaleY();
-
-      stage.setFullScreen(true);
-      stage.setTitle("test");  
-      stage.setScene(scene);
-      stage.show(); 
 
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
