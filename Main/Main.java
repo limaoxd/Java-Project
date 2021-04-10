@@ -47,10 +47,10 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = false;
       });
 
-      Screen screen = Screen.getPrimary();
-      double dpi = screen.getDpi();
-      double scaleX = screen.getOutputScaleX();
-      double scaleY = screen.getOutputScaleY();
+      stage.setFullScreen(true);
+      stage.setTitle("test");  
+      stage.setScene(scene);
+      stage.show(); 
 
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
