@@ -55,7 +55,6 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
-            out.println(stage.getWidth()+" "+stage.getHeight());
             p.SetScreenSize(stage.getWidth(),stage.getHeight());
             p.act();
          }
