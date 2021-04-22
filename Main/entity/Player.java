@@ -25,33 +25,6 @@ public class Player extends entity{
       Setpos(x,y); 
    }
 
-   public void Setpos(double x,double y){
-      Pos[0] = x;
-      Pos[1] = y;
-      sprite.setFitWidth(Width*ratio[0]); 
-      sprite.setFitHeight(Height*ratio[1]);
-      sprite.setX((Pos[0]-Width/2)*ratio[0]); 
-      sprite.setY((1080-Pos[1]-Height)*ratio[1]); 
-   }
- 
-   public void Setsize(int w,int h){
-      Width = w;
-      Height = h;
-   }
- 
-   public void SetScreenSize(double x,double y){
-      ratio[0]=x/1920;
-      ratio[1]=y/1080;
-   }
-
-   public double Getx(){
-      return Pos[0];
-   }
-
-   public double Gety(){
-      return Pos[1];
-   }
-   
    @Override
    public void act(){
        
