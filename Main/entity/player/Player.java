@@ -12,20 +12,23 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color; 
 
 public class Player {  
-    private Image image;
-    private WritableImage flipimage;
+    private Image image ,imageS;
+    private WritableImage flipimage ,flipimageS;
     private double[] Pos = {0,0};
     private double[] Motion = {0,0};
     private int Width = 0,Height = 0;
     private double[] ratio={1,1};
     
-    public boolean Rightpress = false ,Leftpress = false ,Jump = false ,Jumped = false ,landing = false;
+    public boolean Rightpress = false ,Leftpress = false ,Jump = false ,Jumped = false ,landing = false ,Spress = false ,isRight = true;
     public ImageView player;
  
     public Player(int x,int y) throws FileNotFoundException{
        image = new Image(new FileInputStream("pic/test1.png"));
        int w=(int)image.getWidth(),h=(int)image.getHeight();
        flipimage = new WritableImage(w,h);
+       imageS = new Image(new FileInputStream("pic/test2.png"));
+       int wS=(int)imageS.getWidth(),hS=(int)imageS.getHeight();
+       flipimageS = new WritableImage(wS,hS);
  
        PixelReader pixelReader = image.getPixelReader(); 
        PixelWriter writer = flipimage.getPixelWriter(); 
@@ -36,6 +39,17 @@ public class Player {
              writer.setColor(w-row-1, col, color);
           }
        }
+
+       PixelReader pixelReaderS = imageS.getPixelReader(); 
+       PixelWriter writerS = flipimageS.getPixelWriter(); 
+ 
+       for(int col=0;col<hS;col++){
+          for(int row=0;row<wS;row++){
+             Color color = pixelReaderS.getColor(row,col); 
+             writerS.setColor(wS-row-1, col, color);
+          }
+       }
+
        player = new ImageView(image);
        player.setSmooth(true);
        player.setPreserveRatio(true);
@@ -96,10 +110,29 @@ public class Player {
        if(Rightpress == true){
           Motion[0] = 3;
           player.setImage(image);
+          isRight = true;
        }
        else if(Leftpress == true){
           Motion[0] = -3;
           player.setImage(flipimage);
+          isRight = false;
+       }
+
+       if(Spress == true){
+         if(isRight == true){
+            player.setImage(imageS);
+          }
+          else{
+            player.setImage(flipimageS);
+          }
+       }
+       else{
+          if(isRight == true){
+            player.setImage(image);
+          }
+          else{
+            player.setImage(flipimage);
+          }
        }
        Setpos(Getx()+Motion[0],Gety()+Motion[1]);
     }
