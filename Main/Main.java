@@ -1,5 +1,4 @@
-
-import entity.player.Player;
+import entity.*;
 import java.util.*;
 import java.math.BigInteger;
 import static java.lang.System.out;
@@ -16,7 +15,7 @@ import javafx.scene.input.KeyEvent;
 
 import javafx.stage.Stage;  
 import javafx.animation.AnimationTimer;
-//commit test
+
 public class Main extends Application {  
    public static Player p;
 
@@ -32,20 +31,18 @@ public class Main extends Application {
    public void start(Stage stage) throws FileNotFoundException {   
 
       //Creating a Group object  
-      Group root = new Group(p.player);  
+      Group root = new Group(p.sprite);  
       
       //Creating a scene object
       Scene scene = new Scene(root, 1920, 1080);  
 
       scene.setOnKeyPressed(ke -> {
-         if (ke.getCode() == KeyCode.S) p.Spress = true;
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
       });
 
       scene.setOnKeyReleased(ke -> {
-         if (ke.getCode() == KeyCode.S) p.Spress = false;
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = false;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = false;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = false;
