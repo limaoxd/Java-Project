@@ -11,21 +11,52 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color; 
 
-public class Player extends entity{  
- 
-   public Player(int x,int y) throws FileNotFoundException{
-      image = new Image(new FileInputStream("pic/test1.png"));
+public class Enemy04 extends entity{  
+
+   private int t=0,rand=(int)(Math.random()*3);
+   private int jt=0,jrand=(int)(Math.random()*10);
+   
+   public Enemy04(int x,int y) throws FileNotFoundException{
+      image = new Image(new FileInputStream("pic/test5.png"));
       flipimage = GetFlip(image);
       sprite = new ImageView(image);
       sprite.setSmooth(true);
       sprite.setPreserveRatio(true);
-      Setsize(191,263);
+      Setsize(186,232);
       Setpos(x,y); 
    }
 
    @Override
    public void act(){
-       
+      t++;
+      t%=60;
+      if(t==59){
+         rand=(int)(Math.random()*3);
+      }
+
+      jt++;
+      jt%=60;
+      if(jt==29){
+         jrand=(int)(Math.random()*6);
+      }
+
+      if(rand == 0){
+         Rightpress = true;
+         Leftpress = false;
+      }else if (rand == 1){
+         Rightpress = false;
+         Leftpress = true;
+      }else{
+         Rightpress = false;
+         Leftpress = false;
+      }
+
+      if(jrand == 5){
+         Jump = true;
+      }else{
+         Jump = false;
+      }
+
       if(Motion[0] != 0){
          if(Motion[0]>0.1) Motion[0]-=0.1;
          else if(Motion[0]<-0.1) Motion[0]+=0.1;

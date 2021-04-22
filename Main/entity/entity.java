@@ -11,14 +11,14 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color; 
 
-public class entity {  
+public class entity { 
    protected Image image;
    protected WritableImage flipimage;
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
    protected int Width = 0,Height = 0;
    protected  double[] ratio={1,1};
-   
+   public boolean Rightpress = false ,Leftpress = false ,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
 
    public entity() throws FileNotFoundException{}
