@@ -11,7 +11,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color; 
 
-public class Enemy01 extends entity{  
+public class Enemy01 extends Entity{  
 
    private int t=0,rand=(int)(Math.random()*3);
    private int jt=0,jrand=(int)(Math.random()*10);

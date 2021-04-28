@@ -16,7 +16,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;  
 import javafx.animation.AnimationTimer;
 
-public class Main extends Application {  
+public class Main extends Application {
+   List<Entity> entity = new ArrayList<>();
    public static Player p;
    public static Enemy01 e;
    public static Enemy02 e2;
@@ -29,6 +30,11 @@ public class Main extends Application {
       e2 = new Enemy02(640,400);
       e3 = new Enemy03(1120,350);
       e4 = new Enemy04(1280,500);
+      entity.add(p);
+      entity.add(e);
+      entity.add(e2);
+      entity.add(e3);
+      entity.add(e4);
    }
 
    public static void main(String args[]) throws FileNotFoundException{ 
@@ -64,16 +70,10 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
-            p.SetScreenSize(stage.getWidth(),stage.getHeight());
-            p.act();
-            e.SetScreenSize(stage.getWidth(),stage.getHeight());
-            e.act();
-            e2.SetScreenSize(stage.getWidth(),stage.getHeight());
-            e2.act();
-            e3.SetScreenSize(stage.getWidth(),stage.getHeight());
-            e3.act();
-            e4.SetScreenSize(stage.getWidth(),stage.getHeight());
-            e4.act();
+            for(Entity E : entity){
+               E.SetScreenSize(stage.getWidth(),stage.getHeight());
+               E.act();
+            }
          }
       };
 

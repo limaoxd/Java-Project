@@ -11,7 +11,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color; 
 
-public class Player extends entity{  
+public class Player extends Entity{  
  
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
@@ -21,6 +21,17 @@ public class Player extends entity{
       sprite.setPreserveRatio(true);
       Setsize(191,263);
       Setpos(x,y); 
+   }
+
+   public void Camera(double sp){
+      World[0]+=sp;
+
+      if(World[0]-Cam[0]>80*ratio[0]){
+         Cam[0]=World[0]-80*ratio[0];
+      }
+      else if(World[0]-Cam[0]<-80*ratio[0]){
+         Cam[0]=World[0]+80*ratio[0];
+      }
    }
 
    @Override
@@ -48,13 +59,16 @@ public class Player extends entity{
       }else if(landing == true) Jumped = false;
  
       if(Rightpress == true){
-         Motion[0] = 3;
+         Motion[0] = 4;
          sprite.setImage(image);
       }
       else if(Leftpress == true){
-         Motion[0] = -3;
+         Motion[0] = -4;
          sprite.setImage(flipimage);
       }
+
+      Camera(Motion[0]);
+
       Setpos(Getx()+Motion[0],Gety()+Motion[1]);
     }
  }
