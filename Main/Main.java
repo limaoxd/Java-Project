@@ -100,7 +100,7 @@ public class Main extends Application {
                         }
                         if(E.Gety()+E.Geth()<B.Gety()+15) E.collidep=2;
                      }
-                     else{
+                     else if(E.Getmy()<=0){
                         E.collidep=1;
                         E.Setpos(E.Getx(),B.Geth()+B.Gety());
                      } 

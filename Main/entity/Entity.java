@@ -71,6 +71,14 @@ public class Entity {
       return Height;
    }
 
+   public double Getmx(){
+      return Motion[0];
+   }
+
+   public double Getmy(){
+      return Motion[1];
+   }
+
    public WritableImage GetFlip(Image img){
       int w=(int)image.getWidth(),h=(int)image.getHeight();
       WritableImage flipimg = new WritableImage(w,h); 
