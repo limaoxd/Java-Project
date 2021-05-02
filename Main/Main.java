@@ -104,7 +104,7 @@ public class Main extends Application {
                      }
                      else{
                         E.collidep=1;
-                        //E.Setpos(E.Getx(),B.Geth()+B.Gety()+1);
+                        E.Setpos(E.Getx(),B.Geth()+B.Gety()+1);
                      } 
                   }
                }
