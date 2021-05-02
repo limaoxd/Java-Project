@@ -9,7 +9,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color; 
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 
 public class Entity {
    protected Image image;
@@ -18,8 +20,11 @@ public class Entity {
    protected double[] Motion = {0,0};
    protected int Width = 0,Height = 0;
    protected  double[] ratio={1,1};
+   public int collideh;
+   public int collidep;
    public boolean Rightpress = false ,Leftpress = false ,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
+   public Rectangle hitbox;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
 
@@ -28,10 +33,16 @@ public class Entity {
    public void Setpos(double x,double y){
       Pos[0] = x;
       Pos[1] = y;
-      sprite.setFitWidth(Width*ratio[0]); 
+      
+      hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
+      hitbox.setY((1080-Pos[1]-Height)*ratio[1]);
+      hitbox.setWidth(Width*ratio[0]); 
+      hitbox.setHeight(Height*ratio[1]);
+
+      sprite.setFitWidth(Width*ratio[0]);
       sprite.setFitHeight(Height*ratio[1]);
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
-      sprite.setY((1080-Pos[1]-Height)*ratio[1]); 
+      sprite.setY((1080-Pos[1]-Height)*ratio[1]);
    }
 
    public void Setsize(int w,int h){
@@ -50,6 +61,14 @@ public class Entity {
 
    public double Gety(){
       return Pos[1];
+   }
+
+   public double Getw(){
+      return Width;
+   }
+   
+   public double Geth(){
+      return Height;
    }
 
    public WritableImage GetFlip(Image img){

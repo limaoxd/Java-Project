@@ -18,23 +18,33 @@ import javafx.animation.AnimationTimer;
 
 public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
+   List<Entity> obj = new ArrayList<>();
    public static Player p;
-   public static Enemy01 e;
+   /*public static Enemy01 e;
    public static Enemy02 e2;
    public static Enemy03 e3;
-   public static Enemy04 e4;
+   public static Enemy04 e4;*/
+   public static Block b,b1,b2,b3; 
 
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
-      e = new Enemy01(800,300);
+      /*e = new Enemy01(800,300);
       e2 = new Enemy02(640,400);
       e3 = new Enemy03(1120,350);
-      e4 = new Enemy04(1280,500);
+      e4 = new Enemy04(1280,500);*/
+      b = new Block(100,200,1100,0);
+      b1 = new Block(100,400,1200,0);
+      b2 = new Block(200,600,1350,0);
+      b3 = new Block(300,900,1600,0);
       entity.add(p);
-      entity.add(e);
+      /*entity.add(e);
       entity.add(e2);
       entity.add(e3);
-      entity.add(e4);
+      entity.add(e4);*/
+      obj.add(b);
+      obj.add(b1);
+      obj.add(b2);
+      obj.add(b3);
    }
 
    public static void main(String args[]) throws FileNotFoundException{ 
@@ -45,8 +55,17 @@ public class Main extends Application {
    public void start(Stage stage) throws FileNotFoundException {   
 
       //Creating a Group object  
-      Group root = new Group(p.sprite,e.sprite,e2.sprite,e3.sprite,e4.sprite);  
+      Group root = new Group();  
       
+      for(Entity B : obj){
+         root.getChildren().add(B.hitbox);
+      }
+
+      for(Entity E : entity){
+         root.getChildren().add(E.hitbox);
+         root.getChildren().add(E.sprite);
+      }
+
       //Creating a scene object
       Scene scene = new Scene(root, 1920, 1080);  
 
@@ -70,6 +89,29 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
+            for(Entity E : entity){
+               E.collideh=0;
+               E.collidep=0;
+               for(Entity B : obj){
+                  if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
+                     if(E.Gety()<(B.Geth()+B.Gety()-15)){
+                        if(E.Getx()<B.Getx()){
+                           E.collideh=1;
+                        }else if(E.Getx()>B.Getx()){
+                           E.collideh=2;
+                        }
+                        if(E.Gety()+E.Geth()<B.Gety()+30) E.collidep=2;
+                     }
+                     else{
+                        E.collidep=1;
+                     }
+                  }
+               }
+            }
+            for(Entity B : obj){
+               B.SetScreenSize(stage.getWidth(),stage.getHeight());
+               B.act();
+            }
             for(Entity E : entity){
                E.SetScreenSize(stage.getWidth(),stage.getHeight());
                E.act();
