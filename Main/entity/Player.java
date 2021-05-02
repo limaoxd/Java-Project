@@ -17,11 +17,11 @@ public class Player extends Entity{
       sprite = new ImageView(image);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      /*hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);*/
+      hitbox.setStroke(Color.LIGHTGREEN);
+      hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
       sprite.setPreserveRatio(true);
-      Setsize(191,263);
+      Setsize(100,200);
       Setpos(x,y); 
    }
 
@@ -41,7 +41,7 @@ public class Player extends Entity{
        
       if(Jump == true && landing == true){
          if(Jumped == false){
-            Motion[1] = 15;
+            Motion[1] = 10;
             Jumped = true;
          }
       }else if(landing == true) Jumped = false;

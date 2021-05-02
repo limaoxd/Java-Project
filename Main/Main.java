@@ -1,4 +1,5 @@
 import entity.*;
+import map.*;
 import java.util.*;
 import java.math.BigInteger;
 import static java.lang.System.out;
@@ -20,31 +21,28 @@ public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
    List<Entity> obj = new ArrayList<>();
    public static Player p;
-   /*public static Enemy01 e;
-   public static Enemy02 e2;
-   public static Enemy03 e3;
-   public static Enemy04 e4;*/
-   public static Block b,b1,b2,b3; 
 
    public Main() throws FileNotFoundException{
-      p = new Player(1000,5000);
-      /*e = new Enemy01(800,300);
-      e2 = new Enemy02(640,400);
-      e3 = new Enemy03(1120,350);
-      e4 = new Enemy04(1280,500);*/
-      b = new Block(100,200,1100,0);
-      b1 = new Block(100,400,1200,0);
-      b2 = new Block(200,600,1350,0);
-      b3 = new Block(300,100,1600,700);
+      p = new Player(1000,500);
       entity.add(p);
-      /*entity.add(e);
-      entity.add(e2);
-      entity.add(e3);
-      entity.add(e4);*/
-      obj.add(b);
-      obj.add(b1);
-      obj.add(b2);
-      obj.add(b3);
+      int i = 0;
+      for(String col : MAP.map1){
+         double length=0;
+         for(int j = 0;j<col.length();j++){
+            if(col.charAt(j)=='1'){
+               length++;
+               if(j==col.length()-1){
+                  Block block = new Block((int)length*100,100,100*(j+1-length/2)+50,100*(10-i));
+                  obj.add(block);
+               }
+            }else if(length>0){
+               Block block = new Block((int)length*100,100,100*(j-length/2)+50,100*(10-i));
+               obj.add(block);
+               length = 0;
+            }
+         }
+         i++;
+      }
    }
 
    public static void main(String args[]) throws FileNotFoundException{ 
