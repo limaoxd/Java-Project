@@ -27,7 +27,7 @@ public class Main extends Application {
    public static Block b,b1,b2,b3; 
 
    public Main() throws FileNotFoundException{
-      p = new Player(1000,600);
+      p = new Player(1000,5000);
       /*e = new Enemy01(800,300);
       e2 = new Enemy02(640,400);
       e3 = new Enemy03(1120,350);
@@ -104,7 +104,7 @@ public class Main extends Application {
                      }
                      else{
                         E.collidep=1;
-                        E.Setpos(E.Getx(),B.Geth()+B.Gety()+1);
+                        E.Setpos(E.Getx(),B.Geth()+B.Gety());
                      } 
                   }
                }
