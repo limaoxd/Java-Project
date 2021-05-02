@@ -27,7 +27,7 @@ public class Main extends Application {
    public static Block b,b1,b2,b3; 
 
    public Main() throws FileNotFoundException{
-      p = new Player(960,200);
+      p = new Player(1000,600);
       /*e = new Enemy01(800,300);
       e2 = new Enemy02(640,400);
       e3 = new Enemy03(1120,350);
@@ -35,7 +35,7 @@ public class Main extends Application {
       b = new Block(100,200,1100,0);
       b1 = new Block(100,400,1200,0);
       b2 = new Block(200,600,1350,0);
-      b3 = new Block(300,900,1600,0);
+      b3 = new Block(300,100,1600,700);
       entity.add(p);
       /*entity.add(e);
       entity.add(e2);
@@ -94,17 +94,18 @@ public class Main extends Application {
                E.collidep=0;
                for(Entity B : obj){
                   if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                     if(E.Gety()<(B.Geth()+B.Gety()-15)){
+                     if(E.Gety()<(B.Geth()+B.Gety()-50)){
                         if(E.Getx()<B.Getx()){
                            E.collideh=1;
                         }else if(E.Getx()>B.Getx()){
                            E.collideh=2;
                         }
-                        if(E.Gety()+E.Geth()<B.Gety()+30) E.collidep=2;
+                        if(E.Gety()+E.Geth()<B.Gety()+15) E.collidep=2;
                      }
                      else{
                         E.collidep=1;
-                     }
+                        //E.Setpos(E.Getx(),B.Geth()+B.Gety()+1);
+                     } 
                   }
                }
             }
