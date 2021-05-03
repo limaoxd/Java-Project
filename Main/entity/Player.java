@@ -21,7 +21,7 @@ public class Player extends Entity{
       hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
       sprite.setPreserveRatio(true);
-      Setsize(100,200);
+      Setsize(100,190);
       Setpos(x,y); 
    }
 
@@ -47,11 +47,13 @@ public class Player extends Entity{
       }else if(landing == true) Jumped = false;
  
       if(Rightpress == true){
-         Motion[0] = 4;
+         if(Shift&&landing) Motion[0] = 6;
+         else if(Motion[0]<=4) Motion[0] = 4;
          sprite.setImage(image);
       }
       else if(Leftpress == true){
-         Motion[0] = -4;
+         if(Shift&&landing) Motion[0] = -6;
+         else if(Motion[0]>=-4)Motion[0] = -4;
          sprite.setImage(flipimage);
       }
       
@@ -59,15 +61,15 @@ public class Player extends Entity{
          if(Motion[0]>0.1){
             if(collideh == 1){
                Motion[0]=0;
-            }else{
-               Motion[0]-=0.1;
+            }else if(landing){
+               Motion[0]-=0.2;
             }
          } 
          else if(Motion[0]<-0.1){
             if(collideh == 2){
                Motion[0]=0;
-            }else{
-               Motion[0]+=0.1;
+            }else if(landing){
+               Motion[0]+=0.2;
             } 
          }
          else Motion[0]=0;
@@ -75,7 +77,7 @@ public class Player extends Entity{
       if(collidep == 2){
          if(Motion[1]>0) Motion[1]=0;
       }
-      if(Pos[1]<=0 || collidep == 1){
+      if(collidep == 1){
          landing = true;
          if(Motion[1]<0) Motion[1]=0;
       }else{
@@ -85,6 +87,6 @@ public class Player extends Entity{
 
       Camera(Motion[0]);
 
-      Setpos(Getx()+Motion[0],Gety()+Motion[1]);
+      Setpos(Getx()+Motion[0],Gety()+cancel(Motion[1]));
     }
  }

@@ -23,7 +23,7 @@ public class Main extends Application {
    public static Player p;
 
    public Main() throws FileNotFoundException{
-      p = new Player(1000,500);
+      p = new Player(1000,300);
       entity.add(p);
       int i = 0;
       for(String col : MAP.map1){
@@ -71,12 +71,14 @@ public class Main extends Application {
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
+         else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
       });
 
       scene.setOnKeyReleased(ke -> {
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = false;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = false;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = false;
+         else if (ke.getCode() == KeyCode.SHIFT) p.Shift = false;
       });
 
       stage.setFullScreen(true);
@@ -87,23 +89,37 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
-            for(Entity E : entity){
+            for(Entity E : entity){ //about entity fall
                E.collideh=0;
                E.collidep=0;
-               for(Entity B : obj){
-                  if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                     if(E.Gety()<(B.Geth()+B.Gety()-50)){
-                        if(E.Getx()<B.Getx()){
-                           E.collideh=1;
-                        }else if(E.Getx()>B.Getx()){
-                           E.collideh=2;
+               for(double i=0;i>=E.Getmy()&&E.Getmy()<=0;i-=0.3){
+                  E.Setpos(E.Getx(),E.Gety()-0.3);
+                  for(Entity B : obj){
+                     if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
+                        if(E.Gety()<(B.Geth()+B.Gety()-1)){
+                           if(E.Getx()<B.Getx()) E.collideh=1;
+                           else if(E.Getx()>B.Getx()) E.collideh=2;
                         }
-                        if(E.Gety()+E.Geth()<B.Gety()+15) E.collidep=2;
+                        else if(E.Getmy()<=0){
+                           E.collidep=1;
+                           E.Setpos(E.Getx(),B.Geth()+B.Gety());
+                           i=E.Getmy()-1;
+                        } 
                      }
-                     else if(E.Getmy()<=0){
-                        E.collidep=1;
-                        E.Setpos(E.Getx(),B.Geth()+B.Gety());
-                     } 
+                  }
+               }
+               if(E.Getmy()>0){
+                  for(Entity B : obj){
+                     if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
+                        if(E.Gety()<B.Gety()+B.Gety()-1){
+                           if(E.Getx()<B.Getx()) E.collideh=1;
+                           else if(E.Getx()>B.Getx()) E.collideh=2;
+                           if(E.Gety()+E.Geth()>B.Gety()&&E.Gety()+E.Geth()<B.Gety()+10){
+                              E.collidep=2;
+                              E.Setpos(E.Getx(),B.Gety()-E.Geth());
+                           }
+                        }
+                     }
                   }
                }
             }

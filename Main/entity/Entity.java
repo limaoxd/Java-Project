@@ -22,7 +22,7 @@ public class Entity {
    protected  double[] ratio={1,1};
    public int collideh;
    public int collidep;
-   public boolean Rightpress = false ,Leftpress = false ,Jump = false ,Jumped = false ,landing = false;
+   public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
    public static double[] World = {0,0};
@@ -77,6 +77,11 @@ public class Entity {
 
    public double Getmy(){
       return Motion[1];
+   }
+
+   public double cancel(double my){
+      if (my<0) my=0;
+      return my;
    }
 
    public WritableImage GetFlip(Image img){
