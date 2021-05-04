@@ -23,20 +23,25 @@ public class Main extends Application {
    public static Player p;
 
    public Main() throws FileNotFoundException{
-      p = new Player(1000,3000);
+      p = new Player(1000,200);
       entity.add(p);
       
       int i = 0;
-      for(String col : MAP.map1){   //Read map and build
+      //Read map and build
+      for(String col : MAP.map1){
          double length=0;
          for(int j = 0;j<col.length();j++){
-            if(col.charAt(j)=='1'){    // count rectangle length
+            // count rectangle length
+            if(col.charAt(j)=='1'){
                length++;
-               if(j==col.length()-1){  //If col end but number is "1"
+               //If col end but number is "1"
+               if(j==col.length()-1){
                   Block block = new Block((int)length*100,100,100*(j+1-length/2)+50,100*(MAP.map1.length-1-i));
                   obj.add(block);
                }
-            }else if(length>0){  //If read "0" stop counting
+            }
+            //If read "0" stop counting
+            else if(length>0){
                Block block = new Block((int)length*100,100,100*(j-length/2)+50,100*(MAP.map1.length-1-i));
                obj.add(block);
                length = 0;
@@ -74,7 +79,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,300);
+            p.setPos(1000,200);
             p.World[0]=0;
          }
       });
@@ -91,20 +96,27 @@ public class Main extends Application {
       stage.setScene(scene);
       stage.show();
 
+      //It can refresh screen
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
-            for(Entity E : entity){ //about entity fall
+            //Dealing entity and obj collide(falling)
+            for(Entity E : entity){
                E.collideh=0;
                E.collidep=0;
+               //Divide falling speed
                for(double i=0;i>=E.getMy()&&E.getMy()<=0;i-=0.3){
                   E.setPos(E.getX(),E.getY()-0.3);
+                  //Detect if collide obj
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
                         if(E.getY()<(B.getH()+B.getY()-1)){
+                           //Collide right
                            if(E.getX()<B.getX()) E.collideh=1;
+                           //Collide left
                            else if(E.getX()>B.getX()) E.collideh=2;
                         }
+                        //Collide down
                         else if(E.getMy()<=0){
                            E.collidep=1;
                            E.setPos(E.getX(),B.getH()+B.getY());
@@ -113,6 +125,7 @@ public class Main extends Application {
                      }
                   }
                }
+               //Dealing entity and obj collide(jump)
                if(E.getMy()>0){
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
@@ -128,6 +141,7 @@ public class Main extends Application {
                   }
                }
             }
+            //Acting everthing
             for(Entity B : obj){
                B.setScreenSize(stage.getWidth(),stage.getHeight());
                B.act();
@@ -138,7 +152,6 @@ public class Main extends Application {
             }
          }
       };
-
       mainloop.start();
    }
 
