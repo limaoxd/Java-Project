@@ -23,20 +23,21 @@ public class Main extends Application {
    public static Player p;
 
    public Main() throws FileNotFoundException{
-      p = new Player(1000,300);
+      p = new Player(1000,3000);
       entity.add(p);
+      
       int i = 0;
-      for(String col : MAP.map1){
+      for(String col : MAP.map1){   //Read map and build
          double length=0;
          for(int j = 0;j<col.length();j++){
-            if(col.charAt(j)=='1'){
+            if(col.charAt(j)=='1'){    // count rectangle length
                length++;
-               if(j==col.length()-1){
-                  Block block = new Block((int)length*100,100,100*(j+1-length/2)+50,100*(10-i));
+               if(j==col.length()-1){  //If col end but number is "1"
+                  Block block = new Block((int)length*100,100,100*(j+1-length/2)+50,100*(MAP.map1.length-1-i));
                   obj.add(block);
                }
-            }else if(length>0){
-               Block block = new Block((int)length*100,100,100*(j-length/2)+50,100*(10-i));
+            }else if(length>0){  //If read "0" stop counting
+               Block block = new Block((int)length*100,100,100*(j-length/2)+50,100*(MAP.map1.length-1-i));
                obj.add(block);
                length = 0;
             }
@@ -72,6 +73,10 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
+         else if (ke.getCode() == KeyCode.R){
+            p.setPos(1000,300);
+            p.World[0]=0;
+         }
       });
 
       scene.setOnKeyReleased(ke -> {
@@ -82,9 +87,9 @@ public class Main extends Application {
       });
 
       stage.setFullScreen(true);
-      stage.setTitle("test");  
+      stage.setTitle("test");
       stage.setScene(scene);
-      stage.show(); 
+      stage.show();
 
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
@@ -92,31 +97,31 @@ public class Main extends Application {
             for(Entity E : entity){ //about entity fall
                E.collideh=0;
                E.collidep=0;
-               for(double i=0;i>=E.Getmy()&&E.Getmy()<=0;i-=0.3){
-                  E.Setpos(E.Getx(),E.Gety()-0.3);
+               for(double i=0;i>=E.getMy()&&E.getMy()<=0;i-=0.3){
+                  E.setPos(E.getX(),E.getY()-0.3);
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                        if(E.Gety()<(B.Geth()+B.Gety()-1)){
-                           if(E.Getx()<B.Getx()) E.collideh=1;
-                           else if(E.Getx()>B.Getx()) E.collideh=2;
+                        if(E.getY()<(B.getH()+B.getY()-1)){
+                           if(E.getX()<B.getX()) E.collideh=1;
+                           else if(E.getX()>B.getX()) E.collideh=2;
                         }
-                        else if(E.Getmy()<=0){
+                        else if(E.getMy()<=0){
                            E.collidep=1;
-                           E.Setpos(E.Getx(),B.Geth()+B.Gety());
-                           i=E.Getmy()-1;
+                           E.setPos(E.getX(),B.getH()+B.getY());
+                           i=E.getMy()-1;
                         } 
                      }
                   }
                }
-               if(E.Getmy()>0){
+               if(E.getMy()>0){
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                        if(E.Gety()<B.Gety()+B.Gety()-1){
-                           if(E.Getx()<B.Getx()) E.collideh=1;
-                           else if(E.Getx()>B.Getx()) E.collideh=2;
-                           if(E.Gety()+E.Geth()>B.Gety()&&E.Gety()+E.Geth()<B.Gety()+10){
+                        if(E.getY()<B.getY()+B.getY()-1){
+                           if(E.getX()<B.getX()) E.collideh=1;
+                           else if(E.getX()>B.getX()) E.collideh=2;
+                           if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10){
                               E.collidep=2;
-                              E.Setpos(E.Getx(),B.Gety()-E.Geth());
+                              E.setPos(E.getX(),B.getY()-E.getH());
                            }
                         }
                      }
@@ -124,11 +129,11 @@ public class Main extends Application {
                }
             }
             for(Entity B : obj){
-               B.SetScreenSize(stage.getWidth(),stage.getHeight());
+               B.setScreenSize(stage.getWidth(),stage.getHeight());
                B.act();
             }
             for(Entity E : entity){
-               E.SetScreenSize(stage.getWidth(),stage.getHeight());
+               E.setScreenSize(stage.getWidth(),stage.getHeight());
                E.act();
             }
          }

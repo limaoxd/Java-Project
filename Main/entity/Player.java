@@ -13,7 +13,7 @@ public class Player extends Entity{
  
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
-      flipimage = GetFlip(image);
+      flipimage = getFlip(image);
       sprite = new ImageView(image);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
@@ -21,8 +21,8 @@ public class Player extends Entity{
       hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
       sprite.setPreserveRatio(true);
-      Setsize(100,190);
-      Setpos(x,y); 
+      setSize(100,140);
+      setPos(x,y); 
    }
 
    public void Camera(double sp){
@@ -47,13 +47,13 @@ public class Player extends Entity{
       }else if(landing == true) Jumped = false;
  
       if(Rightpress == true){
-         if(Shift&&landing) Motion[0] = 6;
-         else if(Motion[0]<=4) Motion[0] = 4;
+         if(Shift&&landing) Motion[0] = 5;
+         else if(Motion[0]<=3) Motion[0] = 3;
          sprite.setImage(image);
       }
       else if(Leftpress == true){
-         if(Shift&&landing) Motion[0] = -6;
-         else if(Motion[0]>=-4)Motion[0] = -4;
+         if(Shift&&landing) Motion[0] = -5;
+         else if(Motion[0]>=-3)Motion[0] = -3;
          sprite.setImage(flipimage);
       }
       
@@ -74,9 +74,11 @@ public class Player extends Entity{
          }
          else Motion[0]=0;
       }
+
       if(collidep == 2){
          if(Motion[1]>0) Motion[1]=0;
       }
+
       if(collidep == 1){
          landing = true;
          if(Motion[1]<0) Motion[1]=0;
@@ -87,6 +89,6 @@ public class Player extends Entity{
 
       Camera(Motion[0]);
 
-      Setpos(Getx()+Motion[0],Gety()+cancel(Motion[1]));
+      setPos(getX()+Motion[0],getY()+cancel(Motion[1]));
     }
  }

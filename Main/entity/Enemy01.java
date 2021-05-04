@@ -16,7 +16,7 @@ public class Enemy01 extends Entity{
    
    public Enemy01(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test2.png"));
-      flipimage = GetFlip(image);
+      flipimage = getFlip(image);
       sprite = new ImageView(image);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
@@ -24,8 +24,8 @@ public class Enemy01 extends Entity{
       hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
       sprite.setPreserveRatio(true);
-      Setsize(165,261);
-      Setpos(x,y); 
+      setSize(165,261);
+      setPos(x,y); 
    }
 
    @Override
@@ -95,6 +95,6 @@ public class Enemy01 extends Entity{
          landing = false;
          Motion[1]-=0.3;
       }
-      Setpos(Getx()+Motion[0],Gety()+Motion[1]);
+      setPos(getX()+Motion[0],getY()+Motion[1]);
     }
  }

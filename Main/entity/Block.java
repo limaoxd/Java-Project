@@ -13,12 +13,12 @@ public class Block extends Entity{
     public Block(int w,int h,double x,double y) throws FileNotFoundException{
         hitbox = new Rectangle();
         hitbox.setFill(Color.RED);
-        Setsize(w,h);
-        Setpos(x,y); 
+        setSize(w,h);
+        setPos(x,y); 
     }
 
     @Override
-    public void Setpos(double x,double y){
+    public void setPos(double x,double y){
         Pos[0] = x;
         Pos[1] = y;
         
@@ -29,6 +29,6 @@ public class Block extends Entity{
      }
 
     public void act(){
-        Setpos(Getx(),Gety());
+        setPos(getX(),getY());
     }
 }

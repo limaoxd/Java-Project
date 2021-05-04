@@ -30,7 +30,7 @@ public class Entity {
 
    public Entity() throws FileNotFoundException{}
 
-   public void Setpos(double x,double y){
+   public void setPos(double x,double y){
       Pos[0] = x;
       Pos[1] = y;
       
@@ -45,37 +45,37 @@ public class Entity {
       sprite.setY((1080-Pos[1]-Height)*ratio[1]);
    }
 
-   public void Setsize(int w,int h){
+   public void setSize(int w,int h){
       Width = w;
       Height = h;
    }
 
-   public void SetScreenSize(double x,double y){
+   public void setScreenSize(double x,double y){
       ratio[0]=x/1920;
       ratio[1]=y/1080;
    }
 
-   public double Getx(){
+   public double getX(){
       return Pos[0];
    }
 
-   public double Gety(){
+   public double getY(){
       return Pos[1];
    }
 
-   public double Getw(){
+   public double getW(){
       return Width;
    }
    
-   public double Geth(){
+   public double getH(){
       return Height;
    }
 
-   public double Getmx(){
+   public double getMx(){
       return Motion[0];
    }
 
-   public double Getmy(){
+   public double getMy(){
       return Motion[1];
    }
 
@@ -84,7 +84,7 @@ public class Entity {
       return my;
    }
 
-   public WritableImage GetFlip(Image img){
+   public WritableImage getFlip(Image img){
       int w=(int)image.getWidth(),h=(int)image.getHeight();
       WritableImage flipimg = new WritableImage(w,h); 
       PixelReader pixelReader = img.getPixelReader(); 
