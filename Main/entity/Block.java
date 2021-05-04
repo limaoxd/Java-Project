@@ -23,8 +23,8 @@ public class Block extends Entity{
         Pos[1] = y;
         
         hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
-        hitbox.setY((1080-Pos[1]-Height)*ratio[1]);
-        hitbox.setWidth(Width*ratio[0]); 
+        hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+        hitbox.setWidth(Width*ratio[0]);
         hitbox.setHeight(Height*ratio[1]);
      }
 

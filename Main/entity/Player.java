@@ -25,14 +25,22 @@ public class Player extends Entity{
       setPos(x,y); 
    }
 
-   public void Camera(double sp){
+   public void Camera(double sp,double sp1){
       World[0]+=sp;
+      World[1]+=sp1;
 
       if(World[0]-Cam[0]>80*ratio[0]){
          Cam[0]=World[0]-80*ratio[0];
       }
       else if(World[0]-Cam[0]<-80*ratio[0]){
          Cam[0]=World[0]+80*ratio[0];
+      }
+
+      if(World[1]-Cam[1]>300*ratio[0]){
+         Cam[1]=World[1]-300*ratio[0];
+      }
+      else if(World[1]-Cam[1]<0){
+         Cam[1]=World[1];
       }
    }
 
@@ -86,8 +94,7 @@ public class Player extends Entity{
          landing = false;
          Motion[1]-=0.3;
       }
-
-      Camera(Motion[0]);
+      Camera(Motion[0],Motion[1]);
 
       setPos(getX()+Motion[0],getY()+cancel(Motion[1]));
     }
