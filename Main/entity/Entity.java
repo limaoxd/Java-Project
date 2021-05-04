@@ -21,7 +21,7 @@ public class Entity {
    protected int Width = 0,Height = 0;
    protected  double[] ratio={1,1};
    public int collideh;
-   public int collidep;
+   public int collidev;
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;

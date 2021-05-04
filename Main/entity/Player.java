@@ -36,8 +36,8 @@ public class Player extends Entity{
          Cam[0]=World[0]+80*ratio[0];
       }
 
-      if(World[1]-Cam[1]>300*ratio[0]){
-         Cam[1]=World[1]-300*ratio[0];
+      if(World[1]-Cam[1]>350*ratio[0]){
+         Cam[1]=World[1]-350*ratio[0];
       }
       else if(World[1]-Cam[1]<0){
          Cam[1]=World[1];
@@ -83,11 +83,11 @@ public class Player extends Entity{
          else Motion[0]=0;
       }
 
-      if(collidep == 2){
+      if(collidev == 2){
          if(Motion[1]>0) Motion[1]=0;
       }
 
-      if(collidep == 1){
+      if(collidev == 1){
          landing = true;
          if(Motion[1]<0) Motion[1]=0;
       }else{

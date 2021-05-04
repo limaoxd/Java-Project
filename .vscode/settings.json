@@ -1,4 +1,5 @@
 {
+    "terminal.integrated.fontFamily": "Consolas NF",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
         "c:\\Users\\leo90\\javafx-sdk-16\\lib\\javafx.base.jar",

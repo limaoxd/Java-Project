@@ -77,7 +77,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,150);
+            p.setPos(1000,200);
             p.Cam[0]=0;
             p.Cam[1]=0;
             p.World[0]=0;
@@ -104,7 +104,7 @@ public class Main extends Application {
             //Dealing entity and obj collide(falling)
             for(Entity E : entity){
                E.collideh=0;
-               E.collidep=0;
+               E.collidev=0;
                //Divide falling speed
                for(double i=0;i>=E.getMy()&&E.getMy()<=0;i-=0.3){
                   E.setPos(E.getX(),E.getY()-0.3);
@@ -119,7 +119,7 @@ public class Main extends Application {
                         }
                         //Collide down
                         else if(E.getMy()<=0){
-                           E.collidep=1;
+                           E.collidev=1;
                            E.setPos(E.getX(),B.getH()+B.getY());
                            E.setMy(i);
                            i--;
@@ -135,7 +135,7 @@ public class Main extends Application {
                            if(E.getX()<B.getX()) E.collideh=1;
                            else if(E.getX()>B.getX()) E.collideh=2;
                            if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10){
-                              E.collidep=2;
+                              E.collidev=2;
                               E.setPos(E.getX(),B.getY()-E.getH());
                            }
                         }
@@ -145,8 +145,7 @@ public class Main extends Application {
             }
             //Acting everthing
             for(Entity E : entity){
-               E.setScreenSize(stage.getWidth(),stage.getHeight());
-               E.act();
+\               E.act();
             }
 
             for(Entity B : obj){
