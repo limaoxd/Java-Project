@@ -22,7 +22,7 @@ public class Main extends Application {
    List<Entity> obj = new ArrayList<>();
    public static Player p;
    public Main() throws FileNotFoundException{
-      p = new Player(1000,100);
+      p = new Player(1000,300);
       entity.add(p);
       int i = 0;
       //Read map and build
@@ -77,7 +77,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,110);
+            p.setPos(1000,310);
             p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
