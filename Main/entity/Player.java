@@ -36,8 +36,8 @@ public class Player extends Entity{
          Cam[0]=World[0]+80*ratio[0];
       }
 
-      if(World[1]-Cam[1]>350*ratio[0]){
-         Cam[1]=World[1]-350*ratio[0];
+      if(World[1]-Cam[1]>400*ratio[0]){
+         Cam[1]=World[1]-400*ratio[0];
       }
       else if(World[1]-Cam[1]<0){
          Cam[1]=World[1];

@@ -77,7 +77,8 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,100);
+            p.setPos(1000,110);
+            p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
             p.World[0]=0;
@@ -121,7 +122,7 @@ public class Main extends Application {
                         else if(E.getMy()<=0){
                            E.collidev=1;
                            E.setPos(E.getX(),B.getH()+B.getY());
-                           //E.setMy(i);
+                           E.setMy(i);
                            i--;
                         } 
                      }
