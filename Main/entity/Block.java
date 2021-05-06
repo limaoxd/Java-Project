@@ -12,7 +12,7 @@ import javafx.scene.shape.Rectangle;
 public class Block extends Entity{
     public Block(int w,int h,double x,double y) throws FileNotFoundException{
         hitbox = new Rectangle();
-        hitbox.setFill(Color.RED);
+        hitbox.setFill(Color.GREY);
         setSize(w,h);
         setPos(x,y); 
     }
