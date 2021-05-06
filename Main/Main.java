@@ -22,7 +22,7 @@ public class Main extends Application {
    List<Entity> obj = new ArrayList<>();
    public static Player p;
    public Main() throws FileNotFoundException{
-      p = new Player(1000,300);
+      p = new Player(1000,100);
       entity.add(p);
       int i = 0;
       //Read map and build
@@ -77,7 +77,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,310);
+            p.setPos(1000,110);
             p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
@@ -121,8 +121,8 @@ public class Main extends Application {
                         //Collide down
                         else if(E.getMy()<=0){
                            E.collidev=1;
-                           E.setPos(E.getX(),B.getH()+B.getY());
                            E.setMy(i);
+                           E.setPos(E.getX(),B.getH()+B.getY());
                            i--;
                         } 
                      }
@@ -137,6 +137,8 @@ public class Main extends Application {
                            else if(E.getX()>B.getX()) E.collideh=2;
                            if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10){
                               E.collidev=2;
+                              //out.println(E.getMy());
+                              //E.setMy(E.getMy()+(E.getY()-B.getY()+E.getH()));
                               E.setPos(E.getX(),B.getY()-E.getH());
                            }
                         }
