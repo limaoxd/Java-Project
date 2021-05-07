@@ -109,7 +109,7 @@ public class Entity {
 
    public boolean Isinrange(Entity B){
       boolean inrange  = false;
-      if(this.getX()-40<B.getX()+B.getW()/2&&this.getX()+40>B.getX()-B.getW()/2){
+      if(this.getX()-35<B.getX()+B.getW()/2&&this.getX()+35>B.getX()-B.getW()/2){
          inrange = true;
       }
       return inrange;
