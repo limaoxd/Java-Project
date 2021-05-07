@@ -21,8 +21,9 @@ public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
    List<Entity> obj = new ArrayList<>();
    public static Player p;
+
    public Main() throws FileNotFoundException{
-      p = new Player(1000,100);
+      p = new Player(960,200);
       entity.add(p);
       int i = 0;
       //Read map and build
@@ -39,14 +40,13 @@ public class Main extends Application {
       //Creating a Group object  
       Group root = new Group();  
       
-      for(Entity B : obj){
-         root.getChildren().add(B.hitbox);
-      }
+      obj.forEach(B -> root.getChildren().add(B.hitbox));
 
-      for(Entity E : entity){
-         root.getChildren().add(E.hitbox);
-         root.getChildren().add(E.sprite);
-      }
+      entity.forEach(E-> {
+            root.getChildren().add(E.hitbox);
+            root.getChildren().add(E.sprite);
+      });
+
 
       //Creating a scene object
       Scene scene = new Scene(root, 1920, 1080);  
@@ -57,7 +57,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(1000,110);
+            p.setPos(960,200);
             p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
@@ -92,22 +92,21 @@ public class Main extends Application {
                   //Detect if collide obj
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                        if(E.getY()<(B.getH()+B.getY()-1)){
+                        if(E.getY()<(B.getH()+B.getY()-10)){
                            //Collide right
                            if(E.getX()<B.getX()) {
                               E.collideh=1;
-                              E.setPos(E.getX(),E.getY());
+                              E.setPos(B.getX()-B.getW()/2-E.getW()/2,E.getY());
                            }
                            //Collide left
                            else if(E.getX()>B.getX()) {
                               E.collideh=2;
-                              E.setPos(E.getX(),E.getY());
+                              E.setPos(B.getX()+B.getW()/2+E.getW()/2,E.getY());
                            }
                         }
                         //Collide down
-                        else if(E.getMy()<=0){
+                        else if(E.getMy()<=0 && E.Isinrange(B)){
                            E.collidev=1;
-                           E.setMy(i);
                            E.setPos(E.getX(),B.getH()+B.getY());
                            i--;
                         } 
@@ -118,14 +117,12 @@ public class Main extends Application {
                if(E.getMy()>0){
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                        if(E.getY()<B.getY()+B.getY()-1){
+                        if(E.getY()<B.getY()+B.getY()-10){
                            if(E.getX()<B.getX()) E.collideh=1;
                            else if(E.getX()>B.getX()) E.collideh=2;
-                           if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10){
+                           if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10&& E.Isinrange(B)){
                               E.collidev=2;
-                              //out.println(E.getMy());
-                              //E.setMy(E.getMy()+(E.getY()-B.getY()+E.getH()));
-                              E.setPos(E.getX(),B.getY()-E.getH());
+                              E.setPos(E.getX(),B.getY()-E.getH()-1);
                            }
                         }
                      }
@@ -133,15 +130,8 @@ public class Main extends Application {
                }
             }
             //Acting everthing
-            for(Entity E : entity){
-               E.setScreenSize(stage.getWidth(),stage.getHeight());
-               E.act();
-            }
-
-            for(Entity B : obj){
-               B.setScreenSize(stage.getWidth(),stage.getHeight());
-               B.act();
-            }
+            entity.forEach(E -> E.act(stage.getWidth(),stage.getHeight()));
+            obj.forEach(B -> B.act(stage.getWidth(),stage.getHeight()));
          }
       };
       mainloop.start();

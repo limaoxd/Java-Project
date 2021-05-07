@@ -44,8 +44,9 @@ public class Player extends Entity{
    }
 
    @Override
-   public void act(){
-       
+   public void act(double x,double y){
+      setScreenSize(x,y);
+
       if(Jump == true && landing == true){
          if(Jumped == false){
             Motion[1] = 12;

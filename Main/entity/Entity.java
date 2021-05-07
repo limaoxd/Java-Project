@@ -107,5 +107,13 @@ public class Entity {
       return flipimg;
    }
 
-   public void act(){}
+   public boolean Isinrange(Entity B){
+      boolean inrange  = false;
+      if(this.getX()-45<B.getX()+B.getW()/2&&this.getX()+45>B.getX()-B.getW()/2){
+         inrange = true;
+      }
+      return inrange;
+   }
+
+   public void act(double x,double y){}
 }

@@ -41,6 +41,7 @@ public class Block extends Entity{
                     obj.add(block);
                     length_1 = 0;
                 }
+
                 if(col.charAt(j)=='2'){
                     length_2++;
                     //If col end but number is "2"
@@ -68,9 +69,11 @@ public class Block extends Entity{
         hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
         hitbox.setWidth(Width*ratio[0]);
         hitbox.setHeight(Height*ratio[1]);
-     }
+    }
 
-    public void act(){
+    @Override
+    public void act(double x,double y){
+        setScreenSize(x,y);
         setPos(getX(),getY());
     }
 }
