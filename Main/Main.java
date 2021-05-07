@@ -26,27 +26,7 @@ public class Main extends Application {
       entity.add(p);
       int i = 0;
       //Read map and build
-      for(String col : MAP.map1){
-         double length=0;
-         for(int j = 0;j<col.length();j++){
-            // count rectangle length
-            if(col.charAt(j)=='1'){
-               length++;
-               //If col end but number is "1"
-               if(j==col.length()-1){
-                  Block block = new Block((int)length*100,100,100*(j+1-length/2)+50,100*(MAP.map1.length-1-i));
-                  obj.add(block);
-               }
-            }
-            //If read "0" stop counting
-            else if(length>0){
-               Block block = new Block((int)length*100,100,100*(j-length/2)+50,100*(MAP.map1.length-1-i));
-               obj.add(block);
-               length = 0;
-            }
-         }
-         i++;
-      }
+      Block.createBlock(obj);
    }
 
    public static void main(String args[]) throws FileNotFoundException{ 
@@ -114,9 +94,15 @@ public class Main extends Application {
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
                         if(E.getY()<(B.getH()+B.getY()-1)){
                            //Collide right
-                           if(E.getX()<B.getX()) E.collideh=1;
+                           if(E.getX()<B.getX()) {
+                              E.collideh=1;
+                              E.setPos(E.getX(),E.getY());
+                           }
                            //Collide left
-                           else if(E.getX()>B.getX()) E.collideh=2;
+                           else if(E.getX()>B.getX()) {
+                              E.collideh=2;
+                              E.setPos(E.getX(),E.getY());
+                           }
                         }
                         //Collide down
                         else if(E.getMy()<=0){
