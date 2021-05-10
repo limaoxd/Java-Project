@@ -18,7 +18,7 @@ public class Trigger extends Entity{
         sprite = new ImageView(image);
         sprite.setSmooth(true);
         sprite.setPreserveRatio(true);
-        setSize(100,140);
+        setSize(100,150);
         setPos(x,y);  
     }
     
@@ -30,11 +30,36 @@ public class Trigger extends Entity{
     
     public void act(double x,double y,double getX){
         setScreenSize(x, y);
-        if (Math.abs(getX()-getX)<10) {
-            System.out.println("Don't touch me");
-            show();
+        boolean flip = false;
+        boolean passThrough  = false;
+        if (Math.abs(getX()-getX)<150 && getX()-getX>0) {
+            flip = true;
+            passThrough = false;
+            flipimage(flip,passThrough);
+        }else if(Math.abs(getX()-getX)>150 && getX()-getX>0){
+            flip = false;
+            passThrough = false;
+            flipimage(flip,passThrough);
+        }else if(Math.abs(getX()-getX)<150 && getX()-getX<0){
+            flip = true;
+            passThrough = true;
+            flipimage(flip,passThrough);
+        }else if(Math.abs(getX()-getX)>150 && getX()-getX<0){
+            flip = false;
+            passThrough = true;
+            flipimage(flip,passThrough);
         }
         setPos(getX(),getY());
+    }
+
+    public void flipimage(boolean flip,boolean passThrough){
+        if(flip || passThrough){
+            if(flip && passThrough) sprite.setScaleX(1);
+            else sprite.setScaleX(-1);
+        }else if(!(flip && passThrough)){
+            sprite.setScaleX(1);
+        }
+        
     }
 
     @Override
@@ -44,7 +69,7 @@ public class Trigger extends Entity{
         sprite.setFitWidth(Width*ratio[0]);
         sprite.setFitHeight(Height*ratio[1]);
         sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
-        sprite.setY((1080-Pos[1]-Height)*ratio[1]);
+        sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
     }
 
     public void setScreenSize(double x,double y){
