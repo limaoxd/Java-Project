@@ -20,11 +20,15 @@ import javafx.animation.AnimationTimer;
 public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
    List<Entity> obj = new ArrayList<>();
+   List<Trigger> trigger = new ArrayList<>();
    public static Player p;
+   public static Trigger t;
 
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
+      t = new Trigger(1750,250);
       entity.add(p);
+      trigger.add(t);
       int i = 0;
       //Read map and build
       Block.createBlock(obj);
@@ -46,6 +50,7 @@ public class Main extends Application {
             root.getChildren().add(E.hitbox);
             root.getChildren().add(E.sprite);
       });
+      trigger.forEach((T -> root.getChildren().add(T.sprite)));
 
 
       //Creating a scene object
@@ -132,6 +137,8 @@ public class Main extends Application {
             //Acting everthing
             entity.forEach(E -> E.act(stage.getWidth(),stage.getHeight()));
             obj.forEach(B -> B.act(stage.getWidth(),stage.getHeight()));
+            trigger.forEach(T -> T.act(stage.getWidth(),stage.getHeight(), p.getX()));
+
          }
       };
       mainloop.start();

@@ -28,7 +28,7 @@ public class Enemy01 extends Entity{
       setPos(x,y); 
    }
 
-   @Override
+  
    public void act(){
       t++;
       t%=60;
