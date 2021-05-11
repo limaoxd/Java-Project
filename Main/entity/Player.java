@@ -17,16 +17,16 @@ public class Player extends Entity{
       sprite = new ImageView(image);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);
+      //hitbox.setStroke(Color.LIGHTGREEN);
+      //hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
-      sprite.setPreserveRatio(true);
+      //sprite.setPreserveRatio(true);
       setSize(100,140);
       setPos(x,y); 
    }
 
    public void Camera(){
-      World[0]=Pos[0]-1000;
+      World[0]=Pos[0]-960;
       World[1]=Pos[1]-100;
 
       if(World[0]-Cam[0]>80*ratio[0]){

@@ -93,16 +93,16 @@ public class Main extends Application {
          public void handle(long t) {
             //calculate the framerate
             long oldFrameTime = frameTimes[frameTimeIndex] ;
-                frameTimes[frameTimeIndex] = now ;
-                frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length ;
-                if (frameTimeIndex == 0) {
-                    arrayFilled = true ;
-                }
-                if (arrayFilled) {
-                    long elapsedNanos = now - oldFrameTime ;
-                    long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
-                    frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
-                }
+            frameTimes[frameTimeIndex] = now ;
+            frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length ;
+            if (frameTimeIndex == 0) {
+               arrayFilled = true ;
+            }
+            if (arrayFilled) {
+               long elapsedNanos = now - oldFrameTime ;
+               long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
+               frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
+            }
 
 
             //Dealing entity and obj collide(falling)
