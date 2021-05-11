@@ -23,6 +23,10 @@ public class Main extends Application {
    List<Trigger> trigger = new ArrayList<>();
    public static Player p;
    public static Trigger t;
+   public static double frameRate;
+   private final long[] frameTimes = new long[100];
+   private int frameTimeIndex = 0 ;
+   private boolean arrayFilled = false ;
 
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
@@ -87,6 +91,20 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
+            //calculate the framerate
+            long oldFrameTime = frameTimes[frameTimeIndex] ;
+                frameTimes[frameTimeIndex] = now ;
+                frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length ;
+                if (frameTimeIndex == 0) {
+                    arrayFilled = true ;
+                }
+                if (arrayFilled) {
+                    long elapsedNanos = now - oldFrameTime ;
+                    long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
+                    frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
+                }
+
+
             //Dealing entity and obj collide(falling)
             for(Entity E : entity){
                E.collideh=0;
