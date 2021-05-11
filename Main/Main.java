@@ -104,7 +104,7 @@ public class Main extends Application {
                long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
                frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
                frameRate = Math.round(frameRate);
-               if(frameRate <60) frameRatio = 1;
+               if(frameRate <=60) frameRatio = 1;
 
                else frameRatio = 60/frameRate;
             }
