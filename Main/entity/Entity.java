@@ -12,7 +12,6 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-
 public class Entity {
    protected Image image;
    protected WritableImage flipimage;
@@ -25,6 +24,7 @@ public class Entity {
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
+   public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
 

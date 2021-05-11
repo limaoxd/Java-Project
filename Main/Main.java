@@ -26,6 +26,7 @@ public class Main extends Application {
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
+   private double frameRatio = 0;
    private boolean arrayFilled = false ;
 
    public Main() throws FileNotFoundException{
@@ -33,7 +34,6 @@ public class Main extends Application {
       t = new Trigger(1750,250);
       entity.add(p);
       trigger.add(t);
-      int i = 0;
       //Read map and build
       Block.createBlock(obj);
    }
@@ -93,25 +93,29 @@ public class Main extends Application {
          public void handle(long t) {
             //calculate the framerate
             long oldFrameTime = frameTimes[frameTimeIndex] ;
-            frameTimes[frameTimeIndex] = now ;
+            frameTimes[frameTimeIndex] = t ;
             frameTimeIndex = (frameTimeIndex + 1) % frameTimes.length ;
+
             if (frameTimeIndex == 0) {
                arrayFilled = true ;
             }
             if (arrayFilled) {
-               long elapsedNanos = now - oldFrameTime ;
+               long elapsedNanos = t - oldFrameTime ;
                long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
                frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
-            }
+               frameRate = Math.round(frameRate);
+               if(frameRate <60) frameRatio = 1;
 
+               else frameRatio = 60/frameRate;
+            }
 
             //Dealing entity and obj collide(falling)
             for(Entity E : entity){
                E.collideh=0;
                E.collidev=0;
                //Divide falling speed
-               for(double i=0;i>=E.getMy()&&E.getMy()<=0;i-=0.3){
-                  E.setPos(E.getX(),E.getY()-0.3);
+               for(double i=0;i>=E.getMy()&&E.getMy()<=0;i-=0.3*frameRatio){
+                  E.setPos(E.getX(),E.getY()-0.3*frameRatio);
                   //Detect if collide obj
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
@@ -153,6 +157,8 @@ public class Main extends Application {
                }
             }
             //Acting everthing
+            Entity.frameRate = frameRatio;
+
             entity.forEach(E -> E.act(stage.getWidth(),stage.getHeight()));
             obj.forEach(B -> B.act(stage.getWidth(),stage.getHeight()));
             trigger.forEach(T -> T.act(stage.getWidth(),stage.getHeight(), p.getX()));

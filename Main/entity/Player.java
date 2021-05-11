@@ -55,13 +55,13 @@ public class Player extends Entity{
       }else if(landing == true) Jumped = false;
  
       if(Rightpress == true){
-         if(Shift&&landing) Motion[0] = 5;
-         else if(Motion[0]<=3) Motion[0] = 3;
+         if(Shift&&landing) Motion[0] = 8;
+         else if(Motion[0]<=3) Motion[0] = 4;
          sprite.setImage(image);
       }
       else if(Leftpress == true){
-         if(Shift&&landing) Motion[0] = -5;
-         else if(Motion[0]>=-3)Motion[0] = -3;
+         if(Shift&&landing) Motion[0] = -8;
+         else if(Motion[0]>=-3)Motion[0] = -4;
          sprite.setImage(flipimage);
       }
       
@@ -92,10 +92,10 @@ public class Player extends Entity{
          if(Motion[1]<0) Motion[1]=0;
       }else{
          landing = false;
-         Motion[1]-=0.3;
+         Motion[1]-=0.3*frameRate;
       }
       Camera();
-
-      setPos(getX()+Motion[0],getY()+cancel(Motion[1]));
-    }
+      //System.out.println(frameRate);
+      setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
+   }
  }
