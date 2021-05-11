@@ -8,60 +8,95 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Scale;
 
 public class Trigger extends Entity{
-
+    private boolean turnround = false;
+    private boolean encounter = false;
     
 
     public Trigger(double x,double y) throws FileNotFoundException {
         image = new Image(new FileInputStream("pic/test3.png"));
         sprite = new ImageView(image);
+        flipimage = getFlip(image);
         sprite.setSmooth(true);
         sprite.setPreserveRatio(true);
         setSize(100,150);
         setPos(x,y);  
     }
     
-    
-    public void show(){
-        
-        setSize(500,700);
-    }
-    
     public void act(double x,double y,double getX){
         setScreenSize(x, y);
         boolean flip = false;
         boolean passThrough  = false;
-        if (Math.abs(getX()-getX)<150 && getX()-getX>0) {
-            flip = true;
-            passThrough = false;
-            flipimage(flip,passThrough);
-        }else if(Math.abs(getX()-getX)>150 && getX()-getX>0){
-            flip = false;
-            passThrough = false;
-            flipimage(flip,passThrough);
-        }else if(Math.abs(getX()-getX)<150 && getX()-getX<0){
-            flip = true;
-            passThrough = true;
-            flipimage(flip,passThrough);
-        }else if(Math.abs(getX()-getX)>150 && getX()-getX<0){
-            flip = false;
-            passThrough = true;
-            flipimage(flip,passThrough);
+
+        
+        //determine whether the passerby should stop or not
+        if(!encounter){
+            if(getX()-1750<250 && !turnround){
+                    Motion[0]=2;
+            }else if(getX()-1750==250 && !turnround){
+                turnround = true;
+                Motion[0]=-2;
+                sprite.setImage(flipimage);
+            }else if(getX()-1750>0 && turnround){
+                Motion[0]=-2;
+            }else if(getX()-1750==0 && turnround){
+                turnround = false;
+                Motion[0]=+2;
+                sprite.setImage(image);
+            }
+            setPos(getX()+Motion[0],getY());
+            if (Math.abs(getX()-getX)<150) encounter = true; //player get close enough to passerby 
+        }else{
+            if (Math.abs(getX()-getX)<150 && getX()-getX>0) {   
+                flip = true;
+                passThrough = false;
+                encounter = true;
+                if(sprite.getImage().equals(image) && Motion[0]>0){
+                    flipimage(flip, passThrough);
+                }
+            }else if(Math.abs(getX()-getX)>150 && getX()-getX>0){
+                // flip = true;
+                // passThrough = false;
+                // flipimage(flip, passThrough);
+                if(Motion[0]>0){
+                    sprite.setImage(image);
+                }else if(Motion[0]<0){
+                    sprite.setImage(flipimage);
+                }
+                encounter = false;
+            }else if(Math.abs(getX()-getX)<150 && getX()-getX<0){
+                flip = true;
+                passThrough = true;
+                encounter = true;
+                if(sprite.getImage().equals(flipimage) && Motion[0]<0){
+                    flipimage(flip, passThrough);
+                }
+            }else if(Math.abs(getX()-getX)>150 && getX()-getX<0){
+                // flip = false;
+                // passThrough = true;
+                // flipimage(flip, passThrough);
+                if(Motion[0]>0){
+                    sprite.setImage(image);
+                }else if(Motion[0]<0){
+                    sprite.setImage(flipimage);
+                }
+                encounter = false;
+            }
+            setPos(getX(), getY());
         }
-        setPos(getX(),getY());
     }
 
     public void flipimage(boolean flip,boolean passThrough){
         if(flip || passThrough){
-            if(flip && passThrough) sprite.setScaleX(1);
-            else sprite.setScaleX(-1);
+            if(flip && passThrough) sprite.setImage(image);
+            else sprite.setImage(flipimage);
         }else if(!(flip && passThrough)){
-            sprite.setScaleX(1);
+            sprite.setImage(image);
         }
-        
     }
-
+   
     @Override
     public void setPos(double x,double y){
         Pos[0] = x;
