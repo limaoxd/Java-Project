@@ -20,9 +20,6 @@ public class Openning{
 
     Boolean isStart = false;
 
-    /*Group root = new Group();
-    Scene openScene = new Scene(root, 1920, 1080);*/
-
     //the lower one
     Image hint = new Image("pic/loginhint.png");
     ImageView hintView = new ImageView(hint);
@@ -37,11 +34,6 @@ public class Openning{
 
     public void openningScreen(Group root, Stage stage, Scene scene){
 
-        /*stage.setFullScreen(true);
-        stage.setTitle("test");
-        stage.setScene(openScene);
-        stage.show();*/
-
         hintView.setX(stage.getWidth()/2-hint.getWidth()/2);
         hintView.setY(stage.getHeight()*3/4-hint.getHeight()/2);
 
@@ -51,10 +43,6 @@ public class Openning{
         root.getChildren().add(screenView);
         root.getChildren().add(hintView);
         root.getChildren().add(titleView);
-
-        /*openScene.setOnKeyPressed(ke -> {
-            if (ke.getCode() == KeyCode.ENTER && isStart == false) start(stage, scene);
-         });*/
         
     }
 
@@ -74,9 +62,6 @@ public class Openning{
         root.getChildren().remove(hintView);
         root.getChildren().remove(titleView);
 
-
-        //stage.setScene(scene);
-        //stage.setFullScreen(true); 
     }
 
 }
