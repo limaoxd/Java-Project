@@ -32,8 +32,8 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
       t = new Trigger(1750,250);
-      entity.add(p);
-      trigger.add(t);
+      /*entity.add(p);
+      trigger.add(t);*/
       //Read map and build
       Block.createBlock(obj);
    }
@@ -48,19 +48,37 @@ public class Main extends Application {
       //Creating a Group object  
       Group root = new Group();  
       
-      obj.forEach(B -> root.getChildren().add(B.hitbox));
+      /*obj.forEach(B -> root.getChildren().add(B.hitbox));
 
       entity.forEach(E-> {
             root.getChildren().add(E.hitbox);
             root.getChildren().add(E.sprite);
       });
-      trigger.forEach((T -> root.getChildren().add(T.sprite)));
+      trigger.forEach((T -> root.getChildren().add(T.sprite)));*/
 
 
       //Creating a scene object
       Scene scene = new Scene(root, 1920, 1080);  
 
+      //for openning
+      Openning openning = new Openning();
+      openning.openningScreen(root,stage,scene);
+
       scene.setOnKeyPressed(ke -> {
+         if (ke.getCode() == KeyCode.ENTER && openning.isStart == false){
+            openning.start(root,stage,scene);
+
+            entity.add(p);
+            trigger.add(t);
+            
+            obj.forEach(B -> root.getChildren().add(B.hitbox));
+
+            entity.forEach(E-> {
+               root.getChildren().add(E.hitbox);
+               root.getChildren().add(E.sprite);
+            });
+            trigger.forEach((T -> root.getChildren().add(T.sprite)));
+         }
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
@@ -86,6 +104,7 @@ public class Main extends Application {
       stage.setTitle("test");
       stage.setScene(scene);
       stage.show();
+      openning.setImage(stage);
 
       //It can refresh screen
       AnimationTimer mainloop = new AnimationTimer() {
