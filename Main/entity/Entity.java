@@ -14,14 +14,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 
-public  abstract class  Entity {
+public class  Entity {
    protected Image image;
    protected Image blood;
    protected WritableImage flipimage;
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
    protected int Width = 0,Height = 0;
-   protected  double[] ratio={1,1};
    public int collideh;
    public int collidev;
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
@@ -34,6 +33,8 @@ public  abstract class  Entity {
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
    public static double[] Blood_pos = {10,30};
+   public static double[] ratio={1,1};
+
 
    public Entity() throws FileNotFoundException{}
 
@@ -72,7 +73,7 @@ public  abstract class  Entity {
       Height = h;
    }
 
-   public void setScreenSize(double x,double y){
+   public static void setScreenSize(double x,double y){
       ratio[0]=x/1920;
       ratio[1]=y/1080;
    }
@@ -136,7 +137,9 @@ public  abstract class  Entity {
       }
       return inrange;
    }
-   public abstract double Inject();
+   public double Inject(){
+      return 0;
+   };
 
-   public void act(double x,double y){}
+   public void act(){}
 }

@@ -51,7 +51,7 @@ public class Player extends Entity{
          Cam[1]=World[1];
       }
    }
-   
+   @Override
    public double Inject(){
       double blood;
       if(Motion[0]==7.8||Motion[0]==-7.8){
@@ -68,8 +68,7 @@ public class Player extends Entity{
    }
 
    @Override
-   public void act(double x,double y){
-      setScreenSize(x,y);
+   public void act(){
 
       if(Jump == true && landing == true){
          if(Jumped == false){
