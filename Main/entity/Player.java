@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import javafx.application.Application; 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -14,6 +15,10 @@ public class Player extends Entity{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
       sprite = new ImageView(image);
+      redBlood = new Rectangle();
+      redBlood.setFill(Color.RED);
+      bloodbarBase = new Rectangle();
+      bloodbarBase.setFill(Color.GRAY);
       blood = new Image(new FileInputStream("pic/health_bar.png"));
       bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
@@ -27,7 +32,7 @@ public class Player extends Entity{
       setPos(x,y); 
    }
 
-   public void Blood(){}
+
 
    public void Camera(){
       World[0]=Pos[0]-960;
@@ -45,6 +50,21 @@ public class Player extends Entity{
       else if(World[1]-Cam[1]<0){
          Cam[1]=World[1];
       }
+   }
+   
+   public double Inject(){
+      double blood;
+      if(Motion[0]==7.8||Motion[0]==-7.8){
+         blood = redBlood.getWidth()-0.1;
+      }else{
+         if(redBlood.getWidth()<400){
+            blood = redBlood.getWidth()+0.5;
+         }else{
+            blood=400;
+         }
+         
+      }
+      return blood;
    }
 
    @Override
@@ -99,7 +119,7 @@ public class Player extends Entity{
          Motion[1]-=0.3*frameRate;
       }
       Camera();
-      Blood();
+      Inject();
       //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }

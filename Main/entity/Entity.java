@@ -9,10 +9,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
-public class Entity {
+public  abstract class  Entity {
    protected Image image;
    protected Image blood;
    protected WritableImage flipimage;
@@ -25,11 +27,13 @@ public class Entity {
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
+   public Rectangle redBlood;
+   public Rectangle bloodbarBase;
    public ImageView bloodbar;
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
-   public static double[] Blood_pos = {10,50};
+   public static double[] Blood_pos = {10,30};
 
    public Entity() throws FileNotFoundException{}
 
@@ -47,10 +51,20 @@ public class Entity {
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      bloodbar.setX((Blood_pos[0]-300/2-Cam[0])*ratio[0]);
-      bloodbar.setY((1080-Blood_pos[1]-100+Cam[1])*ratio[1]);
-      bloodbar.setFitWidth(300*ratio[0]);
-      bloodbar.setFitHeight(100*ratio[1]);
+      redBlood.setX((Blood_pos[0]+10)*ratio[0]);
+      redBlood.setY((Blood_pos[1]+70)*ratio[1]);
+      redBlood.setWidth(Inject());
+      redBlood.setHeight(20);
+
+      bloodbarBase.setX((Blood_pos[0]+10)*ratio[0]);
+      bloodbarBase.setY((Blood_pos[1]+70)*ratio[1]);
+      bloodbarBase.setWidth(400);
+      bloodbarBase.setHeight(20);
+
+      bloodbar.setX(Blood_pos[0]*ratio[0]);
+      bloodbar.setY(Blood_pos[1]*ratio[1]);
+      bloodbar.setFitWidth(450);
+      bloodbar.setFitHeight(150);
    }
 
    public void setSize(int w,int h){
@@ -122,6 +136,7 @@ public class Entity {
       }
       return inrange;
    }
+   public abstract double Inject();
 
    public void act(double x,double y){}
 }

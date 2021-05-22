@@ -78,6 +78,9 @@ public class Main extends Application {
             entity.forEach(E-> {
                root.getChildren().add(E.hitbox);
                root.getChildren().add(E.sprite);
+               root.getChildren().add(E.bloodbarBase);
+               root.getChildren().add(E.redBlood);
+               root.getChildren().add(E.bloodbar);
             });
             trigger.forEach((T -> root.getChildren().add(T.sprite)));
          }
