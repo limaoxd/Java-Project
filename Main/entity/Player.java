@@ -98,11 +98,7 @@ public class Player extends Entity{
          Motion[1]-=0.3*frameRate;
       }
       Camera();
-<<<<<<< HEAD
-=======
       Blood();
-      //System.out.println(frameRate);
->>>>>>> 18780e0bf99454156cdad39b818d624e096cab2d
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }
  }

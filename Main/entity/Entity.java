@@ -28,11 +28,8 @@ public class Entity {
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
-<<<<<<< HEAD
    public static double[] ratio={1,1};
-=======
    public static double[] Blood_pos = {10,50};
->>>>>>> 18780e0bf99454156cdad39b818d624e096cab2d
 
    public Entity() throws FileNotFoundException{}
 
