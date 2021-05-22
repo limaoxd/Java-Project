@@ -25,8 +25,7 @@ public class Trigger extends Entity{
         setPos(x,y);  
     }
     
-    public void act(double x,double y,double getX){
-        setScreenSize(x, y);
+    public void act(double getX){
         boolean flip = false;
         boolean passThrough  = false;
 
@@ -107,8 +106,4 @@ public class Trigger extends Entity{
         sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
     }
 
-    public void setScreenSize(double x,double y){
-        ratio[0]=x/1920;
-        ratio[1]=y/1080;
-    }
 }

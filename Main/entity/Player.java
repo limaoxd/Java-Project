@@ -44,8 +44,7 @@ public class Player extends Entity{
    }
 
    @Override
-   public void act(double x,double y){
-      setScreenSize(x,y);
+   public void act(){
 
       if(Jump == true && landing == true){
          if(Jumped == false){
@@ -95,7 +94,6 @@ public class Player extends Entity{
          Motion[1]-=0.3*frameRate;
       }
       Camera();
-      //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }
  }

@@ -178,9 +178,10 @@ public class Main extends Application {
             //Acting everthing
             Entity.frameRate = frameRatio;
 
-            entity.forEach(E -> E.act(stage.getWidth(),stage.getHeight()));
-            obj.forEach(B -> B.act(stage.getWidth(),stage.getHeight()));
-            trigger.forEach(T -> T.act(stage.getWidth(),stage.getHeight(), p.getX()));
+            Entity.setScreenSize(stage.getWidth(),stage.getHeight());
+            entity.forEach(E -> E.act());
+            obj.forEach(B -> B.act());
+            trigger.forEach(T -> T.act(p.getX()));
 
          }
       };

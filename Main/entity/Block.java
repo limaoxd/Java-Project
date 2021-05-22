@@ -72,8 +72,7 @@ public class Block extends Entity{
     }
 
     @Override
-    public void act(double x,double y){
-        setScreenSize(x,y);
+    public void act(){
         setPos(getX(),getY());
     }
 }

@@ -18,7 +18,6 @@ public class Entity {
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
    protected int Width = 0,Height = 0;
-   protected  double[] ratio={1,1};
    public int collideh;
    public int collidev;
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
@@ -27,6 +26,7 @@ public class Entity {
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
+   public static double[] ratio={1,1};
 
    public Entity() throws FileNotFoundException{}
 
@@ -50,7 +50,7 @@ public class Entity {
       Height = h;
    }
 
-   public void setScreenSize(double x,double y){
+   public static void setScreenSize(double x,double y){
       ratio[0]=x/1920;
       ratio[1]=y/1080;
    }
@@ -115,5 +115,5 @@ public class Entity {
       return inrange;
    }
 
-   public void act(double x,double y){}
+   public void act(){}
 }
