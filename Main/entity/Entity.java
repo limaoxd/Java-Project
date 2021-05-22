@@ -9,12 +9,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 
-public class Entity {
+public class  Entity {
    protected Image image;
-   protected Image blood;
    protected WritableImage flipimage;
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
@@ -24,19 +25,18 @@ public class Entity {
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
-   public ImageView bloodbar;
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
    public static double[] ratio={1,1};
-   public static double[] Blood_pos = {10,50};
+
 
    public Entity() throws FileNotFoundException{}
 
    public void setPos(double x,double y){
       Pos[0] = x;
       Pos[1] = y;
-      
+
       hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
       hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
       hitbox.setWidth(Width*ratio[0]); 
@@ -47,10 +47,6 @@ public class Entity {
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      // bloodbar.setX((Blood_pos[0]-300/2-Cam[0])*ratio[0]);
-      // bloodbar.setY((1080-Blood_pos[1]-100+Cam[1])*ratio[1]);
-      // bloodbar.setFitWidth(300*ratio[0]);
-      // bloodbar.setFitHeight(100*ratio[1]);
    }
 
    public void setSize(int w,int h){
@@ -102,13 +98,13 @@ public class Entity {
 
    public WritableImage getFlip(Image img){
       int w=(int)image.getWidth(),h=(int)image.getHeight();
-      WritableImage flipimg = new WritableImage(w,h); 
-      PixelReader pixelReader = img.getPixelReader(); 
-      PixelWriter writer = flipimg.getPixelWriter(); 
- 
+      WritableImage flipimg = new WritableImage(w,h);
+      PixelReader pixelReader = img.getPixelReader();
+      PixelWriter writer = flipimg.getPixelWriter();
+
       for(int col=0;col<h;col++){
          for(int row=0;row<w;row++){
-            Color color = pixelReader.getColor(row,col); 
+            Color color = pixelReader.getColor(row,col);
             writer.setColor(w-row-1, col, color);
          }
       }

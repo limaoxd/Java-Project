@@ -35,9 +35,9 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
       t = new Trigger(1750,250);
-      int cannonX=4500,cannonY=350;
+      int cannonX=4450,cannonY=300;
       c = new Cannon(cannonX,cannonY);
-      b = new Bullet(cannonX-100,cannonY);
+      b = new Bullet(cannonX-50,cannonY+50);
       /*entity.add(p);
       trigger.add(t);*/
       //Read map and build
@@ -63,7 +63,7 @@ public class Main extends Application {
 
 
       //Creating a scene object
-      Scene scene = new Scene(root, 1920, 1080);  
+      Scene scene = new Scene(root, 1920, 1080);
 
       //for openning
       Openning openning = new Openning();
@@ -74,8 +74,8 @@ public class Main extends Application {
             openning.start(root,stage,scene);
 
             entity.add(p);
+            entity.add(b);
             obj.add(c);
-            obj.add(b);
             trigger.add(t);
 
             obj.forEach(B -> root.getChildren().add(B.hitbox));
@@ -86,6 +86,7 @@ public class Main extends Application {
             });
             trigger.forEach((T -> root.getChildren().add(T.sprite)));
 
+            root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
          }
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
@@ -183,7 +184,10 @@ public class Main extends Application {
                   }
                }
             }
-            
+            if(p.hitbox.intersects(b.hitbox.getBoundsInLocal())){
+               b.isHit=true;
+               //player damaged code
+            }
             //Acting everthing
             Entity.frameRate = frameRatio;
 

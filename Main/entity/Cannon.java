@@ -22,4 +22,9 @@ public class Cannon extends Entity{
         setSize(200,200);
         setPos(x,y);
     }
+
+    @Override
+    public void act(){
+        setPos(getX(),getY());
+    }
 }
