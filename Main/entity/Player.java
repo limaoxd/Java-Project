@@ -11,6 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity{  
+   public Rectangle redBlood;
+   public Rectangle bloodbarBase;
+   public ImageView bloodbar;
+   private Image blood;
+   private static double[] Blood_pos = {10,30};
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
@@ -32,6 +37,36 @@ public class Player extends Entity{
       setPos(x,y); 
    }
 
+@Override
+public void setPos(double x,double y){
+   Pos[0] = x;
+   Pos[1] = y;
+   
+   hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
+   hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+   hitbox.setWidth(Width*ratio[0]); 
+   hitbox.setHeight(Height*ratio[1]);
+
+   sprite.setFitWidth(Width*ratio[0]);
+   sprite.setFitHeight(Height*ratio[1]);
+   sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
+   sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+
+   redBlood.setX((Blood_pos[0]+10)*ratio[0]);
+   redBlood.setY((Blood_pos[1]+70)*ratio[1]);
+   redBlood.setWidth(Inject());
+   redBlood.setHeight(20);
+
+   bloodbarBase.setX((Blood_pos[0]+10)*ratio[0]);
+   bloodbarBase.setY((Blood_pos[1]+70)*ratio[1]);
+   bloodbarBase.setWidth(400);
+   bloodbarBase.setHeight(20);
+
+   bloodbar.setX(Blood_pos[0]*ratio[0]);
+   bloodbar.setY(Blood_pos[1]*ratio[1]);
+   bloodbar.setFitWidth(450);
+   bloodbar.setFitHeight(150);
+}
 
 
    public void Camera(){
@@ -51,7 +86,7 @@ public class Player extends Entity{
          Cam[1]=World[1];
       }
    }
-   @Override
+   
    public double Inject(){
       double blood;
       if(Motion[0]==7.8||Motion[0]==-7.8){

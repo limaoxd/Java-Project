@@ -16,7 +16,6 @@ import javafx.scene.shape.Shape;
 
 public class  Entity {
    protected Image image;
-   protected Image blood;
    protected WritableImage flipimage;
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
@@ -26,13 +25,9 @@ public class  Entity {
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
-   public Rectangle redBlood;
-   public Rectangle bloodbarBase;
-   public ImageView bloodbar;
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
-   public static double[] Blood_pos = {10,30};
    public static double[] ratio={1,1};
 
 
@@ -52,20 +47,6 @@ public class  Entity {
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      redBlood.setX((Blood_pos[0]+10)*ratio[0]);
-      redBlood.setY((Blood_pos[1]+70)*ratio[1]);
-      redBlood.setWidth(Inject());
-      redBlood.setHeight(20);
-
-      bloodbarBase.setX((Blood_pos[0]+10)*ratio[0]);
-      bloodbarBase.setY((Blood_pos[1]+70)*ratio[1]);
-      bloodbarBase.setWidth(400);
-      bloodbarBase.setHeight(20);
-
-      bloodbar.setX(Blood_pos[0]*ratio[0]);
-      bloodbar.setY(Blood_pos[1]*ratio[1]);
-      bloodbar.setFitWidth(450);
-      bloodbar.setFitHeight(150);
    }
 
    public void setSize(int w,int h){
@@ -137,9 +118,6 @@ public class  Entity {
       }
       return inrange;
    }
-   public double Inject(){
-      return 0;
-   };
 
    public void act(){}
 }
