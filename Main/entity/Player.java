@@ -23,7 +23,10 @@ public class Player extends Entity{
       //sprite.setPreserveRatio(true);
       setSize(100,140);
       setPos(x,y); 
+      Blood[0] = 100;
    }
+
+   public void Blood(){}
 
    public void Camera(){
       World[0]=Pos[0]-960;
@@ -95,6 +98,7 @@ public class Player extends Entity{
          Motion[1]-=0.3*frameRate;
       }
       Camera();
+      Blood();
       //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }

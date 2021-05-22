@@ -27,6 +27,7 @@ public class Entity {
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
+   public static double[] Blood = {0};
 
    public Entity() throws FileNotFoundException{}
 
