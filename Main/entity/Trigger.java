@@ -95,7 +95,7 @@ public class Trigger extends Entity{
             sprite.setImage(image);
         }
     }
-   
+
     @Override
     public void setPos(double x,double y){
         Pos[0] = x;

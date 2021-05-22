@@ -15,7 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.*;
 
-import javafx.stage.Stage;  
+import javafx.stage.Stage;
 import javafx.animation.AnimationTimer;
 
 public class Main extends Application {
@@ -24,6 +24,8 @@ public class Main extends Application {
    List<Trigger> trigger = new ArrayList<>();
    public static Player p;
    public static Trigger t;
+   public static Cannon c;
+   public static Bullet b;
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
@@ -33,22 +35,24 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
       t = new Trigger(1750,250);
+      int cannonX=4500,cannonY=350;
+      c = new Cannon(cannonX,cannonY);
+      b = new Bullet(cannonX-100,cannonY);
       /*entity.add(p);
       trigger.add(t);*/
       //Read map and build
       Block.createBlock(obj);
    }
 
-   public static void main(String args[]) throws FileNotFoundException{ 
-      launch(args); 
+   public static void main(String args[]) throws FileNotFoundException{
+      launch(args);
    }
 
-   @Override 
-   public void start(Stage stage) throws FileNotFoundException {   
+   @Override
+   public void start(Stage stage) throws FileNotFoundException {
 
-      //Creating a Group object  
-      Group root = new Group();  
-      
+      //Creating a Group object
+      Group root = new Group();
       /*obj.forEach(B -> root.getChildren().add(B.hitbox));
 
       entity.forEach(E-> {
@@ -70,9 +74,10 @@ public class Main extends Application {
             openning.start(root,stage,scene);
 
             entity.add(p);
+            obj.add(c);
+            obj.add(b);
             trigger.add(t);
 
-            
             obj.forEach(B -> root.getChildren().add(B.hitbox));
 
             entity.forEach(E-> {
@@ -80,6 +85,7 @@ public class Main extends Application {
                root.getChildren().add(E.sprite);
             });
             trigger.forEach((T -> root.getChildren().add(T.sprite)));
+
          }
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
@@ -177,6 +183,7 @@ public class Main extends Application {
                   }
                }
             }
+            
             //Acting everthing
             Entity.frameRate = frameRatio;
 

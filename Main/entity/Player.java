@@ -67,7 +67,7 @@ public class Player extends Entity{
          else if(Motion[0]>=-3)Motion[0] = -4;
          sprite.setImage(flipimage);
       }
-      
+
       if(Motion[0] != 0){
          if(Motion[0]>0.1){
             if(collideh == 1){
@@ -99,6 +99,7 @@ public class Player extends Entity{
       }
       Camera();
       Blood();
+      //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }
  }

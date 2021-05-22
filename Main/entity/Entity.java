@@ -47,10 +47,10 @@ public class Entity {
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      bloodbar.setX((Blood_pos[0]-300/2-Cam[0])*ratio[0]);
-      bloodbar.setY((1080-Blood_pos[1]-100+Cam[1])*ratio[1]);
-      bloodbar.setFitWidth(300*ratio[0]);
-      bloodbar.setFitHeight(100*ratio[1]);
+      // bloodbar.setX((Blood_pos[0]-300/2-Cam[0])*ratio[0]);
+      // bloodbar.setY((1080-Blood_pos[1]-100+Cam[1])*ratio[1]);
+      // bloodbar.setFitWidth(300*ratio[0]);
+      // bloodbar.setFitHeight(100*ratio[1]);
    }
 
    public void setSize(int w,int h){

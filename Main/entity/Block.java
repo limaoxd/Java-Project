@@ -64,7 +64,7 @@ public class Block extends Entity{
     public void setPos(double x,double y){
         Pos[0] = x;
         Pos[1] = y;
-        
+
         hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
         hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
         hitbox.setWidth(Width*ratio[0]);
