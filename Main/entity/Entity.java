@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Entity {
    protected Image image;
+   protected Image blood;
    protected WritableImage flipimage;
    protected double[] Pos = {0,0};
    protected double[] Motion = {0,0};
@@ -23,10 +24,15 @@ public class Entity {
    public boolean Rightpress = false ,Leftpress = false ,Shift = false,Jump = false ,Jumped = false ,landing = false;
    public ImageView sprite;
    public Rectangle hitbox;
+   public ImageView bloodbar;
    public static double frameRate;
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
+<<<<<<< HEAD
    public static double[] ratio={1,1};
+=======
+   public static double[] Blood_pos = {10,50};
+>>>>>>> 18780e0bf99454156cdad39b818d624e096cab2d
 
    public Entity() throws FileNotFoundException{}
 
@@ -43,6 +49,11 @@ public class Entity {
       sprite.setFitHeight(Height*ratio[1]);
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+
+      bloodbar.setX((Blood_pos[0]-300/2-Cam[0])*ratio[0]);
+      bloodbar.setY((1080-Blood_pos[1]-100+Cam[1])*ratio[1]);
+      bloodbar.setFitWidth(300*ratio[0]);
+      bloodbar.setFitHeight(100*ratio[1]);
    }
 
    public void setSize(int w,int h){

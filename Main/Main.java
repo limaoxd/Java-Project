@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.*;
 
 import javafx.stage.Stage;  
 import javafx.animation.AnimationTimer;
@@ -70,6 +71,7 @@ public class Main extends Application {
 
             entity.add(p);
             trigger.add(t);
+
             
             obj.forEach(B -> root.getChildren().add(B.hitbox));
 
@@ -182,7 +184,6 @@ public class Main extends Application {
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
             trigger.forEach(T -> T.act(p.getX()));
-
          }
       };
       mainloop.start();
