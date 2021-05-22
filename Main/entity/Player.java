@@ -10,20 +10,21 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity{  
- 
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
       sprite = new ImageView(image);
+      blood = new Image(new FileInputStream("pic/health_bar.png"));
+      bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
       //hitbox.setStroke(Color.LIGHTGREEN);
       //hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
+      bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
       setSize(100,140);
       setPos(x,y); 
-      Blood[0] = 100;
    }
 
    public void Blood(){}

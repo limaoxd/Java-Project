@@ -24,7 +24,6 @@ public class Main extends Application {
    List<Trigger> trigger = new ArrayList<>();
    public static Player p;
    public static Trigger t;
-   public static Text blood;
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
@@ -34,7 +33,6 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,200);
       t = new Trigger(1750,250);
-      blood = new Text("test for blood");
       /*entity.add(p);
       trigger.add(t);*/
       //Read map and build
@@ -82,9 +80,6 @@ public class Main extends Application {
                root.getChildren().add(E.sprite);
             });
             trigger.forEach((T -> root.getChildren().add(T.sprite)));
-            blood.setX(50);
-            blood.setY(50);
-            root.getChildren().add(blood);
          }
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
