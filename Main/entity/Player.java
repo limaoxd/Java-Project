@@ -11,11 +11,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity{
+   private static double[] Blood_pos = {10,30};
    public Rectangle redBlood;
    public Rectangle bloodbarBase;
    public ImageView bloodbar;
    private Image blood;
-   private static double[] Blood_pos = {10,30};
+   public boolean hitByBullet = false;
+   public boolean newBornInGame = true;
+   public double health_value = 325;
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
@@ -52,7 +55,7 @@ public class Player extends Entity{
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      redBlood.setX((Blood_pos[0]+10)*ratio[0]);
+      redBlood.setX((Blood_pos[0]+100)*ratio[0]);
       redBlood.setY((Blood_pos[1]+70)*ratio[1]);
       redBlood.setWidth(Inject());
       redBlood.setHeight(20);
@@ -88,17 +91,18 @@ public class Player extends Entity{
    }
 
    public double Inject(){
-      double blood;
-      if(Motion[0]==7.8||Motion[0]==-7.8){
-         blood = redBlood.getWidth()-0.1;
+      if(newBornInGame){
+         health_value = 325;
+         newBornInGame = false;
       }else{
-         if(redBlood.getWidth()<400){
-            blood = redBlood.getWidth()+0.5;
-         }else{
-            blood=400;
+         if(hitByBullet){
+            health_value = redBlood.getWidth()-50;
+            hitByBullet = false;
+            System.out.println(redBlood.getWidth());
          }
       }
-      return blood;
+      
+      return health_value;
    }
 
    @Override
@@ -152,7 +156,6 @@ public class Player extends Entity{
          Motion[1]-=0.3*frameRate;
       }
       Camera();
-      Inject();
       //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }

@@ -29,6 +29,7 @@ public class  Entity {
    public static double[] World = {0,0};
    public static double[] Cam = {0,0};
    public static double[] ratio={1,1};
+   public double health_value;
 
 
    public Entity() throws FileNotFoundException{}
