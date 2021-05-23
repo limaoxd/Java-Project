@@ -28,9 +28,9 @@ public class Bullet extends Entity{
     }
     @Override
     public void act(){
-        setPos(getX()+(-8*frameRate),originY);
+        setPos(getX()+(-10*frameRate),originY);
         t++;
-        if(t>160/frameRate){
+        if(t>200/frameRate){
             setPos(originX,originY);
             isHit=false;
             t=0;

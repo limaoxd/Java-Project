@@ -37,7 +37,7 @@ public class Main extends Application {
       t = new Trigger(1750,250);
       int cannonX=4450,cannonY=300;
       c = new Cannon(cannonX,cannonY);
-      b = new Bullet(cannonX-50,cannonY+50);
+      b = new Bullet(cannonX,cannonY+50);
       /*entity.add(p);
       trigger.add(t);*/
       //Read map and build
@@ -99,6 +99,7 @@ public class Main extends Application {
             p.Cam[1]=0;
             p.World[0]=0;
             p.World[1]=0;
+            p.newBornInGame=true;
          }
       });
 

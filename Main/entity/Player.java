@@ -17,6 +17,10 @@ public class Player extends Entity{
    public ImageView bloodbar;
    private Image blood;
    public boolean hitByBullet = false;
+
+   private boolean damaged =false;
+   private int timer=0;//timer for damaged animation
+
    public boolean newBornInGame = true;
    public double health_value;
    public Player(int x,int y) throws FileNotFoundException{
@@ -99,6 +103,7 @@ public class Player extends Entity{
             health_value = redBlood.getWidth()-50;
             redBlood.setWidth(health_value);
             hitByBullet = false;
+            damaged = true;
             if(redBlood.getWidth()<=0){
                setPos(960,200);
                setMy(0);
@@ -110,30 +115,39 @@ public class Player extends Entity{
             }
          }
       }
-      
+
       return health_value;
    }
 
    @Override
    public void act(){
 
-      if(Jump == true && landing == true){
-         if(Jumped == false){
-            Motion[1] = 12;
-            Jumped = true;
+         if(Jump == true && landing == true){
+            if(Jumped == false){
+               Motion[1] = 12;
+               Jumped = true;
+            }
+         }else if(landing == true) Jumped = false;
+
+         if(Rightpress == true && !damaged){
+            if(Shift&&landing) Motion[0] = 8;
+            else if(Motion[0]<=3) Motion[0] = 4;
+            sprite.setImage(image);
          }
-      }else if(landing == true) Jumped = false;
- 
-      if(Rightpress == true){
-         if(Shift&&landing) Motion[0] = 8;
-         else if(Motion[0]<=3) Motion[0] = 4;
-         sprite.setImage(image);
-      }
-      else if(Leftpress == true){
-         if(Shift&&landing) Motion[0] = -8;
-         else if(Motion[0]>=-3)Motion[0] = -4;
-         sprite.setImage(flipimage);
-      }
+
+         else if(Leftpress == true && !damaged){
+            if(Shift&&landing) Motion[0] = -8;
+            else if(Motion[0]>=-3)Motion[0] = -4;
+            sprite.setImage(flipimage);
+         }
+         else if(damaged) {
+            Motion[0]=-10;
+            timer++;
+            if(timer>20/frameRate){
+               timer=0;
+               damaged=false;
+            }
+         }
 
       if(Motion[0] != 0){
          if(Motion[0]>0.1){
@@ -142,13 +156,13 @@ public class Player extends Entity{
             }else if(landing){
                Motion[0]-=0.2;
             }
-         } 
+         }
          else if(Motion[0]<-0.1){
             if(collideh == 2){
                Motion[0]=0;
             }else if(landing){
                Motion[0]+=0.2;
-            } 
+            }
          }
          else Motion[0]=0;
       }
