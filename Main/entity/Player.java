@@ -18,7 +18,7 @@ public class Player extends Entity{
    private Image blood;
    public boolean hitByBullet = false;
    public boolean newBornInGame = true;
-   public double health_value = 325;
+   public double health_value;
    public Player(int x,int y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
@@ -97,8 +97,17 @@ public class Player extends Entity{
       }else{
          if(hitByBullet){
             health_value = redBlood.getWidth()-50;
+            redBlood.setWidth(health_value);
             hitByBullet = false;
-            System.out.println(redBlood.getWidth());
+            if(redBlood.getWidth()<=0){
+               setPos(960,200);
+               setMy(0);
+               Cam[0]=0;
+               Cam[1]=0;
+               World[0]=0;
+               World[1]=0;
+               newBornInGame = true;
+            }
          }
       }
       

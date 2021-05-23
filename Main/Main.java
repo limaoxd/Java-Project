@@ -187,18 +187,8 @@ public class Main extends Application {
             if(p.hitbox.intersects(b.hitbox.getBoundsInLocal())){
                b.isHit=true;
                //player damaged code
-               if(p.redBlood.getWidth()<0){
-                  p.setPos(960,200);
-                  p.setMy(0);
-                  p.Cam[0]=0;
-                  p.Cam[1]=0;
-                  p.World[0]=0;
-                  p.World[1]=0;
-                  p.newBornInGame = true;
-               }else{
                   p.hitByBullet = true;
                   p.Inject();
-               }
             }
             //Acting everthing
             Entity.frameRate = frameRatio;
