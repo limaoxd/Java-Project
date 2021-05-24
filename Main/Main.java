@@ -1,5 +1,6 @@
 import entity.*;
 import map.*;
+import loadSave.*;
 import java.util.*;
 import java.math.BigInteger;
 import static java.lang.System.out;
@@ -72,8 +73,7 @@ public class Main extends Application {
       scene.setOnKeyPressed(ke -> {
          if (ke.getCode() == KeyCode.ENTER && openning.isStart == false){
             openning.start(root,stage,scene);
-
-            entity.add(p);
+            /*entity.add(p);
             entity.add(b);
             obj.add(c);
             trigger.add(t);
@@ -86,8 +86,10 @@ public class Main extends Application {
             });
             trigger.forEach((T -> root.getChildren().add(T.sprite)));
 
-            root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
+            root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);*/
          }
+         if (ke.getCode() == KeyCode.S) LoadSave.save(p);
+         if (ke.getCode() == KeyCode.L) LoadSave.load();
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
@@ -128,6 +130,19 @@ public class Main extends Application {
             if (frameTimeIndex == 0) {
                arrayFilled = true ;
             }
+            
+            //lag to loading
+            if (openning.isStart == true) {
+               if(openning.step <= 2) openning.time = (openning.time + 1) % frameTimes.length ;
+               if(openning.time == 0 && openning.step == 0) addE(root,openning);
+               else if(openning.time == 20 && openning.step == 1) forEach(root,openning);
+               else if(openning.time == 40 && openning.step == 2) {
+                  root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
+                  openning.step++;
+                  openning.loadingOut(root);
+               }
+            }
+
             if (arrayFilled) {
                long elapsedNanos = t - oldFrameTime ;
                long elapsedNanosPerFrame = elapsedNanos / frameTimes.length ;
@@ -203,4 +218,26 @@ public class Main extends Application {
       mainloop.start();
    }
 
+   public void addE(Group root, Openning openning){
+      entity.add(p);
+      entity.add(b);
+      obj.add(c);
+      trigger.add(t);
+
+      openning.step++;
+      openning.loadingIn(root);
+   }
+
+   public void forEach(Group root, Openning openning){
+      obj.forEach(B -> root.getChildren().add(B.hitbox));
+
+      entity.forEach(E-> {
+         root.getChildren().add(E.hitbox);
+         root.getChildren().add(E.sprite);
+      });
+      trigger.forEach((T -> root.getChildren().add(T.sprite)));
+
+      openning.step++;
+      openning.loadingIn(root);
+   }
 }

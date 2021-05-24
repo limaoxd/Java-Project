@@ -1,5 +1,6 @@
 import entity.*;
 import map.*;
+import loadSave.*;
 import java.util.*;
 import java.math.BigInteger;
 import static java.lang.System.out;
@@ -18,19 +19,25 @@ import javafx.stage.Stage;
 
 public class Openning{
 
-    Boolean isStart = false;
+    public Boolean isStart = false;
+    public int time = 0;
+    public int step =0;
 
     //the lower one
-    Image hint = new Image("pic/loginhint.png");
-    ImageView hintView = new ImageView(hint);
+    private Image hint = new Image("pic/loginhint.png");
+    private ImageView hintView = new ImageView(hint);
 
     //the upper one
-    Image title = new Image("pic/logintitle.png");
-    ImageView titleView = new ImageView(title);
+    private Image title = new Image("pic/logintitle.png");
+    private ImageView titleView = new ImageView(title);
 
     //background
-    Image screen = new Image("pic/loginscreen.png");
-    ImageView screenView = new ImageView(screen);
+    private Image screen = new Image("pic/loginscreen.png");
+    private ImageView screenView = new ImageView(screen);
+
+    //loadingImage
+    private Image loadingScreen = new Image("pic/loadingscreen.png");
+    private ImageView loadingView = new ImageView(loadingScreen);
 
     public void openningScreen(Group root, Stage stage, Scene scene){
 
@@ -57,11 +64,24 @@ public class Openning{
     public void start(Group root, Stage stage, Scene scene){
 
         isStart = true;
+        time = 0;
+        step = 0;
 
         root.getChildren().remove(screenView);
         root.getChildren().remove(hintView);
         root.getChildren().remove(titleView);
 
+        LoadSave.reset();
+        loadingIn(root);
+    }
+
+    public void loadingIn(Group root){
+        loadingOut(root);
+        root.getChildren().add(loadingView);
+    }
+
+    public void loadingOut(Group root){
+        root.getChildren().remove(loadingView);
     }
 
 }
