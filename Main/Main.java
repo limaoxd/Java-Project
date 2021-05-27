@@ -102,6 +102,7 @@ public class Main extends Application {
             p.World[0]=0;
             p.World[1]=0;
             p.newBornInGame=true;
+            p.damaged=false;
          }
       });
 

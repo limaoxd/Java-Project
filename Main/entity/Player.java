@@ -18,7 +18,7 @@ public class Player extends Entity{
    private Image blood;
    public boolean hitByBullet = false;
 
-   private boolean damaged =false;
+   public boolean damaged =false;
    private int timer=0;//timer for damaged animation
 
    public boolean newBornInGame = true;
@@ -112,6 +112,7 @@ public class Player extends Entity{
                World[0]=0;
                World[1]=0;
                newBornInGame = true;
+               damaged = false;
             }
          }
       }
@@ -143,7 +144,7 @@ public class Player extends Entity{
          else if(damaged) {
             Motion[0]=-10;
             timer++;
-            if(timer>20/frameRate){
+            if(timer>20/frameRate||!damaged){//let damaged be false when respwan
                timer=0;
                damaged=false;
             }
