@@ -53,10 +53,10 @@ public class Player extends Entity{
       hitbox.setFill(Color.TRANSPARENT);
       hitbox.setStroke(Color.LIGHTGREEN);
       hitbox.setStrokeWidth(2);
-      //sprite.setSmooth(true);
+      sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
-      setSize(100,140);
+      setSize(200,280);
       setPos(x,y); 
    }
 
@@ -73,7 +73,7 @@ public class Player extends Entity{
       sprite.setFitWidth(Width*ratio[0]);
       sprite.setFitHeight(Height*ratio[1]);
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
-      sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+      sprite.setY((1090-Pos[1]-Height+Cam[1])*ratio[1]);
 
       redBlood.setX((Blood_pos[0]+100)*ratio[0]);
       redBlood.setY((Blood_pos[1]+70)*ratio[1]);
