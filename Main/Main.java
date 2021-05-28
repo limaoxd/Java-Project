@@ -88,7 +88,7 @@ public class Main extends Application {
 
             root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);*/
          }
-         if (ke.getCode() == KeyCode.S) LoadSave.save(p);
+         if (ke.getCode() == KeyCode.S) LoadSave.save(p,s);
          if (ke.getCode() == KeyCode.L) LoadSave.load();
          if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
@@ -138,14 +138,14 @@ public class Main extends Application {
                if(openning.time == 0 && openning.step == 0) {
                   addE();
                   openning.step++;
-                  openning.loadingIn(root);
+                  openning.loadingIn(root,stage);
                }
-               else if(openning.time >= 20 && openning.step == 1) forEach(root,openning);
+               else if(openning.time >= 20 && openning.step == 1) forEach(root,openning,stage);
                else if(openning.time >= 40 && openning.step == 2) {
                   root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
                   openning.step++;
                   openning.loadingOut(root);
-                  LoadSave.save(p);
+                  LoadSave.save(p,s);
                }
             }
 
@@ -218,7 +218,8 @@ public class Main extends Application {
             }
             //savepoint
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
-               LoadSave.save(p);
+               LoadSave.phase++;
+               LoadSave.save(p,s);
             }
 
             //Acting everthing
@@ -241,7 +242,7 @@ public class Main extends Application {
       trigger.add(t);
    }
 
-   public void forEach(Group root, Openning openning){
+   public void forEach(Group root, Openning openning, Stage stage){
       obj.forEach(B -> root.getChildren().add(B.hitbox));
 
       entity.forEach(E-> {
@@ -251,6 +252,6 @@ public class Main extends Application {
       trigger.forEach((T -> root.getChildren().add(T.sprite)));
 
       openning.step++;
-      openning.loadingIn(root);
+      openning.loadingIn(root,stage);
    }
 }

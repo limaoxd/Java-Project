@@ -30,7 +30,7 @@ public class Openning{
     private ImageView hintView = new ImageView(hint);
 
     //the upper one
-    private Image title = new Image("pic/logintitle.png");
+    private Image title = new Image("pic/logintitle(.ver2).png");
     private ImageView titleView = new ImageView(title);
 
     //background
@@ -77,10 +77,12 @@ public class Openning{
         root.getChildren().remove(titleView);
 
         LoadSave.reset();
-        loadingIn(root);
+        title = new Image("pic/loadingtitle.png");
+        titleView = new ImageView(title);
+        loadingIn(root,stage);
     }
 
-    public void loadingIn(Group root){
+    public void loadingIn(Group root,Stage stage){
         bar.setHeight(10);
         bar.setWidth(640*step);
         bar.setX(0);
@@ -94,17 +96,23 @@ public class Openning{
         stroke.setY(800);
         stroke.setFill(Color.TRANSPARENT);
         stroke.setStroke(Color.WHITE);
-        
+
+        titleView.setX(stage.getWidth()/2-title.getWidth()/2);
+        titleView.setY(stage.getHeight()/3-title.getHeight()/2);
+
         loadingOut(root);
+
         root.getChildren().add(loadingView);
         root.getChildren().add(stroke);
         root.getChildren().add(bar);
+        root.getChildren().add(titleView);
     }
 
     public void loadingOut(Group root){
         root.getChildren().remove(loadingView);
         root.getChildren().remove(bar);
         root.getChildren().remove(stroke);
+        root.getChildren().remove(titleView);
     }
 
 }
