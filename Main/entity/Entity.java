@@ -98,7 +98,7 @@ public class  Entity {
    }
 
    public WritableImage getFlip(Image img){
-      int w=(int)image.getWidth(),h=(int)image.getHeight();
+      int w=(int)img.getWidth(),h=(int)img.getHeight();
       WritableImage flipimg = new WritableImage(w,h);
       PixelReader pixelReader = img.getPixelReader();
       PixelWriter writer = flipimg.getPixelWriter();
