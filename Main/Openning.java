@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;  
 
 public class Openning{
@@ -38,6 +40,9 @@ public class Openning{
     //loadingImage
     private Image loadingScreen = new Image("pic/loadingscreen.png");
     private ImageView loadingView = new ImageView(loadingScreen);
+
+    public Rectangle bar = new Rectangle();
+    public Rectangle stroke = new Rectangle();
 
     public void openningScreen(Group root, Stage stage, Scene scene){
 
@@ -76,12 +81,30 @@ public class Openning{
     }
 
     public void loadingIn(Group root){
+        bar.setHeight(10);
+        bar.setWidth(640*step);
+        bar.setX(0);
+        bar.setY(800);
+        bar.setFill(Color.WHITE);
+        bar.setStroke(Color.WHITE);
+
+        stroke.setHeight(10);
+        stroke.setWidth(1920);
+        stroke.setX(0);
+        stroke.setY(800);
+        stroke.setFill(Color.TRANSPARENT);
+        stroke.setStroke(Color.WHITE);
+        
         loadingOut(root);
         root.getChildren().add(loadingView);
+        root.getChildren().add(stroke);
+        root.getChildren().add(bar);
     }
 
     public void loadingOut(Group root){
         root.getChildren().remove(loadingView);
+        root.getChildren().remove(bar);
+        root.getChildren().remove(stroke);
     }
 
 }

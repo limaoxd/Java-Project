@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import loadSave.LoadSave;
 
 public class Player extends Entity{
    private static double[] Blood_pos = {10,30};
@@ -23,7 +24,7 @@ public class Player extends Entity{
 
    public boolean newBornInGame = true;
    public double health_value;
-   public Player(int x,int y) throws FileNotFoundException{
+   public Player(double x,double y) throws FileNotFoundException{
       image = new Image(new FileInputStream("pic/test1.png"));
       flipimage = getFlip(image);
       sprite = new ImageView(image);
@@ -105,13 +106,13 @@ public class Player extends Entity{
             hitByBullet = false;
             damaged = true;
             if(redBlood.getWidth()<=0){
-               setPos(960,200);
                setMy(0);
                Cam[0]=0;
                Cam[1]=0;
                World[0]=0;
                World[1]=0;
                newBornInGame = true;
+               damaged = false;
             }
          }
       }

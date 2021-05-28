@@ -27,6 +27,7 @@ public class Main extends Application {
    public static Trigger t;
    public static Cannon c;
    public static Bullet b;
+   public static Savepoint s;
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
@@ -39,8 +40,7 @@ public class Main extends Application {
       int cannonX=4450,cannonY=300;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+50);
-      /*entity.add(p);
-      trigger.add(t);*/
+      s = new Savepoint(6000,900);
       //Read map and build
       Block.createBlock(obj);
    }
@@ -131,15 +131,20 @@ public class Main extends Application {
                arrayFilled = true ;
             }
             
-            //lag to loading
+            //lag the loading
             if (openning.isStart == true) {
                if(openning.step <= 2) openning.time = (openning.time + 1) % frameTimes.length ;
-               if(openning.time == 0 && openning.step == 0) addE(root,openning);
-               else if(openning.time == 20 && openning.step == 1) forEach(root,openning);
-               else if(openning.time == 40 && openning.step == 2) {
+               if(openning.time == 0 && openning.step == 0) {
+                  addE();
+                  openning.step++;
+                  openning.loadingIn(root);
+               }
+               else if(openning.time >= 20 && openning.step == 1) forEach(root,openning);
+               else if(openning.time >= 40 && openning.step == 2) {
                   root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
                   openning.step++;
                   openning.loadingOut(root);
+                  LoadSave.save(p);
                }
             }
 
@@ -206,6 +211,15 @@ public class Main extends Application {
                   p.hitByBullet = true;
                   p.Inject();
             }
+            if(p.redBlood.getWidth()<=0){
+               LoadSave.load();
+               p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
+            }
+            //savepoint
+            if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
+               LoadSave.save(p);
+            }
+
             //Acting everthing
             Entity.frameRate = frameRatio;
 
@@ -218,14 +232,12 @@ public class Main extends Application {
       mainloop.start();
    }
 
-   public void addE(Group root, Openning openning){
+   public void addE(){
       entity.add(p);
       entity.add(b);
+      entity.add(s);
       obj.add(c);
       trigger.add(t);
-
-      openning.step++;
-      openning.loadingIn(root);
    }
 
    public void forEach(Group root, Openning openning){

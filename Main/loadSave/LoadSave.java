@@ -11,6 +11,9 @@ import java.io.FileInputStream;
 import java.util.Scanner;
 
 public class LoadSave {
+
+    public static double[] temp = {0,0,0};
+
     public static void reset(){
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream("loadSave/savedata.txt"));
@@ -35,7 +38,6 @@ public class LoadSave {
     }
 
     public static void load() {
-        double[] temp = {0,0,0};
         try{
             int i = 0;
             Scanner scanner = new Scanner(new FileInputStream("loadSave/savedata.txt"));
