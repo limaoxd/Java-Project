@@ -252,7 +252,7 @@ public class Player extends Entity{
 
       if(Jump == true && landing == true){
          if(Jumped == false){    //haven't Jumped
-            Motion[1] = 22.4;//10
+            Motion[1] = 21.7;//10
             Jumped = true;
             anim_type=2;
          }

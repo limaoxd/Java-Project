@@ -19,7 +19,7 @@ public class Cannon extends Entity{
         hitbox = new Rectangle();
         hitbox.setFill(Color.BLACK);
         sprite.setSmooth(true);
-        setSize(400,400);
+        setSize(300,250);
         setPos(x,y);
     }
 

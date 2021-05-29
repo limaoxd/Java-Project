@@ -37,9 +37,9 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,500);
       t = new Trigger(2500,500);
-      int cannonX=9000,cannonY=600;
+      int cannonX=8900,cannonY=450;
       c = new Cannon(cannonX,cannonY);
-      b = new Bullet(cannonX+140,cannonY+100);
+      b = new Bullet(cannonX,cannonY+70);
       s = new Savepoint(6000,900);
       //Read map and build
       Block.createBlock(obj);
