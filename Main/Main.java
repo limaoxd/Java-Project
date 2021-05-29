@@ -218,7 +218,7 @@ public class Main extends Application {
             }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
-               // p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
+               p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
             }
             //savepoint
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
