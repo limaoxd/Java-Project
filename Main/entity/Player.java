@@ -75,14 +75,14 @@ public class Player extends Entity{
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
       sprite.setY((1090-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      redBlood.setX((Blood_pos[0]+100)*ratio[0]);
-      redBlood.setY((Blood_pos[1]+70)*ratio[1]);
+      redBlood.setX((Blood_pos[0]+78)*ratio[0]);
+      redBlood.setY((Blood_pos[1]+65)*ratio[1]);
       redBlood.setWidth(Inject()*ratio[0]);
       redBlood.setHeight(20*ratio[1]);
 
-      bloodbarBase.setX((Blood_pos[0]+10)*ratio[0]);
-      bloodbarBase.setY((Blood_pos[1]+70)*ratio[1]);
-      bloodbarBase.setWidth(400*ratio[0]);
+      bloodbarBase.setX((Blood_pos[0]+78)*ratio[0]);
+      bloodbarBase.setY((Blood_pos[1]+65)*ratio[1]);
+      bloodbarBase.setWidth(325*ratio[0]);
       bloodbarBase.setHeight(20*ratio[1]);
 
       bloodbar.setX(Blood_pos[0]*ratio[0]);
