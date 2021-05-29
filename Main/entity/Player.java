@@ -65,9 +65,9 @@ public class Player extends Entity{
       Pos[0] = x;
       Pos[1] = y;
 
-      hitbox.setX((Pos[0]-Width/2-Cam[0])*ratio[0]);
+      hitbox.setX((Pos[0]-(Width-100)/2-Cam[0])*ratio[0]);
       hitbox.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
-      hitbox.setWidth(Width*ratio[0]); 
+      hitbox.setWidth((Width-100)*ratio[0]); 
       hitbox.setHeight(Height*ratio[1]);
 
       sprite.setFitWidth(Width*ratio[0]);
@@ -77,18 +77,18 @@ public class Player extends Entity{
 
       redBlood.setX((Blood_pos[0]+100)*ratio[0]);
       redBlood.setY((Blood_pos[1]+70)*ratio[1]);
-      redBlood.setWidth(Inject());
-      redBlood.setHeight(20);
+      redBlood.setWidth(Inject()*ratio[0]);
+      redBlood.setHeight(20*ratio[1]);
 
       bloodbarBase.setX((Blood_pos[0]+10)*ratio[0]);
       bloodbarBase.setY((Blood_pos[1]+70)*ratio[1]);
-      bloodbarBase.setWidth(400);
-      bloodbarBase.setHeight(20);
+      bloodbarBase.setWidth(400*ratio[0]);
+      bloodbarBase.setHeight(20*ratio[1]);
 
       bloodbar.setX(Blood_pos[0]*ratio[0]);
       bloodbar.setY(Blood_pos[1]*ratio[1]);
-      bloodbar.setFitWidth(450);
-      bloodbar.setFitHeight(150);
+      bloodbar.setFitWidth(450*ratio[0]);
+      bloodbar.setFitHeight(150*ratio[1]);
    }
 
 
@@ -211,6 +211,11 @@ public class Player extends Entity{
       }
 
       anim_timer++;
+   }
+
+   @Override
+   public double getW(){
+      return Width-100;
    }
 
    @Override
