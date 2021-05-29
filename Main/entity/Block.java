@@ -17,7 +17,7 @@ public class Block extends Entity{
         hitbox = new Rectangle();
         hitbox.setFill(color);
         setSize(w,h);
-        setPos(x,y); 
+        setPos(x,y);
     }
     public static void createBlock(List<Entity> obj) throws FileNotFoundException{
         int i=0;
@@ -30,14 +30,14 @@ public class Block extends Entity{
                     length_1++;
                     //If col end but number is "1"
                     if(j==col.length()-1){
-                        Block block = new Block((int)length_1*100,100,100*(j+1-length_1/2)+50,100*(MAP.map1.length-1-i),Color.GRAY);
+                        Block block = new Block((int)length_1*200,200,200*(j+1-length_1/2)+50,200*(MAP.map1.length-1-i),Color.GRAY);
                         obj.add(block);
                     }
                 }
                 
                //If read "0" stop counting
                 else if(length_1>0){
-                    Block block = new Block((int)length_1*100,100,100*(j-length_1/2)+50,100*(MAP.map1.length-1-i),Color.GRAY);
+                    Block block = new Block((int)length_1*200,200,200*(j-length_1/2)+50,200*(MAP.map1.length-1-i),Color.GRAY);
                     obj.add(block);
                     length_1 = 0;
                 }
@@ -46,12 +46,12 @@ public class Block extends Entity{
                     length_2++;
                     //If col end but number is "2"
                     if(j==col.length()-1){
-                        Block block = new Block((int)length_2*100,100,100*(j+1-length_2/2)+50,100*(MAP.map1.length-1-i),Color.RED);
+                        Block block = new Block((int)length_2*200,200,200*(j+1-length_2/2)+50,200*(MAP.map1.length-1-i),Color.RED);
                         obj.add(block);
                     }
                 }
                 else if(length_2>0){
-                    Block block = new Block((int)length_2*100,100,100*(j-length_2/2)+50,100*(MAP.map1.length-1-i),Color.RED);
+                    Block block = new Block((int)length_2*200,200,200*(j-length_2/2)+50,200*(MAP.map1.length-1-i),Color.RED);
                     obj.add(block);
                     length_2 = 0;
                 }

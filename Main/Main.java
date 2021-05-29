@@ -35,11 +35,11 @@ public class Main extends Application {
    private boolean arrayFilled = false ;
 
    public Main() throws FileNotFoundException{
-      p = new Player(960,200);
-      t = new Trigger(1750,250);
-      int cannonX=4450,cannonY=300;
+      p = new Player(960,500);
+      t = new Trigger(2500,500);
+      int cannonX=9000,cannonY=600;
       c = new Cannon(cannonX,cannonY);
-      b = new Bullet(cannonX,cannonY+50);
+      b = new Bullet(cannonX+140,cannonY+100);
       s = new Savepoint(6000,900);
       //Read map and build
       Block.createBlock(obj);
@@ -95,7 +95,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(960,200);
+            p.setPos(960,500);
             p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
@@ -131,7 +131,7 @@ public class Main extends Application {
             if (frameTimeIndex == 0) {
                arrayFilled = true ;
             }
-            
+
             //lag the loading
             if (openning.isStart == true) {
                if(openning.step <= 2) openning.time = (openning.time + 1) % frameTimes.length ;
@@ -186,7 +186,7 @@ public class Main extends Application {
                            E.collidev=1;
                            E.setPos(E.getX(),B.getH()+B.getY());
                            i--;
-                        } 
+                        }
                      }
                   }
                }
@@ -194,9 +194,13 @@ public class Main extends Application {
                if(E.getMy()>0){
                   for(Entity B : obj){
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
-                        if(E.getY()<B.getY()+B.getY()-10){
-                           if(E.getX()<B.getX()) E.collideh=1;
-                           else if(E.getX()>B.getX()) E.collideh=2;
+                        if(E.getY()<B.getY()+B.getY()-20){
+                           if(E.getX()<B.getX()) {
+                              E.collideh=1;
+                           }
+                           else if(E.getX()>B.getX()) {
+                              E.collideh=2;
+                           }
                            if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10&& E.Isinrange(B)){
                               E.collidev=2;
                               E.setPos(E.getX(),B.getY()-E.getH()-1);

@@ -56,8 +56,8 @@ public class Player extends Entity{
       sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
-      setSize(200,280);
-      setPos(x,y); 
+      setSize(180,280);
+      setPos(x,y);
    }
 
    @Override
@@ -219,24 +219,24 @@ public class Player extends Entity{
       if(Motion[0]<=1&&Motion[0]>=-1&&landing&&Motion[1]<=0&&Motion[1]>-0.3){
          anim_type=0;
       }
+      if(!damaged){
+         if(Rightpress == true){
+            if(Shift&&landing) Motion[0] = 10;
+            else if(Motion[0]<=3) Motion[0] = 6;
+            if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
+               anim_type=1;
+            flip=false;
+         }
 
-      if(Rightpress == true && !damaged){
-         if(Shift&&landing) Motion[0] = 8;
-         else if(Motion[0]<=3) Motion[0] = 4;
-         if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
-            anim_type=1;
-         flip=false;
+         else if(Leftpress == true){
+            if(Shift&&landing) Motion[0] = -10;
+            else if(Motion[0]>=-3)Motion[0] = -6;
+            if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
+               anim_type=1;
+            flip=true;
+         }
       }
-
-      else if(Leftpress == true && !damaged){
-         if(Shift&&landing) Motion[0] = -8;
-         else if(Motion[0]>=-3)Motion[0] = -4;
-         if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
-            anim_type=1;
-         flip=true;
-      }
-
-      else if(damaged) {
+      else {
          Motion[0]=-10;
          timer++;
          if(timer>20/frameRate||!damaged){//let damaged be false when respwan
@@ -246,14 +246,14 @@ public class Player extends Entity{
       }
 
       if(Jump == true && landing == true){
-         if(Jumped == false){
-            Motion[1] = 12;
+         if(Jumped == false){    //haven't Jumped
+            Motion[1] = 22.4;//10
             Jumped = true;
             anim_type=2;
          }
       }else if(landing == true) Jumped = false;
 
-      if(Motion[0] != 0){
+      if(Motion[0] != 0){        //slow down when movement key released
          if(Motion[0]>0.1){
             if(collideh == 1){
                Motion[0]=0;
@@ -271,16 +271,16 @@ public class Player extends Entity{
          else Motion[0]=0;
       }
 
-      if(collidev == 2){
+      if(collidev == 2){      //hit upside block
          if(Motion[1]>0) Motion[1]=0;
       }
 
-      if(collidev == 1){
+      if(collidev == 1){      //hit the ground
          landing = true;
          if(Motion[1]<0) Motion[1]=0;
-      }else{
+      }else{                  //falling
          landing = false;
-         Motion[1]-=0.3*frameRate;
+         Motion[1]-=0.6*frameRate;
       }
       runAnim();
       Camera();

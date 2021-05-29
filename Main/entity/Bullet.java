@@ -21,16 +21,16 @@ public class Bullet extends Entity{
         hitbox = new Rectangle();
         hitbox.setFill(Color.BLACK);
         sprite.setSmooth(true);
-        setSize(70,70);
+        setSize(100,100);
         setPos(x,y);
         originX=x;
         originY=y;
     }
     @Override
     public void act(){
-        setPos(getX()+(-10*frameRate),originY);
+        setPos(getX()+(-12*frameRate),originY);
         t++;
-        if(t>200/frameRate){
+        if(t>300/frameRate){
             setPos(originX,originY);
             isHit=false;
             t=0;
