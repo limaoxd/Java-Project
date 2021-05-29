@@ -176,6 +176,7 @@ public class Player extends Entity{
       }
       if(anim_type==0){
          if(index==idle.size()){
+            index=0;
             anim_timer=0;
             image=idle.get(0);
             flipimage=(WritableImage)idleFlip.get(0);
@@ -187,6 +188,7 @@ public class Player extends Entity{
       }
       else if(anim_type==1){
          if(index==run.size()) {
+            index=0;
             anim_timer=0;
             image=run.get(0);
             flipimage=(WritableImage)runFlip.get(0);
@@ -240,7 +242,7 @@ public class Player extends Entity{
                anim_type=1;
             flip=true;
          }
-         else if(landing)
+         else if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
             anim_type=0;
       }
       else {
