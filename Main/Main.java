@@ -171,7 +171,7 @@ public class Main extends Application {
                      if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
                         if(E.getY()<(B.getH()+B.getY()-10)){
                            //Collide right
-                           if(E.getX()<B.getX()) {
+                           if(E.getX()<B.getX()) {//set
                               E.collideh=1;
                               E.setPos(B.getX()-B.getW()/2-E.getW()/2,E.getY());
                            }
@@ -218,7 +218,7 @@ public class Main extends Application {
             }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
-               p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
+               // p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
             }
             //savepoint
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
