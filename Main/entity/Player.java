@@ -56,7 +56,7 @@ public class Player extends Entity{
       sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
-      setSize(180,280);
+      setSize(200,280);
       setPos(x,y);
    }
 

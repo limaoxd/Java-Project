@@ -203,7 +203,7 @@ public class Main extends Application {
                            }
                            if(E.getY()+E.getH()>B.getY()&&E.getY()+E.getH()<B.getY()+10&& E.Isinrange(B)){
                               E.collidev=2;
-                              E.setPos(E.getX(),B.getY()-E.getH()-1);
+                              E.setPos(E.getX(),B.getY()-E.getH()-1/(stage.getHeight()/1080));
                            }
                         }
                      }
