@@ -16,8 +16,7 @@ public class Block extends Entity{
     private int blockType=0;
     private int LRtimer=0;
     private int gateTimer=0;
-    private double ReferenceX;//reference for type 3 & 4
-    private double GateReference;
+    private double ReferenceX,ReferenceY;//reference for type 3 & 4
     public static boolean isSwitchOpened=false;
     public Block(int w,int h,double x,double y,Color color) throws FileNotFoundException{
         hitbox = new Rectangle();
@@ -128,7 +127,7 @@ public class Block extends Entity{
                     obj.add(block);
                     block.setType(5);
                     length_5 = 0;
-                    block.GateReference=block.getY();
+                    block.ReferenceY=block.getY();
                 }
                 //Type 5
             }
@@ -190,13 +189,13 @@ public class Block extends Entity{
                     //3 second opening
                     else if(gateTimer>190/frameRate && gateTimer<400/frameRate){
                         Motion[1]=0;
-                        setPos(getX(), GateReference+450);
+                        setPos(getX(), ReferenceY+450);
                     }
                     //close
                     else{
                         Motion[1]=-10;
-                        if(getY()<=GateReference){
-                            setPos(getX(), GateReference);
+                        if(getY()<=ReferenceY){
+                            setPos(getX(), ReferenceY);
                             gateTimer=0;
                             Motion[1]=0;
                             isSwitchOpened=false;
