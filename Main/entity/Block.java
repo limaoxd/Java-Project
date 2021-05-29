@@ -22,7 +22,7 @@ public class Block extends Entity{
         setSize(w,h);
         setPos(x,y);
     }
-    public static void createBlock(List<Entity> obj) throws FileNotFoundException{
+    public static void createBlock(List<Entity> obj,List<Entity> movingBlock) throws FileNotFoundException{
         int i=0;
         for(String col : MAP.map1){
             double length_1=0;
@@ -74,12 +74,14 @@ public class Block extends Entity{
                     if(j==col.length()-1){
                         Block block = new Block((int)length_3*200,150,200*(j+1-length_3/2)+50,150*(MAP.map1.length-1-i),Color.RED);
                         obj.add(block);
+                        movingBlock.add(block);
                         block.setType(3);
                     }
                 }
                 else if(length_3>0){
                     Block block = new Block((int)length_3*200,150,200*(j-length_3/2)+50,150*(MAP.map1.length-1-i),Color.RED);
                     obj.add(block);
+                    movingBlock.add(block);
                     block.setType(3);
                     length_3 = 0;
                     block.ReferenceX=block.getX();
@@ -93,12 +95,14 @@ public class Block extends Entity{
                     if(j==col.length()-1){
                         Block block = new Block((int)length_4*200,150,200*(j+1-length_4/2)+50,150*(MAP.map1.length-1-i),Color.RED);
                         obj.add(block);
+                        movingBlock.add(block);
                         block.setType(4);
                     }
                 }
                 else if(length_4>0){
                     Block block = new Block((int)length_4*200,150,200*(j-length_4/2)+50,150*(MAP.map1.length-1-i),Color.RED);
                     obj.add(block);
+                    movingBlock.add(block);
                     block.setType(4);
                     length_4 = 0;
                     block.ReferenceX=block.getX();
@@ -134,19 +138,24 @@ public class Block extends Entity{
                 if     (timer<60/frameRate){
                     if(blockType==3)        setPos(ReferenceX+600, getY());
                     else if(blockType==4)   setPos(ReferenceX+600, getY());
-                    break;
+                    Motion[0]=0;
                 }
                 //left 120
-                else if(timer> 60/frameRate && timer<180/frameRate)
-                    setPos(getX()-(5*frameRate),getY());
+                else if(timer> 60/frameRate && timer<180/frameRate){
+                    Motion[0]=-5;
+                    setPos(getX()+(Motion[0]*frameRate),getY());
+                }
                 //stop 60
                 else if(timer>180/frameRate && timer<240/frameRate){
                     if(blockType==3)        setPos(ReferenceX, getY());
                     else if(blockType==4)   setPos(ReferenceX, getY());
+                    Motion[0]=0;
                 }
                 //right 120
-                else if(timer>240/frameRate && timer<360/frameRate)
-                    setPos(getX()+(5*frameRate),getY());
+                else if(timer>240/frameRate && timer<360/frameRate){
+                    Motion[0]=5;
+                    setPos(getX()+(Motion[0]*frameRate),getY());
+                }
                 //timer exceed 360/frameRate
                 break;
             default :

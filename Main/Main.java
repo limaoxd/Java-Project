@@ -22,6 +22,7 @@ import javafx.animation.AnimationTimer;
 public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
    List<Entity> obj = new ArrayList<>();
+   List<Entity> movingBlock = new ArrayList<>();
    List<Trigger> trigger = new ArrayList<>();
    public static Player p;
    public static Trigger t;
@@ -42,7 +43,7 @@ public class Main extends Application {
       b = new Bullet(cannonX,cannonY+70);
       s = new Savepoint(6000,900);
       //Read map and build
-      Block.createBlock(obj);
+      Block.createBlock(obj,movingBlock);
    }
 
    public static void main(String args[]) throws FileNotFoundException{
@@ -209,6 +210,9 @@ public class Main extends Application {
                      }
                   }
                }
+               for(Entity B : movingBlock)
+                  if(E.hitbox.intersects(B.hitbox.getBoundsInLocal()))
+                     E.setMx(B.getMx());
             }
             if(p.hitbox.intersects(b.hitbox.getBoundsInLocal())){
                b.isHit=true;

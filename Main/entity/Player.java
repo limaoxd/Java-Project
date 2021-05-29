@@ -221,9 +221,9 @@ public class Player extends Entity{
    @Override
    public void act(){
 
-      if(Motion[0]<=1&&Motion[0]>=-1&&landing&&Motion[1]<=0&&Motion[1]>-0.3){
-         anim_type=0;
-      }
+      // if(Motion[0]<=1&&Motion[0]>=-1&&landing&&Motion[1]<=0&&Motion[1]>-0.3){
+      //    anim_type=0;
+      // }
       if(!damaged){
          if(Rightpress == true){
             if(Shift&&landing) Motion[0] = 10;
@@ -240,6 +240,8 @@ public class Player extends Entity{
                anim_type=1;
             flip=true;
          }
+         else if(landing)
+            anim_type=0;
       }
       else {
          Motion[0]=-10;
