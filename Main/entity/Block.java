@@ -14,8 +14,11 @@ import javafx.scene.shape.Rectangle;
 
 public class Block extends Entity{
     private int blockType=0;
-    private int timer=0;
-    private double ReferenceX;
+    private int LRtimer=0;
+    private int gateTimer=0;
+    private double ReferenceX;//reference for type 3 & 4
+    private double GateReference;
+    public static boolean isSwitchOpened=false;
     public Block(int w,int h,double x,double y,Color color) throws FileNotFoundException{
         hitbox = new Rectangle();
         hitbox.setFill(color);
@@ -29,6 +32,7 @@ public class Block extends Entity{
             double length_2=0;
             double length_3=0;
             double length_4=0;
+            double length_5=0;
             for(int j = 0;j<col.length();j++){
                //Type 1(normal block)
                 if(col.charAt(j)=='1'){// count rectangle length
@@ -108,6 +112,25 @@ public class Block extends Entity{
                     block.ReferenceX=block.getX();
                 }
                 //Type 4
+
+                //Type 5(gate)
+                if(col.charAt(j)=='5'){
+                    length_5++;
+                    //If col end but number is "2"
+                    if(j==col.length()-1){
+                        Block block = new Block((int)length_5*200,150,200*(j+1-length_5/2)+50,150*(MAP.map1.length-1-i),Color.RED);
+                        obj.add(block);
+                        block.setType(5);
+                    }
+                }
+                else if(length_5>0){
+                    Block block = new Block((int)length_5*200,150,200*(j-length_5/2)+50,150*(MAP.map1.length-1-i),Color.RED);
+                    obj.add(block);
+                    block.setType(5);
+                    length_5 = 0;
+                    block.GateReference=block.getY();
+                }
+                //Type 5
             }
             i++;
          }
@@ -126,38 +149,61 @@ public class Block extends Entity{
 
     @Override
     public void act(){
-        timer++;
-        if(timer>360/frameRate) {
-            timer=0;
+        LRtimer++;
+        if(LRtimer>360/frameRate) {
+            LRtimer=0;
         }
 
         setPos(getX(),getY());
         switch(blockType){
             case 3 :case 4:
                 //stop 60
-                if     (timer<60/frameRate){
+                if     (LRtimer<60/frameRate){
                     if(blockType==3)        setPos(ReferenceX+600, getY());
                     else if(blockType==4)   setPos(ReferenceX+600, getY());
                     Motion[0]=0;
                 }
                 //left 120
-                else if(timer> 60/frameRate && timer<180/frameRate){
+                else if(LRtimer> 60/frameRate && LRtimer<180/frameRate){
                     Motion[0]=-5;
                     setPos(getX()+(Motion[0]*frameRate),getY());
                 }
                 //stop 60
-                else if(timer>180/frameRate && timer<240/frameRate){
+                else if(LRtimer>180/frameRate && LRtimer<240/frameRate){
                     if(blockType==3)        setPos(ReferenceX, getY());
                     else if(blockType==4)   setPos(ReferenceX, getY());
                     Motion[0]=0;
                 }
                 //right 120
-                else if(timer>240/frameRate && timer<360/frameRate){
+                else if(LRtimer>240/frameRate && LRtimer<360/frameRate){
                     Motion[0]=5;
                     setPos(getX()+(Motion[0]*frameRate),getY());
                 }
-                //timer exceed 360/frameRate
+                //LRtimer exceed 360/frameRate
                 break;
+            case 5 :
+                if(isSwitchOpened){
+                    gateTimer++;
+                    //3 seconds
+                    if(gateTimer<190/frameRate)
+                        Motion[1]=1;
+                    //3 second opening
+                    else if(gateTimer>190/frameRate && gateTimer<400/frameRate){
+                        Motion[1]=0;
+                        setPos(getX(), GateReference+450);
+                    }
+                    //close
+                    else{
+                        Motion[1]=-10;
+                        if(getY()<=GateReference){
+                            setPos(getX(), GateReference);
+                            gateTimer=0;
+                            Motion[1]=0;
+                            isSwitchOpened=false;
+                        }
+                    }
+                    setPos(getX(), getY()+Motion[1]);
+                }
             default :
                 break;
         }

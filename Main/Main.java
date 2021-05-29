@@ -29,6 +29,7 @@ public class Main extends Application {
    public static Cannon c;
    public static Bullet b;
    public static Savepoint s;
+   public static Switch sw;
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
@@ -41,7 +42,8 @@ public class Main extends Application {
       int cannonX=8900,cannonY=450;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+70);
-      s = new Savepoint(6000,900);
+      s = new Savepoint(6000,700);
+     sw = new Switch(3500,1050);
       //Read map and build
       Block.createBlock(obj,movingBlock);
    }
@@ -229,7 +231,10 @@ public class Main extends Application {
                LoadSave.phase++;
                LoadSave.save(p,s);
             }
-
+            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
+               Block.isSwitchOpened=true;
+               sw.isSwitchOpened=true;
+            }
             //Acting everthing
             Entity.frameRate = frameRatio;
 
@@ -247,6 +252,7 @@ public class Main extends Application {
       entity.add(b);
       entity.add(s);
       obj.add(c);
+      obj.add(sw);
       trigger.add(t);
    }
 
