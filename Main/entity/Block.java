@@ -15,9 +15,7 @@ import javafx.scene.shape.Rectangle;
 public class Block extends Entity{
     private int blockType=0;
     private double LRtimer=0;
-    private double gateTimer=0;
     private double ReferenceX,ReferenceY;//reference for type 3 & 4
-    public static boolean isSwitchOpened=false;
     public Block(int w,int h,double x,double y,Color color) throws FileNotFoundException{
         hitbox = new Rectangle();
         hitbox.setFill(color);
@@ -91,24 +89,6 @@ public class Block extends Entity{
                 }
                 //Type3
 
-                //Type 5(gate)
-                if(col.charAt(j)=='5'){
-                    length_5++;
-                    //If col end but number is "2"
-                    if(j==col.length()-1){
-                        Block block = new Block((int)length_5*200,150,200*(j+1-length_5/2)+50,150*(MAP.map1.length-1-i),Color.RED);
-                        obj.add(block);
-                        block.setType(5);
-                    }
-                }
-                else if(length_5>0){
-                    Block block = new Block((int)length_5*200,150,200*(j-length_5/2)+50,150*(MAP.map1.length-1-i),Color.RED);
-                    obj.add(block);
-                    block.setType(5);
-                    length_5 = 0;
-                    block.ReferenceY=block.getY();
-                }
-                //Type 5
             }
             i++;
          }
@@ -127,63 +107,45 @@ public class Block extends Entity{
 
     @Override
     public void act(){
-        LRtimer++;
-        if(LRtimer>360/frameRate) {
-            LRtimer=0;
-        }
-
         setPos(getX(),getY());
+
         switch(blockType){
             case 3 :
+                LRtimer++;
+                //LRtimer exceed 360/frameRate
+                if(LRtimer>360/frameRate)   LRtimer=0;
+
                 //stop 60
-                if     (LRtimer<60/frameRate && getX()>ReferenceX){
+                if     (LRtimer<60/frameRate && getX()>=ReferenceX){
                     setPos(ReferenceX, getY());
                     Motion[0]=0;
                 }
+
                 //left 120
                 else if(LRtimer> 60/frameRate && LRtimer<180/frameRate && getX()>ReferenceX-600){
                     Motion[0]=-10*frameRate;
                     setPos(getX()+(Motion[0]*frameRate),getY());
-                    if(LRtimer>170/frameRate && getX()>ReferenceX-600)//time has arrived but the block haven't arrived yet
-                        LRtimer=175/frameRate;
+
+                    //time has arrived but the block haven't arrived yet
+                    if(LRtimer>170/frameRate && getX()>ReferenceX-600)  LRtimer=175/frameRate;
                 }
+
                 //stop 60
-                else if(LRtimer>180/frameRate && LRtimer<240/frameRate && getX()<ReferenceX-600){
+                else if(LRtimer>180/frameRate && LRtimer<240/frameRate && getX()<=ReferenceX-600){
                     setPos(ReferenceX-600, getY());
                     Motion[0]=0;
                 }
+
                 //right 120
                 else if(LRtimer>240/frameRate && LRtimer<360/frameRate && getX()<ReferenceX){
                     Motion[0]=10*frameRate;
                     setPos(getX()+(Motion[0]*frameRate),getY());
-                    if(LRtimer>350/frameRate && getX()<ReferenceX)
-                        LRtimer=355/frameRate;
+
+                    //time has arrived but the block haven't arrived yet
+                    if(LRtimer>350/frameRate && getX()<ReferenceX)  LRtimer=355/frameRate;
                 }
-                //LRtimer exceed 360/frameRate
                 break;
-            case 5 :
-                if(isSwitchOpened){
-                    //3 seconds
-                    if(getY()<ReferenceY+450 && gateTimer==0)
-                        Motion[1]=(450/180)*frameRate;
-                    //3 second opening
-                    else if(getY()>=ReferenceY+450 && gateTimer<240/frameRate){
-                        Motion[1]=0;
-                        setPos(getX(), ReferenceY+450);
-                        gateTimer++;
-                    }
-                    //close
-                    else if(gateTimer>240/frameRate){
-                        Motion[1]=-10*frameRate;
-                        if(getY()<ReferenceY){
-                            setPos(getX(), ReferenceY);
-                            gateTimer=0;
-                            Motion[1]=0;
-                            isSwitchOpened=false;
-                        }
-                    }
-                    setPos(getX(), getY()+Motion[1]);
-                }
+
             default :
                 break;
         }

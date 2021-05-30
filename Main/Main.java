@@ -30,6 +30,7 @@ public class Main extends Application {
    public static Bullet b;
    public static Savepoint s;
    public static Switch sw;
+   public static Gate g;
    public static double frameRate;
    private final long[] frameTimes = new long[100];
    private int frameTimeIndex = 0 ;
@@ -37,13 +38,14 @@ public class Main extends Application {
    private boolean arrayFilled = false ;
 
    public Main() throws FileNotFoundException{
-      p = new Player(960,500);
+      p = new Player(960,500);//960
       t = new Trigger(2500,500);
       int cannonX=8900,cannonY=450;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+70);
       s = new Savepoint(6000,700);
      sw = new Switch(3500,1050);
+      g = new Gate(4000,450);
       //Read map and build
       Block.createBlock(obj,movingBlock);
    }
@@ -98,7 +100,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
          else if (ke.getCode() == KeyCode.R){
-            p.setPos(960,500);
+            p.setPos(9000,700);
             p.setMy(0);
             p.Cam[0]=0;
             p.Cam[1]=0;
@@ -158,7 +160,7 @@ public class Main extends Application {
                frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
                frameRate = Math.round(frameRate);
                if(frameRate <=60) frameRatio = 1;
-
+               else if(frameRate>=120) frameRatio = 0.416667;
                else frameRatio = 60/frameRate;
             }
 
@@ -231,8 +233,8 @@ public class Main extends Application {
                LoadSave.phase++;
                LoadSave.save(p,s);
             }
-            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
-               Block.isSwitchOpened=true;
+            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
+               g.isSwitchOpened=true;
                sw.isSwitchOpened=true;
             }
             //Acting everthing
@@ -253,6 +255,7 @@ public class Main extends Application {
       entity.add(s);
       obj.add(c);
       obj.add(sw);
+      obj.add(g);
       trigger.add(t);
    }
 
