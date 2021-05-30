@@ -162,7 +162,7 @@ public class Main extends Application {
                frameRate = 1_000_000_000.0 / elapsedNanosPerFrame ;
                frameRate = Math.round(frameRate);
                if(frameRate <=60) frameRatio = 1;
-               else if(frameRate>=120) frameRatio = 0.416667;
+               else if(frameRate>=130) frameRatio = 0.416667;
                else frameRatio = 60/frameRate;
             }
 
