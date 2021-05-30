@@ -44,7 +44,7 @@ public class Main extends Application {
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+70);
       s = new Savepoint(6000,700);
-     sw = new Switch(3500,1050);
+      sw = new Switch(3500,1050);
       g = new Gate(4000,450);
       //Read map and build
       Block.createBlock(obj,movingBlock);
@@ -78,28 +78,18 @@ public class Main extends Application {
       scene.setOnKeyPressed(ke -> {
          if (ke.getCode() == KeyCode.ENTER && openning.isStart == false){
             openning.start(root,stage,scene);
-            /*entity.add(p);
-            entity.add(b);
-            obj.add(c);
-            trigger.add(t);
-
-            obj.forEach(B -> root.getChildren().add(B.hitbox));
-
-            entity.forEach(E-> {
-               root.getChildren().add(E.hitbox);
-               root.getChildren().add(E.sprite);
-            });
-            trigger.forEach((T -> root.getChildren().add(T.sprite)));
-
-            root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);*/
          }
-         if (ke.getCode() == KeyCode.S) LoadSave.save(p,s);
-         if (ke.getCode() == KeyCode.L) LoadSave.load();
-         if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
-         else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
-         else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
-         else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
-         else if (ke.getCode() == KeyCode.R){
+         if (ke.getCode() == KeyCode.ENTER && openning.isDead == true && openning.isReborn == false){
+            openning.reborn(root);
+            p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
+         }
+         if (ke.getCode() == KeyCode.S && openning.isDead == false) LoadSave.save(p,s);
+         if (ke.getCode() == KeyCode.L && openning.isDead == false) LoadSave.load();
+         if (ke.getCode() == KeyCode.LEFT && openning.isDead == false) p.Leftpress = true;
+         else if (ke.getCode() == KeyCode.RIGHT && openning.isDead == false) p.Rightpress = true;
+         else if (ke.getCode() == KeyCode.SPACE && openning.isDead == false) p.Jump = true;
+         else if (ke.getCode() == KeyCode.SHIFT && openning.isDead == false) p.Shift = true;
+         else if (ke.getCode() == KeyCode.R && openning.isDead == false){
             p.setPos(9000,700);
             p.setMy(0);
             p.Cam[0]=0;
@@ -137,9 +127,11 @@ public class Main extends Application {
                arrayFilled = true ;
             }
 
-            //lag the loading
+            
             if (openning.isStart == true) {
-               if(openning.step <= 2) openning.time = (openning.time + 1) % frameTimes.length ;
+               openning.time = (openning.time + 1) % frameTimes.length ;
+
+               //lag the loading
                if(openning.time == 0 && openning.step == 0) {
                   addE();
                   openning.step++;
@@ -151,6 +143,16 @@ public class Main extends Application {
                   openning.step++;
                   openning.loadingOut(root);
                   LoadSave.save(p,s);
+               }
+
+               //for dead screen
+               if(openning.isDead == true){
+                  if(openning.time >= 3 && openning.lightDegree <= 0.8 && openning.isReborn == false){
+                     openning.deadSdarker();
+                  }
+                  if(openning.time >= 1 && openning.isReborn == true){
+                     openning.rebornLoading(root);
+                  }
                }
             }
 
@@ -221,12 +223,18 @@ public class Main extends Application {
             if(p.hitbox.intersects(b.hitbox.getBoundsInLocal())){
                b.isHit=true;
                //player damaged code
+               if(openning.isDead == false){
                   p.hitByBullet = true;
                   p.Inject();
+               }
             }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
-               p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
+               openning.deadScreen(root);
+               p.Leftpress = false;
+               p.Rightpress = false;
+               p.Jump = false;
+               p.Shift = false;
             }
             //savepoint
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){

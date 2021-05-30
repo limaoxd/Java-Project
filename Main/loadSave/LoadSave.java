@@ -40,12 +40,16 @@ public class LoadSave {
 
         switch(phase){
             case 0:
-                s.posx = 6180;
-                s.posy = 900;
+                s.posx = 9890;
+                s.posy = 850;
                 break;
             case 1:
-                s.posx = 2080;
-                s.posy = 1100;
+                s.posx = 10637;
+                s.posy = 2350;
+                break;
+            case 2:
+                s.posx = 4100;
+                s.posy = 1750;
                 break;
             default:
                 s.posx = 100;

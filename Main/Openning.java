@@ -22,7 +22,11 @@ import javafx.stage.Stage;
 public class Openning{
 
     public Boolean isStart = false;
+    public Boolean isDead = false;
+    public Boolean isReborn = false;
+    public double lightDegree = 0.1;
     public int time = 0;
+    public int t;
     public int step =0;
 
     //the lower one
@@ -43,6 +47,10 @@ public class Openning{
 
     public Rectangle bar = new Rectangle();
     public Rectangle stroke = new Rectangle();
+    public Rectangle dScreen= new Rectangle();
+
+    private Rectangle transparentOne = new Rectangle();
+    private Rectangle blackOne = new Rectangle();
 
     public void openningScreen(Group root, Stage stage, Scene scene){
 
@@ -94,7 +102,7 @@ public class Openning{
         stroke.setWidth(1920);
         stroke.setX(0);
         stroke.setY(800);
-        stroke.setFill(Color.TRANSPARENT);
+        stroke.setFill(Color.rgb(255,255,255,0.3));
         stroke.setStroke(Color.WHITE);
 
         titleView.setX(stage.getWidth()/2-title.getWidth()/2);
@@ -113,6 +121,85 @@ public class Openning{
         root.getChildren().remove(bar);
         root.getChildren().remove(stroke);
         root.getChildren().remove(titleView);
+    }
+
+    public void deadScreen(Group root){
+        dScreen.setFill(Color.rgb(105,0,0,lightDegree));
+        dScreen.setStroke(Color.rgb(105,0,0,lightDegree));
+        dScreen.setHeight(1080);
+        dScreen.setWidth(1920);
+        dScreen.setX(0);
+        dScreen.setY(0);
+
+        time = 0;
+        isDead = true;
+
+        root.getChildren().add(dScreen);
+        root.getChildren().add(hintView);
+    }
+
+    public void deadSdarker(){
+        
+        time = 0;
+        lightDegree += 0.1;
+        dScreen.setFill(Color.rgb(105,0,0,lightDegree));
+        dScreen.setStroke(Color.rgb(105,0,0,lightDegree));
+    }
+
+    public void reborn(Group root){
+
+        isReborn = true;
+        t = 0;
+        time = 0;
+        
+        blackOne.setFill(Color.rgb(0,0,0));
+        blackOne.setStroke(Color.rgb(0,0,0));
+        blackOne.setX(0);
+        blackOne.setY(0);
+        blackOne.setHeight(0);
+        blackOne.setWidth(1920);
+
+        transparentOne.setFill(Color.rgb(0,0,0,lightDegree));
+        transparentOne.setStroke(Color.rgb(0,0,0,lightDegree));
+        transparentOne.setX(0);
+        transparentOne.setY(0);
+        transparentOne.setHeight(108);
+        transparentOne.setWidth(1920);
+
+        root.getChildren().add(blackOne);
+        root.getChildren().add(transparentOne);
+
+        dScreen.setFill(Color.rgb(105,0,0));
+        dScreen.setStroke(Color.rgb(105,0,0));
+
+    }
+
+    public void rebornLoading(Group root){
+
+        time = 0;
+        t += 13;
+
+        if(t <= 1080){
+            blackOne.setHeight(t);
+            transparentOne.setHeight(108 + t);
+            if(t == 1080){
+                root.getChildren().remove(dScreen);
+                root.getChildren().remove(hintView);
+            }
+        }
+        else if(t <= 2160){
+            root.getChildren().remove(dScreen);
+            root.getChildren().remove(hintView);
+            blackOne.setHeight(2160-t);
+            transparentOne.setHeight(2268-t);
+        }
+        else{
+            isDead = false;
+            lightDegree = 0;
+            isReborn = false;
+            root.getChildren().remove(blackOne);
+            root.getChildren().remove(transparentOne);
+        }
     }
 
 }
