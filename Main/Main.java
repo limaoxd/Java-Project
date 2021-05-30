@@ -268,7 +268,12 @@ public class Main extends Application {
    }
 
    public void forEach(Group root, Openning openning, Stage stage){
-      obj.forEach(B -> root.getChildren().add(B.hitbox));
+      obj.forEach(B -> {
+         root.getChildren().add(B.hitbox);
+         if(B instanceof Block)
+            if(((Block)B).getType()==1||((Block)B).getType()==4) root.getChildren().add(B.sprite);
+         
+      });
 
       entity.forEach(E-> {
          root.getChildren().add(E.hitbox);
