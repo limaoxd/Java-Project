@@ -53,7 +53,7 @@ public class Trigger extends Entity{
         information.setFont(Font.font(null,FontWeight.NORMAL,25));
   
     }
-    
+
     public void act(double getX,double getY){
         if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200 && getY-Pos[1]<=50){
             sprite.setImage(flipimage);

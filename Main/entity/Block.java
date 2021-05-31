@@ -22,7 +22,7 @@ public class Block extends Entity{
 
     public Block(int w,int h,double x,double y,Color color) throws FileNotFoundException{
         hitbox = new Rectangle();
-        hitbox.setFill(color);
+        hitbox.setFill(Color.TRANSPARENT);
         setSize(w,h);
         setPos(x,y);
     }
@@ -135,7 +135,7 @@ public class Block extends Entity{
     public void setPos(double x,double y){
         Pos[0] = x;
         Pos[1] = y;
-        if(blockType==1||blockType==4){
+        if(blockType>0&&blockType<5){
             sprite.setFitWidth(Width*ratio[0]);
             sprite.setFitHeight(Height*ratio[1]);
             sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
@@ -197,6 +197,10 @@ public class Block extends Entity{
         this.blockType=t;
         if(blockType==1){
             image=extendSprite(new Image(new FileInputStream("pic/gd1.png")),Width);
+            sprite = new ImageView(image);
+        }
+        else if(blockType==3||blockType==2){
+            image=new Image(new FileInputStream("pic/plug1.png"));
             sprite = new ImageView(image);
         }
         else if(blockType==4){
