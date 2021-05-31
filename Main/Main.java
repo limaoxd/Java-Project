@@ -94,7 +94,7 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.E && openning.isDead == false) {
             if(p.getX()-t.getX()<200) t.infoWindow = true;
          }
-         else if (ke.getCode() == KeyCode.R && openning.isDead == false){
+         /*else if (ke.getCode() == KeyCode.R && openning.isDead == false){
             p.setPos(9000,700);
             p.setMy(0);
             p.Cam[0]=0;
@@ -103,7 +103,7 @@ public class Main extends Application {
             p.World[1]=0;
             p.newBornInGame=true;
             p.damaged=false;
-         }
+         }*/
       });
 
       scene.setOnKeyReleased(ke -> {
@@ -278,7 +278,7 @@ public class Main extends Application {
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          if(B instanceof Block)
-            if(((Block)B).getType()>0&&((Block)B).getType()<5) root.getChildren().add(B.sprite);
+            if(((Block)B).getType()>0&&((Block)B).getType()<7) root.getChildren().add(B.sprite);
          
       });
       trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));

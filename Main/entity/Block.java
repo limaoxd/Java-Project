@@ -108,6 +108,15 @@ public class Block extends Entity{
                     block.setType(4);
                     length_4 = 0;
                 }
+
+                if(col.charAt(j)=='l'||col.charAt(j)=='r'){
+                    Block block = new Block(200,150,200*(j+0.5)+50,150*(MAP.map1.length-1-i),Color.BLACK);
+                    obj.add(block);
+                    if(col.charAt(j)=='l')
+                        block.setType(5);
+                    else
+                        block.setType(6);
+                }
             }
             i++;
          }
@@ -135,7 +144,7 @@ public class Block extends Entity{
     public void setPos(double x,double y){
         Pos[0] = x;
         Pos[1] = y;
-        if(blockType>0&&blockType<5){
+        if(blockType>0&&blockType<7){
             sprite.setFitWidth(Width*ratio[0]);
             sprite.setFitHeight(Height*ratio[1]);
             sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
@@ -205,6 +214,14 @@ public class Block extends Entity{
         }
         else if(blockType==4){
             image=new Image(new FileInputStream("pic/p1.png"));
+            sprite = new ImageView(image);
+        }
+        else if(blockType==5){
+            image=new Image(new FileInputStream("pic/left_gd1.png"));
+            sprite = new ImageView(image);
+        }
+        else if(blockType==6){
+            image=new Image(new FileInputStream("pic/right_gd1.png"));
             sprite = new ImageView(image);
         }
     }
