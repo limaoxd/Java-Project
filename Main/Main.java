@@ -251,7 +251,7 @@ public class Main extends Application {
             Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
-            trigger.forEach(T -> T.act(p.getX()));
+            trigger.forEach(T -> T.act(p.getX(),p.getY()));
          }
       };
       mainloop.start();

@@ -293,3 +293,4 @@ public class Player extends Entity{
       //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }
+}

@@ -24,7 +24,7 @@ public class Trigger extends Entity{
         setSize(200,300);
         setPos(x,y);  
     }
-    
+
     public void act(double getX,double getY){
         if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200 && getY-Pos[1]<=50){
             sprite.setImage(flipimage);
