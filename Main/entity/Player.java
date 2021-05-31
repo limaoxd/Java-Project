@@ -51,8 +51,8 @@ public class Player extends Entity{
       bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      /*hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);*/
+      hitbox.setStroke(Color.LIGHTGREEN);
+      hitbox.setStrokeWidth(2);
       sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
@@ -73,7 +73,7 @@ public class Player extends Entity{
       sprite.setFitWidth(Width*ratio[0]);
       sprite.setFitHeight(Height*ratio[1]);
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
-      sprite.setY((1090-Pos[1]-Height+Cam[1])*ratio[1]);
+      sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
       redBlood.setX((Blood_pos[0]+78)*ratio[0]);
       redBlood.setY((Blood_pos[1]+65)*ratio[1]);
@@ -293,4 +293,3 @@ public class Player extends Entity{
       //System.out.println(frameRate);
       setPos(getX()+(Motion[0]*frameRate),getY()+cancel(Motion[1]*frameRate));
    }
- }
