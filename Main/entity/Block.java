@@ -18,6 +18,7 @@ import javafx.scene.shape.Rectangle;
 public class Block extends Entity{
     private int blockType=0;
     private double LRtimer=0;
+    private static boolean isGoingRight=false;//is going right or not(going left)
     private double ReferenceX,ReferenceY;//reference for type 3 & 4
 
     public Block(int w,int h,double x,double y,Color color) throws FileNotFoundException{
@@ -159,41 +160,44 @@ public class Block extends Entity{
     @Override
     public void act(){
         setPos(getX(),getY());
+        LRtimer++;
 
         switch(blockType){
             case 3 :
-                LRtimer++;
-                //LRtimer exceed 360/frameRate
-                if(LRtimer>360/frameRate)   LRtimer=0;
-
                 //stop 60
-                if     (LRtimer<60/frameRate && getX()>=ReferenceX){
-                    setPos(ReferenceX, getY());
+                //blocks were going right and have arrived
+                if     (isGoingRight && getX()>=ReferenceX){
                     Motion[0]=0;
+                    setPos(ReferenceX, getY());
+
+                    if(LRtimer>60/frameRate)    isGoingRight=false;
                 }
 
-                //left 120
-                else if(LRtimer> 60/frameRate && LRtimer<180/frameRate && getX()>ReferenceX-600){
+                //left
+                //blocks were going left and haven't arrived
+                else if(!isGoingRight && getX()>ReferenceX-600){
                     Motion[0]=-10*frameRate;
                     setPos(getX()+(Motion[0]*frameRate),getY());
 
-                    //time has arrived but the block haven't arrived yet
-                    if(LRtimer>170/frameRate && getX()>ReferenceX-600)  LRtimer=175/frameRate;
+                    LRtimer=0;
                 }
 
                 //stop 60
-                else if(LRtimer>180/frameRate && LRtimer<240/frameRate && getX()<=ReferenceX-600){
-                    setPos(ReferenceX-600, getY());
+                //blocks were going left and have arrived
+                else if(!isGoingRight && getX()<=ReferenceX-600){
                     Motion[0]=0;
+                    setPos(ReferenceX-600, getY());
+
+                    if(LRtimer>60/frameRate)    isGoingRight=true;
                 }
 
-                //right 120
-                else if(LRtimer>240/frameRate && LRtimer<360/frameRate && getX()<ReferenceX){
+                //right
+                //blocks were going right and haven't arrived
+                else if(isGoingRight && getX()<ReferenceX){
                     Motion[0]=10*frameRate;
                     setPos(getX()+(Motion[0]*frameRate),getY());
 
-                    //time has arrived but the block haven't arrived yet
-                    if(LRtimer>350/frameRate && getX()<ReferenceX)  LRtimer=355/frameRate;
+                    LRtimer=0;
                 }
                 break;
 
