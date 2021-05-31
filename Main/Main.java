@@ -45,7 +45,7 @@ public class Main extends Application {
       b = new Bullet(cannonX,cannonY+70);
       s = new Savepoint(6000,700);
       sw = new Switch(3500,1050);
-      g = new Gate(4000,450);
+      g = new Gate(3950,450);
       //Read map and build
       Block.createBlock(obj,movingBlock);
    }
@@ -271,7 +271,7 @@ public class Main extends Application {
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          if(B instanceof Block)
-            if(((Block)B).getType()==1||((Block)B).getType()==4) root.getChildren().add(B.sprite);
+            if(((Block)B).getType()>0&&((Block)B).getType()<5) root.getChildren().add(B.sprite);
          
       });
 

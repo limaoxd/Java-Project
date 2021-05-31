@@ -51,8 +51,8 @@ public class Player extends Entity{
       bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);
+      /*hitbox.setStroke(Color.LIGHTGREEN);
+      hitbox.setStrokeWidth(2);*/
       sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
