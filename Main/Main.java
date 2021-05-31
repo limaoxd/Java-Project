@@ -24,6 +24,7 @@ public class Main extends Application {
    List<Entity> obj = new ArrayList<>();
    List<Entity> movingBlock = new ArrayList<>();
    List<Trigger> trigger = new ArrayList<>();
+   List<Book> book = new ArrayList<>();
    public static Player p;
    public static Trigger t;
    public static Cannon c;
@@ -47,6 +48,7 @@ public class Main extends Application {
       sw = new Switch(3500,1050);
       g = new Gate(3950,450);
       //Read map and build
+      Book.createBook(book);
       Block.createBlock(obj,movingBlock);
    }
 
@@ -254,6 +256,7 @@ public class Main extends Application {
             Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
+            book.forEach(P -> P.act());
             trigger.forEach(T -> T.act(p.getX(),p.getY()));
          }
       };
@@ -271,6 +274,7 @@ public class Main extends Application {
    }
 
    public void forEach(Group root, Openning openning, Stage stage){
+      book.forEach((P -> root.getChildren().add(P.sprite)));
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          if(B instanceof Block)

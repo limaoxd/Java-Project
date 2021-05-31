@@ -204,7 +204,7 @@ public class Block extends Entity{
             sprite = new ImageView(image);
         }
         else if(blockType==4){
-            image=new Image(new FileInputStream("pic/w1.png"));
+            image=new Image(new FileInputStream("pic/p1.png"));
             sprite = new ImageView(image);
         }
     }
