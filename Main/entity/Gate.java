@@ -22,7 +22,7 @@ public class Gate extends Entity{
         hitbox = new Rectangle();
         hitbox.setFill(Color.BLACK);
         sprite.setSmooth(true);
-        setSize(210,600);
+        setSize(210,450);
         setPos(x,y);
         ReferenceY=y;
     }

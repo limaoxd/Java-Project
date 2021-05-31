@@ -41,9 +41,9 @@ public class Trigger extends Entity{
         setPos(x,y);
 
         infoWindow  = false;
-        information = new Text(650,860,"Welcome to the whatever");
+        information = new Text(810,860,"Welcome to the whatever");
 
-        messageBase.setX(400);
+        messageBase.setX(560);
         messageBase.setY(600);
         messageBase.setFitWidth(800);
         messageBase.setFitHeight(500);
@@ -55,8 +55,8 @@ public class Trigger extends Entity{
     }
 
     public void act(double getX,double getY){
-        System.out.println(Pos[0]);
-        System.out.println(Pos[1]);
+        /*System.out.println(Pos[0]);
+        System.out.println(Pos[1]);*/
         if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200){
             sprite.setImage(flipimage);
             exclamationMark.setVisible(true);
