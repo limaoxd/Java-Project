@@ -3,6 +3,9 @@ import static java.lang.System.out;
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException;
 import java.lang.Math;
+
+import javax.swing.text.html.StyleSheet;
+
 import javafx.application.Application; 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,80 +14,25 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.transform.Scale;
 
 public class Trigger extends Entity{
-    private boolean turnround = false;
-    private boolean encounter = false;
     
-
     public Trigger(double x,double y) throws FileNotFoundException {
         image = new Image(new FileInputStream("pic/test3.png"));
         sprite = new ImageView(image);
         flipimage = getFlip(image);
         sprite.setSmooth(true);
         sprite.setPreserveRatio(true);
-        setSize(100,150);
+        setSize(200,300);
         setPos(x,y);  
     }
     
-    public void act(double getX){
-        boolean flip = false;
-        boolean passThrough  = false;
-
-        
-        //determine whether the passerby should stop or not
-        if(!encounter){
-            if(getX()-1750<250 && !turnround){
-                    Motion[0]=2;
-            }else if(getX()-1750==250 && !turnround){
-                turnround = true;
-                Motion[0]=-2;
-                sprite.setImage(flipimage);
-            }else if(getX()-1750>0 && turnround){
-                Motion[0]=-2;
-            }else if(getX()-1750==0 && turnround){
-                turnround = false;
-                Motion[0]=+2;
-                sprite.setImage(image);
-            }
-            setPos(getX()+Motion[0],getY());
-            if (Math.abs(getX()-getX)<150) encounter = true; //player get close enough to passerby 
-        }else{
-            if (Math.abs(getX()-getX)<150 && getX()-getX>0) {   
-                flip = true;
-                passThrough = false;
-                encounter = true;
-                if(sprite.getImage().equals(image) && Motion[0]>0){
-                    flipimage(flip, passThrough);
-                }
-            }else if(Math.abs(getX()-getX)>150 && getX()-getX>0){
-                // flip = true;
-                // passThrough = false;
-                // flipimage(flip, passThrough);
-                if(Motion[0]>0){
-                    sprite.setImage(image);
-                }else if(Motion[0]<0){
-                    sprite.setImage(flipimage);
-                }
-                encounter = false;
-            }else if(Math.abs(getX()-getX)<150 && getX()-getX<0){
-                flip = true;
-                passThrough = true;
-                encounter = true;
-                if(sprite.getImage().equals(flipimage) && Motion[0]<0){
-                    flipimage(flip, passThrough);
-                }
-            }else if(Math.abs(getX()-getX)>150 && getX()-getX<0){
-                // flip = false;
-                // passThrough = true;
-                // flipimage(flip, passThrough);
-                if(Motion[0]>0){
-                    sprite.setImage(image);
-                }else if(Motion[0]<0){
-                    sprite.setImage(flipimage);
-                }
-                encounter = false;
-            }
-            setPos(getX(), getY());
+    public void act(double getX,double getY){
+        if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200 && getY-Pos[1]<=50){
+            sprite.setImage(flipimage);
+        }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])<200 && Math.abs(getY-Pos[1])<=50){
+            sprite.setImage(image);
         }
+        setPos(Pos[0], Pos[1]);
+        
     }
 
     public void flipimage(boolean flip,boolean passThrough){

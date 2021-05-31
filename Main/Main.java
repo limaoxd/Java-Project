@@ -39,7 +39,7 @@ public class Main extends Application {
 
    public Main() throws FileNotFoundException{
       p = new Player(960,500);//960
-      t = new Trigger(2500,500);
+      t = new Trigger(2500,250);
       int cannonX=8900,cannonY=450;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+70);
@@ -251,7 +251,7 @@ public class Main extends Application {
             Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
-            trigger.forEach(T -> T.act(p.getX()));
+            trigger.forEach(T -> T.act(p.getX(),p.getY()));
          }
       };
       mainloop.start();
@@ -274,12 +274,12 @@ public class Main extends Application {
             if(((Block)B).getType()==1||((Block)B).getType()==4) root.getChildren().add(B.sprite);
          
       });
-
+      trigger.forEach((T -> root.getChildren().add(T.sprite)));
       entity.forEach(E-> {
          root.getChildren().add(E.hitbox);
          root.getChildren().add(E.sprite);
       });
-      trigger.forEach((T -> root.getChildren().add(T.sprite)));
+      
 
       openning.step++;
       openning.loadingIn(root,stage);
