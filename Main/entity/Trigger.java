@@ -55,16 +55,18 @@ public class Trigger extends Entity{
     }
 
     public void act(double getX,double getY){
-        if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200 && getY-Pos[1]<=50){
+        System.out.println(Pos[0]);
+        System.out.println(Pos[1]);
+        if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200){
             sprite.setImage(flipimage);
             exclamationMark.setVisible(true);
-        }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])<200 && Math.abs(getY-Pos[1])<=50){
+        }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])<200 ){
             sprite.setImage(image);
             exclamationMark.setVisible(true);
-        }else if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])>200 && getY-Pos[1]>=50){
+        }else if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])>200){
             sprite.setImage(flipimage);
             exclamationMark.setVisible(false);
-        }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])>200 && getY-Pos[1]>=50){
+        }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])>200){
             sprite.setImage(image);
             exclamationMark.setVisible(false);
         }

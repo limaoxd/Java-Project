@@ -39,7 +39,7 @@ public class Main extends Application {
 
    public Main() throws FileNotFoundException{
       p = new Player(960,500);//960
-      t = new Trigger(2500,500);
+      t = new Trigger(2200,200);
       int cannonX=8900,cannonY=450;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+70);
