@@ -89,6 +89,9 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.RIGHT && openning.isDead == false) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE && openning.isDead == false) p.Jump = true;
          else if (ke.getCode() == KeyCode.SHIFT && openning.isDead == false) p.Shift = true;
+         else if (ke.getCode() == KeyCode.E && openning.isDead == false) {
+            if(p.getX()-t.getX()<200) t.infoWindow = true;
+         }
          else if (ke.getCode() == KeyCode.R && openning.isDead == false){
             p.setPos(9000,700);
             p.setMy(0);
@@ -274,11 +277,13 @@ public class Main extends Application {
             if(((Block)B).getType()==1||((Block)B).getType()==4) root.getChildren().add(B.sprite);
          
       });
-      trigger.forEach((T -> root.getChildren().add(T.sprite)));
+      trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
       entity.forEach(E-> {
          root.getChildren().add(E.hitbox);
          root.getChildren().add(E.sprite);
       });
+      //subtitle should above the player
+      trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information)));
       
 
       openning.step++;
