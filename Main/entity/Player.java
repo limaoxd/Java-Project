@@ -260,18 +260,18 @@ public class Player extends Entity{
       }else if(landing == true) Jumped = false;
 
       if(Motion[0] != 0){        //slow down when movement key released
-         if(Motion[0]>0.1){
+         if(Motion[0]>0.25){
             if(collideh == 1){
                Motion[0]=0;
             }else if(landing){
-               Motion[0]-=0.2;
+               Motion[0]-=0.5;
             }
          }
-         else if(Motion[0]<-0.1){
+         else if(Motion[0]<-0.25){
             if(collideh == 2){
                Motion[0]=0;
             }else if(landing){
-               Motion[0]+=0.2;
+               Motion[0]+=0.5;
             }
          }
          else Motion[0]=0;
