@@ -118,6 +118,14 @@ public class Block extends Entity{
                     else
                         block.setType(6);
                 }
+                if(col.charAt(j)=='L'||col.charAt(j)=='R'){
+                    Block block = new Block(200,150,200*(j+0.5)+50,150*(MAP.map1.length-1-i),Color.BLACK);
+                    obj.add(block);
+                    if(col.charAt(j)=='L')
+                        block.setType(7);
+                    else
+                        block.setType(8);
+                }
             }
             i++;
          }
@@ -145,7 +153,7 @@ public class Block extends Entity{
     public void setPos(double x,double y){
         Pos[0] = x;
         Pos[1] = y;
-        if(blockType>0&&blockType<7){
+        if(blockType>0&&blockType<9){
             sprite.setFitWidth(Width*ratio[0]);
             sprite.setFitHeight(Height*ratio[1]);
             sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
@@ -208,26 +216,15 @@ public class Block extends Entity{
 
     private void setType(int t) throws FileNotFoundException{
         this.blockType=t;
-        if(blockType==1){
-            image=extendSprite(new Image(new FileInputStream("pic/gd1.png")),Width);
-            sprite = new ImageView(image);
-        }
-        else if(blockType==3||blockType==2){
-            image=new Image(new FileInputStream("pic/plug1.png"));
-            sprite = new ImageView(image);
-        }
-        else if(blockType==4){
-            image=new Image(new FileInputStream("pic/p1.png"));
-            sprite = new ImageView(image);
-        }
-        else if(blockType==5){
-            image=new Image(new FileInputStream("pic/left_gd1.png"));
-            sprite = new ImageView(image);
-        }
-        else if(blockType==6){
-            image=new Image(new FileInputStream("pic/right_gd1.png"));
-            sprite = new ImageView(image);
-        }
+        if(blockType==1) image=extendSprite(new Image(new FileInputStream("pic/gd1.png")),Width);
+        else if(blockType==3||blockType==2) image=new Image(new FileInputStream("pic/plug1.png"));
+        else if(blockType==4) image=new Image(new FileInputStream("pic/p1.png"));
+        else if(blockType==5) image=new Image(new FileInputStream("pic/left_gd1.png"));
+        else if(blockType==6) image=new Image(new FileInputStream("pic/right_gd1.png"));
+        else if(blockType==7) image=new Image(new FileInputStream("pic/gd2.png"));
+        else if(blockType==8) image=new Image(new FileInputStream("pic/gd3.png"));
+
+        sprite = new ImageView(image);
     }
 
     public int getType(){

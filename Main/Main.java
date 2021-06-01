@@ -25,6 +25,7 @@ public class Main extends Application {
    List<Entity> movingBlock = new ArrayList<>();
    List<Trigger> trigger = new ArrayList<>();
    List<Book> book = new ArrayList<>();
+   List<Background> backGround = new ArrayList<>();
    public static Player p;
    public static Trigger t;
    public static Cannon c;
@@ -48,6 +49,7 @@ public class Main extends Application {
       sw = new Switch(3500,1050);
       g = new Gate(3950,450);
       //Read map and build
+      Background.createBg(backGround);
       Book.createBook(book);
       Block.createBlock(obj,movingBlock);
    }
@@ -256,6 +258,7 @@ public class Main extends Application {
             Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
+            backGround.forEach(G -> G.act());
             book.forEach(P -> P.act());
             trigger.forEach(T -> T.act(p.getX(),p.getY()));
          }
@@ -274,10 +277,11 @@ public class Main extends Application {
    }
 
    public void forEach(Group root, Openning openning, Stage stage){
+      backGround.forEach((G -> root.getChildren().add(G.sprite)));
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          if(B instanceof Block)
-            if(((Block)B).getType()>0&&((Block)B).getType()<7) root.getChildren().add(B.sprite);
+            if(((Block)B).getType()>0&&((Block)B).getType()<9) root.getChildren().add(B.sprite);
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
       trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
