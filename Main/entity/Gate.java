@@ -16,13 +16,13 @@ public class Gate extends Entity{
     public boolean isSwitchOpened=false;
     private double ReferenceY;
     public Gate(double x, double y) throws FileNotFoundException{
-        image = new Image(new FileInputStream("pic/test1.png"));
+        image = new Image(new FileInputStream("pic/gate.png"));
         flipimage = getFlip(image);
         sprite = new ImageView(image);
         hitbox = new Rectangle();
-        hitbox.setFill(Color.BLACK);
+        hitbox.setFill(Color.TRANSPARENT);
         sprite.setSmooth(true);
-        setSize(210,450);
+        setSize(200,450);
         setPos(x,y);
         ReferenceY=y;
     }

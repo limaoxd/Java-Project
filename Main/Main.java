@@ -280,8 +280,7 @@ public class Main extends Application {
       backGround.forEach((G -> root.getChildren().add(G.sprite)));
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
-         if(B instanceof Block)
-            if(((Block)B).getType()>0&&((Block)B).getType()<9) root.getChildren().add(B.sprite);
+         root.getChildren().add(B.sprite);
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
       trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
