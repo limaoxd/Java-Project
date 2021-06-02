@@ -13,13 +13,13 @@ import javafx.scene.shape.Rectangle;
 
 public class Cannon extends Entity{
     public Cannon(double x, double y) throws FileNotFoundException{
-        image = new Image(new FileInputStream("pic/test1.png"));
+        image = new Image(new FileInputStream("pic/cannon.png"));
         flipimage = getFlip(image);
         sprite = new ImageView(image);
         hitbox = new Rectangle();
-        hitbox.setFill(Color.BLACK);
+        hitbox.setFill(Color.TRANSPARENT);
         sprite.setSmooth(true);
-        setSize(300,200);
+        setSize(400,174);
         setPos(x,y);
     }
 

@@ -21,7 +21,7 @@ public class Bullet extends Entity{
         hitbox = new Rectangle();
         hitbox.setFill(Color.BLACK);
         sprite.setSmooth(true);
-        setSize(100,100);
+        setSize(50,50);
         setPos(x,y);
         originX=x;
         originY=y;

@@ -116,7 +116,7 @@ public class Player extends Entity{
          newBornInGame = false;
       }else{
          if(hitByBullet){
-            health_value = redBlood.getWidth()-50;
+            health_value = redBlood.getWidth()-120;
             redBlood.setWidth(health_value);
             hitByBullet = false;
             damaged = true;
