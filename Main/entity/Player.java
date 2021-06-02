@@ -51,8 +51,8 @@ public class Player extends Entity{
       bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);
+      /*hitbox.setStroke(Color.LIGHTGREEN);
+      hitbox.setStrokeWidth(2);*/
       sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
@@ -116,7 +116,7 @@ public class Player extends Entity{
          newBornInGame = false;
       }else{
          if(hitByBullet){
-            health_value = redBlood.getWidth()-50;
+            health_value = redBlood.getWidth()-120;
             redBlood.setWidth(health_value);
             hitByBullet = false;
             damaged = true;

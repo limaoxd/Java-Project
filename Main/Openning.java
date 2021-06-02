@@ -45,6 +45,9 @@ public class Openning{
     private Image loadingScreen = new Image("pic/loadingscreen.png");
     private ImageView loadingView = new ImageView(loadingScreen);
 
+    private Image deadMBase = new Image("pic/deadmessage.png");
+    private ImageView deadMBaseView = new ImageView(deadMBase);
+
     public Rectangle bar = new Rectangle();
     public Rectangle stroke = new Rectangle();
     public Rectangle dScreen= new Rectangle();
@@ -123,7 +126,7 @@ public class Openning{
         root.getChildren().remove(titleView);
     }
 
-    public void deadScreen(Group root){
+    public void deadScreen(Group root, Stage stage){
         dScreen.setFill(Color.rgb(105,0,0,lightDegree));
         dScreen.setStroke(Color.rgb(105,0,0,lightDegree));
         dScreen.setHeight(1080);
@@ -131,11 +134,15 @@ public class Openning{
         dScreen.setX(0);
         dScreen.setY(0);
 
+        deadMBaseView.setX(stage.getWidth()/2-deadMBase.getWidth()/2);
+        deadMBaseView.setY(stage.getHeight()/2-deadMBase.getHeight()/2);
+
         time = 0;
         isDead = true;
 
         root.getChildren().add(dScreen);
         root.getChildren().add(hintView);
+        root.getChildren().add(deadMBaseView);
     }
 
     public void deadSdarker(){
@@ -163,7 +170,7 @@ public class Openning{
         transparentOne.setStroke(Color.rgb(0,0,0,lightDegree));
         transparentOne.setX(0);
         transparentOne.setY(0);
-        transparentOne.setHeight(108);
+        transparentOne.setHeight(13);
         transparentOne.setWidth(1920);
 
         root.getChildren().add(blackOne);
@@ -181,17 +188,14 @@ public class Openning{
 
         if(t <= 1080){
             blackOne.setHeight(t);
-            transparentOne.setHeight(108 + t);
-            if(t == 1080){
-                root.getChildren().remove(dScreen);
-                root.getChildren().remove(hintView);
-            }
+            transparentOne.setHeight(13 + t);
         }
         else if(t <= 2160){
             root.getChildren().remove(dScreen);
             root.getChildren().remove(hintView);
+            root.getChildren().remove(deadMBaseView);
             blackOne.setHeight(2160-t);
-            transparentOne.setHeight(2268-t);
+            transparentOne.setHeight(2173-t);
         }
         else{
             isDead = false;

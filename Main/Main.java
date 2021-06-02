@@ -42,9 +42,9 @@ public class Main extends Application {
    public Main() throws FileNotFoundException{
       p = new Player(960,500);//960
       t = new Trigger(2200,200);
-      int cannonX=8900,cannonY=450;
+      int cannonX=8850,cannonY=450;
       c = new Cannon(cannonX,cannonY);
-      b = new Bullet(cannonX,cannonY+70);
+      b = new Bullet(cannonX,cannonY+110);
       s = new Savepoint(6000,700);
       sw = new Switch(3500,1050);
       g = new Gate(3950,450);
@@ -64,7 +64,6 @@ public class Main extends Application {
       //Creating a Group object
       Group root = new Group();
       /*obj.forEach(B -> root.getChildren().add(B.hitbox));
-
       entity.forEach(E-> {
             root.getChildren().add(E.hitbox);
             root.getChildren().add(E.sprite);
@@ -101,16 +100,6 @@ public class Main extends Application {
             }
             
          }
-         /*else if (ke.getCode() == KeyCode.R && openning.isDead == false){
-            p.setPos(9000,700);
-            p.setMy(0);
-            p.Cam[0]=0;
-            p.Cam[1]=0;
-            p.World[0]=0;
-            p.World[1]=0;
-            p.newBornInGame=true;
-            p.damaged=false;
-         }*/
       });
 
       scene.setOnKeyReleased(ke -> {
@@ -243,7 +232,7 @@ public class Main extends Application {
             }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
-               openning.deadScreen(root);
+               openning.deadScreen(root,stage);
                p.Leftpress = false;
                p.Rightpress = false;
                p.Jump = false;
@@ -282,17 +271,16 @@ public class Main extends Application {
 
    public void forEach(Group root, Openning openning, Stage stage){
       backGround.forEach((G -> root.getChildren().add(G.sprite)));
+      trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
+      entity.forEach(E-> {
+         root.getChildren().add(E.hitbox);
+         root.getChildren().add(E.sprite);
+      });
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          root.getChildren().add(B.sprite);
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
-      trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
-
-      entity.forEach(E-> {
-         root.getChildren().add(E.hitbox);
-         root.getChildren().add(E.sprite);
-      });
       //subtitle should above the player
       trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information)));
       
