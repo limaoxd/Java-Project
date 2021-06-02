@@ -24,7 +24,7 @@ public class Player extends Entity{
    public boolean newBornInGame = true;
    public double health_value;
 
-   private static double[] Blood_pos = {10,30};
+   private static double[] Blood_pos = {10,50};
    private Image blood;
    private List<Image> idle,run,jump,idleFlip,runFlip,jumpFlip;
    private boolean flip = false,fliped = false;
@@ -73,22 +73,22 @@ public class Player extends Entity{
       sprite.setFitWidth(Width*ratio[0]);
       sprite.setFitHeight(Height*ratio[1]);
       sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
-      sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
+      sprite.setY((1090-Pos[1]-Height+Cam[1])*ratio[1]);
 
-      redBlood.setX((Blood_pos[0]+78)*ratio[0]);
-      redBlood.setY((Blood_pos[1]+65)*ratio[1]);
+      redBlood.setX((Blood_pos[0]+54)*ratio[0]);
+      redBlood.setY((Blood_pos[1]+27)*ratio[1]);
       redBlood.setWidth(Inject()*ratio[0]);
-      redBlood.setHeight(20*ratio[1]);
+      redBlood.setHeight(22*ratio[1]);
 
-      bloodbarBase.setX((Blood_pos[0]+78)*ratio[0]);
-      bloodbarBase.setY((Blood_pos[1]+65)*ratio[1]);
-      bloodbarBase.setWidth(325*ratio[0]);
-      bloodbarBase.setHeight(20*ratio[1]);
+      bloodbarBase.setX((Blood_pos[0]+54)*ratio[0]);
+      bloodbarBase.setY((Blood_pos[1]+27)*ratio[1]);
+      bloodbarBase.setWidth(650*ratio[0]);
+      bloodbarBase.setHeight(22*ratio[1]);
 
       bloodbar.setX(Blood_pos[0]*ratio[0]);
       bloodbar.setY(Blood_pos[1]*ratio[1]);
-      bloodbar.setFitWidth(450*ratio[0]);
-      bloodbar.setFitHeight(150*ratio[1]);
+      bloodbar.setFitWidth(750*ratio[0]);
+      bloodbar.setFitHeight(75*ratio[1]);
    }
 
 
@@ -112,11 +112,11 @@ public class Player extends Entity{
 
    public double Inject(){
       if(newBornInGame){
-         health_value = 325;
+         health_value = 650;
          newBornInGame = false;
       }else{
          if(hitByBullet){
-            health_value = redBlood.getWidth()-120;
+            health_value = redBlood.getWidth()-250;
             redBlood.setWidth(health_value);
             hitByBullet = false;
             damaged = true;

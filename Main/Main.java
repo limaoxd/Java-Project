@@ -272,13 +272,13 @@ public class Main extends Application {
    public void forEach(Group root, Openning openning, Stage stage){
       backGround.forEach((G -> root.getChildren().add(G.sprite)));
       trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
-      entity.forEach(E-> {
-         root.getChildren().add(E.hitbox);
-         root.getChildren().add(E.sprite);
-      });
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          root.getChildren().add(B.sprite);
+      });
+      entity.forEach(E-> {
+         root.getChildren().add(E.hitbox);
+         root.getChildren().add(E.sprite);
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
       //subtitle should above the player
