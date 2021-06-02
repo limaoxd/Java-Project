@@ -53,8 +53,8 @@ public class Player extends Entity{
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
       /*hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);*/
-      sprite.setSmooth(true);
+      hitbox.setStrokeWidth(2);
+      sprite.setSmooth(true);*/
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
       setSize(200,280);
