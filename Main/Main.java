@@ -87,25 +87,26 @@ public class Main extends Application {
             openning.reborn(root);
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
          }
-         if (ke.getCode() == KeyCode.S && openning.isDead == false) LoadSave.save(p,s);
-         if (ke.getCode() == KeyCode.L && openning.isDead == false) LoadSave.load();
-         if (ke.getCode() == KeyCode.LEFT && openning.isDead == false) p.Leftpress = true;
-         else if (ke.getCode() == KeyCode.RIGHT && openning.isDead == false) p.Rightpress = true;
-         else if (ke.getCode() == KeyCode.SPACE && openning.isDead == false) p.Jump = true;
-         else if (ke.getCode() == KeyCode.SHIFT && openning.isDead == false) p.Shift = true;
-         else if (ke.getCode() == KeyCode.E && openning.isDead == false) {
-            if(p.getX()-t.getX()<200) t.infoWindow = true;
+         if(openning.isDead == false){
+            //if (ke.getCode() == KeyCode.S) LoadSave.save(p,s);
+            if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
+            else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
+            else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
+            else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
+            else if (ke.getCode() == KeyCode.E) {
+               if(p.getX()-t.getX()<200) t.infoWindow = true;
+            }
+            /*else if (ke.getCode() == KeyCode.R){
+               p.setPos(9000,700);
+               p.setMy(0);
+               p.Cam[0]=0;
+               p.Cam[1]=0;
+               p.World[0]=0;
+               p.World[1]=0;
+               p.newBornInGame=true;
+               p.damaged=false;
+            }*/
          }
-         /*else if (ke.getCode() == KeyCode.R && openning.isDead == false){
-            p.setPos(9000,700);
-            p.setMy(0);
-            p.Cam[0]=0;
-            p.Cam[1]=0;
-            p.World[0]=0;
-            p.World[1]=0;
-            p.newBornInGame=true;
-            p.damaged=false;
-         }*/
       });
 
       scene.setOnKeyReleased(ke -> {
@@ -237,7 +238,7 @@ public class Main extends Application {
             }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
-               openning.deadScreen(root);
+               openning.deadScreen(root,stage);
                p.Leftpress = false;
                p.Rightpress = false;
                p.Jump = false;
