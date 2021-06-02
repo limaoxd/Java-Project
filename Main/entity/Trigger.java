@@ -3,6 +3,8 @@ import static java.lang.System.out;
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException;
 import java.lang.Math;
+
+import javax.swing.LayoutFocusTraversalPolicy;
 import javax.swing.text.html.StyleSheet;
 
 import javafx.application.Application;
@@ -14,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.scene.transform.Scale;
 public class Trigger extends Entity{
     public boolean infoWindow ;
@@ -22,6 +25,7 @@ public class Trigger extends Entity{
     public Image exclamationMarkImage;
     public Image messageBaseImage;
     public ImageView messageBase;
+
     public Trigger(double x,double y) throws FileNotFoundException {
         image = new Image(new FileInputStream("pic/test3.png"));
         sprite = new ImageView(image);
@@ -37,21 +41,16 @@ public class Trigger extends Entity{
         messageBase = new ImageView(messageBaseImage);
         messageBase.setVisible(false);
 
-        setSize(200,300);
-        setPos(x,y);
-
+        information = new Text("Welcome to the whatever");
         infoWindow  = false;
-        information = new Text(810,860,"Welcome to the whatever");
-
-        messageBase.setX(560);
-        messageBase.setY(600);
-        messageBase.setFitWidth(800);
-        messageBase.setFitHeight(500);
-
         information.setFill(Color.RED);
         information.setVisible(false);
         information.setFont(Font.font(null,FontWeight.NORMAL,25));
   
+        setSize(200,300);
+        setPos(x,y);
+
+      
     }
 
     public void act(double getX,double getY){
@@ -103,6 +102,15 @@ public class Trigger extends Entity{
         exclamationMark.setFitHeight(100*ratio[1]);
         exclamationMark.setX(((Pos[0]+50)-100/2-Cam[0])*ratio[0]); 
         exclamationMark.setY((1080-(Pos[1]+300)-100+Cam[1])*ratio[1]);
+        messageBase.setFitWidth(ratio[0]*840);
+        messageBase.setFitHeight(ratio[1]*100);
+        messageBase.setX((ratio[0]*1920)/2-messageBase.getFitWidth()/2);
+        messageBase.setY((ratio[1]*1080)-messageBase.getFitHeight()-100);
+        information.setTextAlignment(TextAlignment.CENTER);
+        information.setWrappingWidth(400);
+        information.setX((ratio[0]*1920)/2-information.getWrappingWidth()/2);
+        information.setLayoutY((ratio[1]*1080-information.getFont().getSize())-100);
+
     }
 
 }

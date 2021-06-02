@@ -95,6 +95,11 @@ public class Main extends Application {
          else if (ke.getCode() == KeyCode.SHIFT && openning.isDead == false) p.Shift = true;
          else if (ke.getCode() == KeyCode.E && openning.isDead == false) {
             if(p.getX()-t.getX()<200) t.infoWindow = true;
+            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
+               g.isSwitchOpened=true;
+               sw.isSwitchOpened=true;
+            }
+            
          }
          /*else if (ke.getCode() == KeyCode.R && openning.isDead == false){
             p.setPos(9000,700);
@@ -125,6 +130,7 @@ public class Main extends Application {
       AnimationTimer mainloop = new AnimationTimer() {
          @Override
          public void handle(long t) {
+            Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             //calculate the framerate
             long oldFrameTime = frameTimes[frameTimeIndex] ;
             frameTimes[frameTimeIndex] = t ;
@@ -248,14 +254,12 @@ public class Main extends Application {
                LoadSave.phase++;
                LoadSave.save(p,s);
             }
-            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
-               g.isSwitchOpened=true;
-               sw.isSwitchOpened=true;
-            }
+            // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
+            //    g.isSwitchOpened=true;
+            //    sw.isSwitchOpened=true;
+            // }
             //Acting everthing
             Entity.frameRate = frameRatio;
-
-            Entity.setScreenSize(stage.getWidth(),stage.getHeight());
             entity.forEach(E -> E.act());
             obj.forEach(B -> B.act());
             backGround.forEach(G -> G.act());
