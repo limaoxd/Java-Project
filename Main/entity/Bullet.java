@@ -15,11 +15,11 @@ public class Bullet extends Entity{
     private static double originY;
     public boolean isHit = false;
     public Bullet(double x,double y) throws FileNotFoundException{
-        image = new Image(new FileInputStream("pic/test1.png"));
+        image = new Image(new FileInputStream("pic/bullet.png"));
         flipimage = getFlip(image);
         sprite = new ImageView(image);
         hitbox = new Rectangle();
-        hitbox.setFill(Color.BLACK);
+        hitbox.setFill(Color.TRANSPARENT);
         sprite.setSmooth(true);
         setSize(50,50);
         setPos(x,y);
