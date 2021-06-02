@@ -261,8 +261,8 @@ public class Main extends Application {
 
    public void addE(){
       entity.add(p);
-      entity.add(b);
       entity.add(s);
+      obj.add(b);
       obj.add(c);
       obj.add(sw);
       obj.add(g);

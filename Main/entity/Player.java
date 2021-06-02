@@ -23,6 +23,7 @@ public class Player extends Entity{
    public boolean damaged =false;
    public boolean newBornInGame = true;
    public double health_value;
+   public double health_base_value=650;
 
    private static double[] Blood_pos = {10,50};
    private Image blood;
@@ -82,7 +83,9 @@ public class Player extends Entity{
 
       bloodbarBase.setX((Blood_pos[0]+54)*ratio[0]);
       bloodbarBase.setY((Blood_pos[1]+27)*ratio[1]);
-      bloodbarBase.setWidth(650*ratio[0]);
+      if(health_base_value>Inject()) health_base_value-=0.75;
+      else health_base_value=Inject();
+      bloodbarBase.setWidth(health_base_value*ratio[0]);
       bloodbarBase.setHeight(22*ratio[1]);
 
       bloodbar.setX(Blood_pos[0]*ratio[0]);
