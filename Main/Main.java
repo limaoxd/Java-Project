@@ -232,7 +232,7 @@ public class Main extends Application {
             }
             if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
                sw.show_Ekey = true;
-            }
+            }else sw.show_Ekey = false;
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
                openning.deadScreen(root,stage);
@@ -245,6 +245,7 @@ public class Main extends Application {
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
                LoadSave.phase++;
                LoadSave.save(s);
+               if(LoadSave.phase==2) Main.t.finishGame = true;
             }
             // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
             //    g.isSwitchOpened=true;
@@ -285,7 +286,7 @@ public class Main extends Application {
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
       //subtitle should above the player
-      trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information)));
+      trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information,T.E_key)));
 
       openning.step++;
       openning.loadingIn(root,stage);

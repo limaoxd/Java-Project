@@ -27,6 +27,8 @@ public class Trigger extends Entity{
     public ImageView messageBase;
     public boolean firstMeet; 
     public boolean finishGame;
+    public Image E_keyImage;
+    public ImageView E_key;
     public Trigger(double x,double y) throws FileNotFoundException {
         image = new Image(new FileInputStream("pic/test3.png"));
         sprite = new ImageView(image);
@@ -43,6 +45,7 @@ public class Trigger extends Entity{
         messageBaseImage = new Image(new FileInputStream("pic/messageBase.png"));
         messageBase = new ImageView(messageBaseImage);
         messageBase.setVisible(false);
+        messageBase.setOpacity(0.4);
 
         information = new Text("Welcome to the whatever");
         infoWindow  = false;
@@ -50,6 +53,9 @@ public class Trigger extends Entity{
         information.setVisible(false);
         information.setFont(Font.font(null,FontWeight.NORMAL,25));
   
+        E_keyImage = new Image(new FileInputStream("pic/e-key.png"));
+        E_key = new ImageView(E_keyImage);
+        E_key.setVisible(false);
         setSize(200,300);
         setPos(x,y);
 
@@ -63,26 +69,32 @@ public class Trigger extends Entity{
             sprite.setImage(flipimage);
             if(firstMeet){
                 exclamationMark.setVisible(true);
+                E_key.setVisible(true);
             }
             if(finishGame){
                 exclamationMark.setVisible(true);
+                E_key.setVisible(true);
                 information.setText("Congratulation!!");
             }
         }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])<200 ){
             sprite.setImage(image);
             if(firstMeet){
+                E_key.setVisible(true);
                 exclamationMark.setVisible(true);
             }
             if(finishGame){
+                E_key.setVisible(true);
                 exclamationMark.setVisible(true);
                 information.setText("Congratulation!!");
             }
         }else if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])>200){
             sprite.setImage(flipimage);
             exclamationMark.setVisible(false);
+            E_key.setVisible(false);
         }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])>200){
             sprite.setImage(image);
             exclamationMark.setVisible(false);
+            E_key.setVisible(false);
         }
         setPos(Pos[0], Pos[1]);
         if(Math.abs(getX-Pos[0])<200 && infoWindow){
@@ -126,7 +138,10 @@ public class Trigger extends Entity{
         information.setWrappingWidth(400);
         information.setX((ratio[0]*1920)/2-information.getWrappingWidth()/2);
         information.setLayoutY((ratio[1]*1080-information.getFont().getSize())-100);
-
+        E_key.setFitWidth(50*ratio[0]);
+        E_key.setFitHeight(50*ratio[1]);
+        E_key.setX((Pos[0]-Width/2-Cam[0]+50)*ratio[0]); 
+        E_key.setY((1080-Pos[1]-Height+Cam[1]-200)*ratio[1]);
     }
 
 }

@@ -71,11 +71,10 @@ public class Switch extends Entity{
             }
         }
         
-        if(show_Ekey){
-            E_key.setVisible(true);
-        }else {
+        if(!show_Ekey){
             E_key.setVisible(false);
-            show_Ekey = false;
+        }else {
+            E_key.setVisible(true);
         }
     }
 }
