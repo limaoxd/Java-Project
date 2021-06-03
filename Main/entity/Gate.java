@@ -13,7 +13,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Gate extends Entity{
     private double gateTimer;
-    public boolean isSwitchOpened=false;
+    public static boolean isSwitchOpened=false;
     private double ReferenceY;
     public Gate(double x, double y) throws FileNotFoundException{
         image = new Image(new FileInputStream("pic/gate.png"));

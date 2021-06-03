@@ -13,6 +13,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Switch extends Entity{
     public boolean isSwitchOpened=false;
+    private int timer;
     public Switch(double x, double y) throws FileNotFoundException{
         image = new Image(new FileInputStream("pic/switch.png"));
         flipimage = getFlip(image);
@@ -27,5 +28,12 @@ public class Switch extends Entity{
     @Override
     public void act(){
         setPos(getX(),getY());
+        if(isSwitchOpened){
+            sprite.setImage(flipimage);
+            if(!Gate.isSwitchOpened){
+                sprite.setImage(image);
+                isSwitchOpened=false;
+            }
+        }
     }
 }
