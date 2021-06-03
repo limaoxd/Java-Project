@@ -86,8 +86,7 @@ public class Main extends Application {
             openning.reborn(root);
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
          }
-         if (ke.getCode() == KeyCode.S && openning.isDead == false) LoadSave.save(p,s);
-         if (ke.getCode() == KeyCode.L && openning.isDead == false) LoadSave.load();
+         if (ke.getCode() == KeyCode.S && openning.isDead == false) LoadSave.save(s);
          if (ke.getCode() == KeyCode.LEFT && openning.isDead == false) p.Leftpress = true;
          else if (ke.getCode() == KeyCode.RIGHT && openning.isDead == false) p.Rightpress = true;
          else if (ke.getCode() == KeyCode.SPACE && openning.isDead == false) p.Jump = true;
@@ -145,7 +144,7 @@ public class Main extends Application {
                   root.getChildren().addAll(sw.E_key);
                   openning.step++;
                   openning.loadingOut(root);
-                  LoadSave.save(p,s);
+                  LoadSave.reset(s,p);
                }
 
                //for dead screen
@@ -245,7 +244,7 @@ public class Main extends Application {
             //savepoint
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
                LoadSave.phase++;
-               LoadSave.save(p,s);
+               LoadSave.save(s);
             }
             // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
             //    g.isSwitchOpened=true;

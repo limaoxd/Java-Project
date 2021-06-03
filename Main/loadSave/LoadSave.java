@@ -15,7 +15,7 @@ public class LoadSave {
     public static double[] temp = {0,0,0};
     public static int phase = 0;
 
-    public static void reset(){
+    public static void reset(Savepoint s,Player p){
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream("loadSave/savedata.txt"));
             writer.println(" ");
@@ -24,19 +24,29 @@ public class LoadSave {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        temp[0] = p.getX();
+        temp[1] = p.getY()+100;
+        temp[2] = phase;
+
+        s.posx = 9890;
+        s.posy = 850;
     }
 
-    public static void save(Player p,Savepoint s){
-        try {
+    public static void save(Savepoint s){
+        /*try {
             PrintWriter writer = new PrintWriter(new FileOutputStream("loadSave/savedata.txt"));
-            writer.println(p.getX());
-            writer.println(p.getY());
+            writer.println(s.getX());
+            writer.println(s.getY()+100);
             writer.println(phase);
             writer.flush();
             writer.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
+        }*/
+        temp[0] = s.getX();
+        temp[1] = s.getY()+100;
+        temp[2] = phase;
 
         switch(phase){
             case 0:
