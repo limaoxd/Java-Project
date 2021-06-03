@@ -142,6 +142,7 @@ public class Main extends Application {
                else if(openning.time >= 20 && openning.step == 1) forEach(root,openning,stage);
                else if(openning.time >= 40 && openning.step == 2) {
                   root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
+                  root.getChildren().addAll(sw.E_key);
                   openning.step++;
                   openning.loadingOut(root);
                   LoadSave.save(p,s);
@@ -230,6 +231,9 @@ public class Main extends Application {
                   p.Inject();
                }
             }
+            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
+               sw.show_Ekey = true;
+            }
             if(p.redBlood.getWidth()<=0){
                LoadSave.load();
                openning.deadScreen(root,stage);
@@ -283,7 +287,6 @@ public class Main extends Application {
       book.forEach((P -> root.getChildren().add(P.sprite)));
       //subtitle should above the player
       trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information)));
-      
 
       openning.step++;
       openning.loadingIn(root,stage);

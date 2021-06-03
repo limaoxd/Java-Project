@@ -25,7 +25,8 @@ public class Trigger extends Entity{
     public Image exclamationMarkImage;
     public Image messageBaseImage;
     public ImageView messageBase;
-
+    public boolean firstMeet; 
+    public boolean finishGame;
     public Trigger(double x,double y) throws FileNotFoundException {
         image = new Image(new FileInputStream("pic/test3.png"));
         sprite = new ImageView(image);
@@ -36,6 +37,8 @@ public class Trigger extends Entity{
         exclamationMarkImage = new Image(new FileInputStream("pic/exclamationMark.png"));
         exclamationMark = new ImageView(exclamationMarkImage);
         exclamationMark.setVisible(false);
+        firstMeet = true;
+        finishGame = false;
 
         messageBaseImage = new Image(new FileInputStream("pic/messageBase.png"));
         messageBase = new ImageView(messageBaseImage);
@@ -58,10 +61,22 @@ public class Trigger extends Entity{
         System.out.println(Pos[1]);*/
         if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])<200){
             sprite.setImage(flipimage);
-            exclamationMark.setVisible(true);
+            if(firstMeet){
+                exclamationMark.setVisible(true);
+            }
+            if(finishGame){
+                exclamationMark.setVisible(true);
+                information.setText("Congratulation!!");
+            }
         }else if(getX-Pos[0]>0 && Math.abs(getX-Pos[0])<200 ){
             sprite.setImage(image);
-            exclamationMark.setVisible(true);
+            if(firstMeet){
+                exclamationMark.setVisible(true);
+            }
+            if(finishGame){
+                exclamationMark.setVisible(true);
+                information.setText("Congratulation!!");
+            }
         }else if(getX-Pos[0]<0 && Math.abs(getX-Pos[0])>200){
             sprite.setImage(flipimage);
             exclamationMark.setVisible(false);
@@ -73,6 +88,7 @@ public class Trigger extends Entity{
         if(Math.abs(getX-Pos[0])<200 && infoWindow){
             information.setVisible(true);
             messageBase.setVisible(true);
+            firstMeet = false;
         }else  {
             infoWindow = false;
             information.setVisible(false);
