@@ -87,7 +87,6 @@ public class Openning{
         root.getChildren().remove(hintView);
         root.getChildren().remove(titleView);
 
-        LoadSave.reset();
         title = new Image("pic/loadingtitle.png");
         titleView = new ImageView(title);
         loadingIn(root,stage);
