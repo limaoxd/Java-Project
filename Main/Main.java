@@ -286,7 +286,7 @@ public class Main extends Application {
       });
       book.forEach((P -> root.getChildren().add(P.sprite)));
       //subtitle should above the player
-      trigger.forEach((T -> root.getChildren().addAll(T.messageBase,T.information,T.E_key)));
+      trigger.forEach((T -> root.getChildren().addAll(T.E_key,T.messageBase,T.information)));
 
       openning.step++;
       openning.loadingIn(root,stage);
