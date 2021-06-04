@@ -41,7 +41,7 @@ public class Main extends Application {
 
    public Main() throws FileNotFoundException{
       p = new Player(960,500);//960
-      t = new Trigger(2200,200);
+      t = new Trigger(2400,285);
       int cannonX=8850,cannonY=450;
       c = new Cannon(cannonX,cannonY);
       b = new Bullet(cannonX,cannonY+110);
@@ -275,11 +275,11 @@ public class Main extends Application {
 
    public void forEach(Group root, Openning openning, Stage stage){
       backGround.forEach((G -> root.getChildren().add(G.sprite)));
-      trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
       obj.forEach(B -> {
          root.getChildren().add(B.hitbox);
          root.getChildren().add(B.sprite);
       });
+      trigger.forEach((T -> root.getChildren().addAll(T.sprite,T.exclamationMark)));
       entity.forEach(E-> {
          root.getChildren().add(E.hitbox);
          root.getChildren().add(E.sprite);

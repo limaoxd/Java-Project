@@ -30,11 +30,11 @@ public class Trigger extends Entity{
     public Image E_keyImage;
     public ImageView E_key;
     public Trigger(double x,double y) throws FileNotFoundException {
-        image = new Image(new FileInputStream("pic/test3.png"));
+        image = new Image(new FileInputStream("pic/npc_idle.png"));
         sprite = new ImageView(image);
         flipimage = getFlip(image);
         sprite.setSmooth(true);
-        sprite.setPreserveRatio(true);
+        //sprite.setPreserveRatio(true);
 
         exclamationMarkImage = new Image(new FileInputStream("pic/exclamationMark.png"));
         exclamationMark = new ImageView(exclamationMarkImage);
@@ -56,10 +56,8 @@ public class Trigger extends Entity{
         E_keyImage = new Image(new FileInputStream("pic/e-key.png"));
         E_key = new ImageView(E_keyImage);
         E_key.setVisible(false);
-        setSize(200,300);
+        setSize(250,330);
         setPos(x,y);
-
-      
     }
 
     public void act(double getX,double getY){
