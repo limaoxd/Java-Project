@@ -86,18 +86,20 @@ public class Main extends Application {
             openning.reborn(root);
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
          }
-         if (ke.getCode() == KeyCode.S && openning.isDead == false) LoadSave.save(s);
-         if (ke.getCode() == KeyCode.LEFT && openning.isDead == false) p.Leftpress = true;
-         else if (ke.getCode() == KeyCode.RIGHT && openning.isDead == false) p.Rightpress = true;
-         else if (ke.getCode() == KeyCode.SPACE && openning.isDead == false) p.Jump = true;
-         else if (ke.getCode() == KeyCode.SHIFT && openning.isDead == false) p.Shift = true;
-         else if (ke.getCode() == KeyCode.E && openning.isDead == false) {
-            if(p.getX()-t.getX()<200) t.infoWindow = true;
-            if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
-               g.isSwitchOpened=true;
-               sw.isSwitchOpened=true;
+         if(openning.isDead == false && openning.isWin == false){
+            if (ke.getCode() == KeyCode.S) LoadSave.save(s);
+            if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
+            else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
+            else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
+            else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
+            else if (ke.getCode() == KeyCode.E) {
+               if(p.getX()-t.getX()<200) t.infoWindow = true;
+               if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
+                  g.isSwitchOpened=true;
+                  sw.isSwitchOpened=true;
+               }
+               
             }
-            
          }
       });
 
@@ -246,6 +248,10 @@ public class Main extends Application {
                LoadSave.phase++;
                LoadSave.save(s);
                if(LoadSave.phase==2) Main.t.finishGame = true;
+            }
+            //to win(change this ↓  to 1 or 2 or 3 to open it)
+            if(LoadSave.phase == 4){
+               openning.win(root,stage,entity,p);
             }
             // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
             //    g.isSwitchOpened=true;

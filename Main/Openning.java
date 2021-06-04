@@ -24,6 +24,7 @@ public class Openning{
     public Boolean isStart = false;
     public Boolean isDead = false;
     public Boolean isReborn = false;
+    public Boolean isWin = false;
     public double lightDegree = 0.1;
     public int time = 0;
     public int t;
@@ -40,10 +41,6 @@ public class Openning{
     //background
     private Image screen = new Image("pic/loginscreen.png");
     private ImageView screenView = new ImageView(screen);
-
-    //loadingImage
-    private Image loadingScreen = new Image("pic/loadingscreen.png");
-    private ImageView loadingView = new ImageView(loadingScreen);
 
     private Image deadMBase = new Image("pic/deadmessage.png");
     private ImageView deadMBaseView = new ImageView(deadMBase);
@@ -112,14 +109,17 @@ public class Openning{
 
         loadingOut(root);
 
-        root.getChildren().add(loadingView);
+        screen = new Image("pic/loadingscreen.png");
+        screenView = new ImageView(screen);
+
+        root.getChildren().add(screenView);
         root.getChildren().add(stroke);
         root.getChildren().add(bar);
         root.getChildren().add(titleView);
     }
 
     public void loadingOut(Group root){
-        root.getChildren().remove(loadingView);
+        root.getChildren().remove(screenView);
         root.getChildren().remove(bar);
         root.getChildren().remove(stroke);
         root.getChildren().remove(titleView);
@@ -203,6 +203,22 @@ public class Openning{
             root.getChildren().remove(blackOne);
             root.getChildren().remove(transparentOne);
         }
+    }
+
+    public void win(Group root, Stage stage, List<Entity> entity, Player p){
+        isWin = true;
+        
+        screen = new Image("pic/loginscreen.png");
+        screenView = new ImageView(screen);
+
+        title = new Image("pic/wintitle.png");
+        titleView = new ImageView(title);
+        titleView.setX(stage.getWidth()/2-title.getWidth()/2);
+        titleView.setY(stage.getHeight()/2-title.getHeight()/2);
+
+        root.getChildren().add(screenView);
+        root.getChildren().add(titleView);
+        entity.remove(p);
     }
 
 }
