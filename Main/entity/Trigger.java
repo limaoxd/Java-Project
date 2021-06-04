@@ -49,7 +49,7 @@ public class Trigger extends Entity{
 
         information = new Text("Welcome to the whatever");
         infoWindow  = false;
-        information.setFill(Color.RED);
+        information.setFill(Color.WHITE);
         information.setVisible(false);
         information.setFont(Font.font(null,FontWeight.NORMAL,25));
   
