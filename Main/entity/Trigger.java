@@ -98,6 +98,7 @@ public class Trigger extends Entity{
         if(Math.abs(getX-Pos[0])<200 && infoWindow){
             information.setVisible(true);
             messageBase.setVisible(true);
+            E_key.setVisible(false);
             firstMeet = false;
         }else  {
             infoWindow = false;
