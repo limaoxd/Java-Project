@@ -136,10 +136,10 @@ public class Trigger extends Entity{
         information.setWrappingWidth(400);
         information.setX((ratio[0]*1920)/2-information.getWrappingWidth()/2);
         information.setLayoutY((ratio[1]*1080-information.getFont().getSize())-100);
-        E_key.setFitWidth(50*ratio[0]);
-        E_key.setFitHeight(50*ratio[1]);
-        E_key.setX((Pos[0]-Width/2-Cam[0]+50)*ratio[0]); 
-        E_key.setY((1080-Pos[1]-Height+Cam[1]-200)*ratio[1]);
+        E_key.setFitWidth(30*ratio[0]);
+        E_key.setFitHeight(30*ratio[1]);
+        E_key.setX((Pos[0]-Width/2-Cam[0]+100)*ratio[0]); 
+        E_key.setY((1080-Pos[1]-Height+Cam[1]+350)*ratio[1]);
     }
 
 }

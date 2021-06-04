@@ -50,8 +50,8 @@ public class Switch extends Entity{
 
         E_key.setFitWidth(50*ratio[0]);
         E_key.setFitHeight(50*ratio[1]);
-        E_key.setX((Pos[0]-Width/2-Cam[0]+50)*ratio[0]); 
-        E_key.setY((1080-Pos[1]-Height+Cam[1]-200)*ratio[1]);
+        E_key.setX((Pos[0]-Width/2-Cam[0]+40)*ratio[0]); 
+        E_key.setY((1080-Pos[1]-Height+Cam[1]+250)*ratio[1]);
 
         // E_key.setFitWidth(Width*ratio[0]);
         // E_key.setFitHeight(Height*ratio[1]);
