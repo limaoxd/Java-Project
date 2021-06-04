@@ -48,8 +48,8 @@ public class Switch extends Entity{
         sprite.setX((Pos[0]-Width/2-Cam[0])*ratio[0]); 
         sprite.setY((1080-Pos[1]-Height+Cam[1])*ratio[1]);
 
-        E_key.setFitWidth(50*ratio[0]);
-        E_key.setFitHeight(50*ratio[1]);
+        E_key.setFitWidth(30*ratio[0]);
+        E_key.setFitHeight(30*ratio[1]);
         E_key.setX((Pos[0]-Width/2-Cam[0]+40)*ratio[0]); 
         E_key.setY((1080-Pos[1]-Height+Cam[1]+250)*ratio[1]);
 
