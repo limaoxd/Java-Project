@@ -27,7 +27,7 @@ public class Book extends Entity{
         setPos(x,y);
     }
 
-    public static void createBook(List<Book> book) throws FileNotFoundException{
+    public static void createBook(List<Book> book,List<Book> spikes) throws FileNotFoundException{
         int i=0;
         double length_2=0;
         double length_3=0;
@@ -57,11 +57,13 @@ public class Book extends Entity{
                     if(j==col.length()-1){
                         Book spike = new Book((int)length_3*200,150,200*(j+1-length_3/2)+50,150*(MAP.map1.length-1-i),3);
                         book.add(spike);
+                        spikes.add(spike);
                     }
                 }
                 else if(length_3>0){
                     Book spike = new Book((int)length_3*200,150,200*(j-length_3/2)+50,150*(MAP.map1.length-1-i),3);
                     book.add(spike);
+                    spikes.add(spike);
                     length_3 = 0;
                 }
             }

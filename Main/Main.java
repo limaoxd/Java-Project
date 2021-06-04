@@ -2,8 +2,12 @@ import entity.*;
 import map.*;
 import loadSave.*;
 import java.util.*;
+
+
+
 import java.math.BigInteger;
 import static java.lang.System.out;
+
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException; 
 import javafx.application.Application; 
@@ -22,9 +26,11 @@ import javafx.animation.AnimationTimer;
 public class Main extends Application {
    List<Entity> entity = new ArrayList<>();
    List<Entity> obj = new ArrayList<>();
-   List<Entity> movingBlock = new ArrayList<>();
+   List<Block> movingBlock = new ArrayList<>();
+   List<Block> Ablock = new ArrayList<>();
    List<Trigger> trigger = new ArrayList<>();
    List<Book> book = new ArrayList<>();
+   List<Book> spikes= new ArrayList<>();
    List<Background> backGround = new ArrayList<>();
    public static Player p;
    public static Trigger t;
@@ -38,6 +44,7 @@ public class Main extends Application {
    private int frameTimeIndex = 0 ;
    private double frameRatio = 0;
    private boolean arrayFilled = false ;
+   private int Ablock_now=7,Ablock_pre=0;
 
    public Main() throws FileNotFoundException{
       p = new Player(960,500);//960
@@ -50,8 +57,8 @@ public class Main extends Application {
       g = new Gate(3950,450);
       //Read map and build
       Background.createBg(backGround);
-      Book.createBook(book);
-      Block.createBlock(obj,movingBlock);
+      Book.createBook(book,spikes);
+      Block.createBlock(obj,movingBlock,Ablock);
    }
 
    public static void main(String args[]) throws FileNotFoundException{
@@ -220,10 +227,39 @@ public class Main extends Application {
                      }
                   }
                }
-               for(Entity B : movingBlock)
-                  if(E.hitbox.intersects(B.hitbox.getBoundsInLocal()))
-                     E.setMx(B.getMx());
+               for(Block B : movingBlock){
+                  if(E.hitbox.intersects(B.hitbox.getBoundsInLocal())){
+                     E.landing=true;
+                     if(B.getType()==3){
+                        E.setMx(B.getMx());
+                     }
+                     else if(B.getType()==2){
+                        for(Block aB:Ablock) aB.isVisible=false;
+                        Ablock_now=7;
+                        Ablock_pre=0;
+                        E.setMy(B.getMy()+0.3);
+                     }
+                  }
+               }
+               Ablock.get(Ablock_now).isVisible=true;
+               if(E.hitbox.intersects(Ablock.get(Ablock_now).hitbox.getBoundsInLocal())){
+                  Ablock.get(Ablock_pre).isVisible=false;
+                  Ablock_pre=Ablock_now;
+                  Ablock_now=Ablock.get(Ablock_now).nextBlock;
+               }
             }
+            for(Book spike:spikes){
+               if(p.getY()<spike.getY()+(spike.getH()/2)&&
+                  p.getY()>spike.getY()-(spike.getH()/2)&&
+                  p.getX()>spike.getX()-(spike.getW()/2)&&
+                  p.getX()<spike.getX()+(spike.getW()/2)){
+                  if(openning.isDead == false){
+                     p.hitBySpike = true;
+                     p.Inject();
+                  }
+               }
+            }
+
             if(p.hitbox.intersects(b.hitbox.getBoundsInLocal())){
                b.isHit=true;
                //player damaged code
@@ -249,7 +285,7 @@ public class Main extends Application {
                LoadSave.save(s);
                if(LoadSave.phase==2) Main.t.finishGame = true;
             }
-            //to win(change this ↓  to 1 or 2 or 3 to open it)
+            //to win(change this  to 1 or 2 or 3 to open it)
             if(LoadSave.phase == 4){
                openning.win(root,stage,entity,p);
             }

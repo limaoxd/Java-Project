@@ -19,7 +19,7 @@ public class Player extends Entity{
    public Rectangle redBlood;
    public Rectangle bloodbarBase;
    public ImageView bloodbar;
-   public boolean hitByBullet = false;
+   public boolean hitByBullet = false,hitBySpike = false;
    public boolean damaged =false;
    public boolean newBornInGame = true;
    public double health_value;
@@ -118,10 +118,15 @@ public class Player extends Entity{
          health_value = 650;
          newBornInGame = false;
       }else{
-         if(hitByBullet){
-            health_value = redBlood.getWidth()-250;
+         if(hitByBullet||hitBySpike){
+            if(hitBySpike)
+               health_value = 0;
+            if(hitByBullet)
+               health_value = redBlood.getWidth()-200;
+
             redBlood.setWidth(health_value);
             hitByBullet = false;
+            hitBySpike  = false;
             damaged = true;
             if(redBlood.getWidth()<=0){
                setMy(0);
@@ -242,12 +247,16 @@ public class Player extends Entity{
                anim_type=1;
             flip=true;
          }
-         else if(landing&&Motion[1]<=0&&Motion[1]>-0.3)
+         else if(landing&&Motion[1]<=0&&Motion[1]>-0.3||Motion[1]==4.3||Motion[1]==-3.7)
             anim_type=0;
       }
       else {
          Motion[0]=-10;
+         Motion[1]=5;
          timer++;
+         if(timer>10/frameRate&&damaged){
+            Motion[1]=0;
+         }
          if(timer>20/frameRate||!damaged){//let damaged be false when respwan
             timer=0;
             damaged=false;
