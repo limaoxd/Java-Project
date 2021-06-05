@@ -103,7 +103,9 @@ public class Main extends Application {
             else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
             else if (ke.getCode() == KeyCode.SHIFT) p.Shift = true;
             else if (ke.getCode() == KeyCode.E) {
-               if(p.getX()-t.getX()<200) t.infoWindow = true;
+               if(p.getX()-t.getX()<200) {
+                  t.conversationCount++;
+                  t.infoWindow = true;}
                if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){
                   g.isSwitchOpened=true;
                   sw.isSwitchOpened=true;
@@ -286,7 +288,7 @@ public class Main extends Application {
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
                LoadSave.phase++;
                LoadSave.save(s);
-               if(LoadSave.phase==2) Main.t.finishGame = true;
+               if(LoadSave.phase==3) {Main.t.finishGame = true;}
             }
             //to win(change this  to 1 or 2 or 3 to open it)
             if(LoadSave.phase == 4){
