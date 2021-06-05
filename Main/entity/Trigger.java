@@ -97,36 +97,48 @@ public class Trigger extends Entity{
         }
         setPos(Pos[0], Pos[1]);
         if(Math.abs(getX-Pos[0])<200 && infoWindow){
-            messageBase.setVisible(true);
-            information.setVisible(true);
             if(!finishGame){
                 switch(conversationCount){
                     case 1:
                         information.setText("......哦,真是稀奇啊，如果是頭腦正常的人應該不會過來這裡.");
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 2:
                         information.setText("要是你和之前的笨蛋們一樣，想要在這充滿危險的古城找到寶藏的話");
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 3:
                         information.setText("那就去吧，然後淒慘的死去吧. 呵呵呵");
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 4:
                         information.setText("怎麼了？決定放棄了？");
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 5:
                         information.setText("呵呵呵 OUO");
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 6:
                         information.setText("那裡面充滿各種危險的機關，大砲，陷阱，各種機關.");
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         break;
                     case 7:
                         information.setText("沒有進去是明智的選擇,哈哈哈.....");
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                        messageBase.setVisible(true);
+                        information.setVisible(true);
                         E_key.setVisible(false);
                         firstMeet = false;
                         
@@ -135,12 +147,14 @@ public class Trigger extends Entity{
                         information.setText("沒有進去是明智的選擇,哈哈哈.....");
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
-                        
+                        messageBase.setVisible(false);
+                        information.setVisible(false);
                         break;
                 }
             }else{
                 if(resetCount)  {conversationCount = 1; resetCount = false;}
-               
+                messageBase.setVisible(true);
+                information.setVisible(true);
                 switch(conversationCount){
                     case 1:
                         information.setText(".......,你繞了大半圈又回到這裡了呢.");
@@ -153,11 +167,14 @@ public class Trigger extends Entity{
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
                         E_key.setVisible(false);
+                        exclamationMark.setVisible(false);
                         break;
                     default:
                         information.setText("呵呵呵 OUO");
                         if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
                         else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                        E_key.setVisible(false);
+                        exclamationMark.setVisible(false);
                         break;
                 }
             }
