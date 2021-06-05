@@ -31,6 +31,19 @@ public class LoadSave {
         s.posy = 850;
     }
 
+    public static void testSave(Player p){
+        try {
+            PrintWriter writer = new PrintWriter(new FileOutputStream("loadSave/savedata.txt"));
+            writer.println(p.getX());
+            writer.println(p.getY()+100);
+            writer.println(phase);
+            writer.flush();
+            writer.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void save(Savepoint s){
         try {
             PrintWriter writer = new PrintWriter(new FileOutputStream("loadSave/savedata.txt"));
@@ -54,6 +67,10 @@ public class LoadSave {
                 break;
             case 2:
                 s.posx = 4100;
+                s.posy = 1750;
+                break;
+            case 3:
+                s.posx = 107;
                 s.posy = 1750;
                 break;
             default:

@@ -1,6 +1,7 @@
 import entity.*;
 import map.*;
 import loadSave.*;
+import music.*;
 import java.util.*;
 
 
@@ -85,6 +86,8 @@ public class Main extends Application {
       Openning openning = new Openning();
       openning.openningScreen(root,stage,scene);
 
+      Music.play();
+
       scene.setOnKeyPressed(ke -> {
          if (ke.getCode() == KeyCode.ENTER && openning.isStart == false){
             openning.start(root,stage,scene);
@@ -94,7 +97,7 @@ public class Main extends Application {
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
          }
          if(openning.isDead == false && openning.isWin == false){
-            if (ke.getCode() == KeyCode.S) LoadSave.save(s);
+            //if (ke.getCode() == KeyCode.S) LoadSave.testSave(p);
             if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
             else if (ke.getCode() == KeyCode.RIGHT) p.Rightpress = true;
             else if (ke.getCode() == KeyCode.SPACE) p.Jump = true;
@@ -136,7 +139,6 @@ public class Main extends Application {
             if (frameTimeIndex == 0) {
                arrayFilled = true ;
             }
-
             
             if (openning.isStart == true) {
                openning.time = (openning.time + 1) % frameTimes.length ;
@@ -154,6 +156,7 @@ public class Main extends Application {
                   openning.step++;
                   openning.loadingOut(root);
                   LoadSave.reset(s,p);
+                  Music.change("ProjectMusic.mp3");
                }
 
                //for dead screen
@@ -288,6 +291,7 @@ public class Main extends Application {
             //to win(change this  to 1 or 2 or 3 to open it)
             if(LoadSave.phase == 4){
                openning.win(root,stage,entity,p);
+               Music.change("StartingMusic.mp3");
             }
             // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
             //    g.isSwitchOpened=true;
