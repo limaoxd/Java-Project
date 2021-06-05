@@ -96,6 +96,9 @@ public class Main extends Application {
             openning.reborn(root);
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
          }
+         if (ke.getCode() == KeyCode.ENTER && openning.isWin == true && openning.isAfter == false){
+            openning.afterstory(root,p);
+         }
          if(openning.isDead == false && openning.isWin == false){
             //if (ke.getCode() == KeyCode.S) LoadSave.testSave(p);
             if (ke.getCode() == KeyCode.LEFT) p.Leftpress = true;
@@ -168,6 +171,12 @@ public class Main extends Application {
                   }
                   if(openning.time >= 1 && openning.isReborn == true){
                      openning.rebornLoading(root);
+                  }
+               }
+
+               if(openning.isWin == true && openning.isAfter == true){
+                  if(openning.time >= 3 && openning.lightDegree >= 0){
+                     openning.winstart(root);
                   }
                }
             }
@@ -289,12 +298,14 @@ public class Main extends Application {
                LoadSave.phase++;
                LoadSave.save(s);
                if(LoadSave.phase==4) {Main.t.finishGame = true;}
+
+               //to win(change this  to 1 or 2 or 3 to open it)
+               if(LoadSave.phase == 4){
+                  openning.win(root,stage,entity,p);
+                  Music.change("StartingMusic.mp3");
+               }
             }
-            //to win(change this  to 1 or 2 or 3 to open it)
-            if(LoadSave.phase == 4){
-               openning.win(root,stage,entity,p);
-               Music.change("StartingMusic.mp3");
-            }
+
             // if(p.hitbox.intersects(sw.hitbox.getBoundsInLocal())){//open switch
             //    g.isSwitchOpened=true;
             //    sw.isSwitchOpened=true;

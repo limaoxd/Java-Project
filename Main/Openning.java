@@ -21,10 +21,11 @@ import javafx.stage.Stage;
 
 public class Openning{
 
-    public Boolean isStart = false;
-    public Boolean isDead = false;
-    public Boolean isReborn = false;
-    public Boolean isWin = false;
+    public boolean isStart = false;
+    public boolean isDead = false;
+    public boolean isReborn = false;
+    public boolean isWin = false;
+    public boolean isAfter = false;
     public double lightDegree = 0.1;
     public int time = 0;
     public int t;
@@ -207,18 +208,48 @@ public class Openning{
 
     public void win(Group root, Stage stage, List<Entity> entity, Player p){
         isWin = true;
+
+        lightDegree = 1;
         
-        screen = new Image("pic/loginscreen.png");
-        screenView = new ImageView(screen);
+        dScreen.setFill(Color.rgb(255,255,255,lightDegree));
+        dScreen.setStroke(Color.rgb(255,255,255,lightDegree));
+        dScreen.setHeight(1080);
+        dScreen.setWidth(1920);
+        dScreen.setX(0);
+        dScreen.setY(0);
 
         title = new Image("pic/wintitle.png");
         titleView = new ImageView(title);
+
         titleView.setX(stage.getWidth()/2-title.getWidth()/2);
         titleView.setY(stage.getHeight()/2-title.getHeight()/2);
 
-        root.getChildren().add(screenView);
+        root.getChildren().add(dScreen);
         root.getChildren().add(titleView);
-        entity.remove(p);
+        root.getChildren().add(hintView);
+    }
+
+    public void winstart(Group root){
+        time = 0;
+        lightDegree -= 0.1;
+        if(lightDegree <= 0){
+            root.getChildren().remove(dScreen);
+            isWin = false;
+        }
+        else{
+            dScreen.setFill(Color.rgb(255,255,255,lightDegree));
+            dScreen.setStroke(Color.rgb(255,255,255,lightDegree));
+        }
+    }
+
+    public void afterstory(Group root,Player p){
+        isAfter = true;
+
+        root.getChildren().remove(titleView);
+        root.getChildren().remove(hintView);
+        p.setPos(1541,400);
+
+        winstart(root);
     }
 
 }
