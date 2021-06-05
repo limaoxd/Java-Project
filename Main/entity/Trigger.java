@@ -59,7 +59,7 @@ public class Trigger extends Entity{
         infoWindow  = false;
         information.setFill(Color.WHITE);
         information.setVisible(false);
-        information.setFont(Font.loadFont("file:C:/Users/leo90/Java_project_final/Main/font/TaipeiSansTCBeta-Light.ttf", 25));
+        information.setFont(Font.font(null,25));
         conversationCount = 0;
         resetCount = true;
 
