@@ -288,7 +288,7 @@ public class Main extends Application {
             if(p.hitbox.intersects(s.hitbox.getBoundsInLocal())){
                LoadSave.phase++;
                LoadSave.save(s);
-               if(LoadSave.phase==4) {Main.t.finishGame = true;}
+               if(LoadSave.phase==3) {Main.t.finishGame = true;}
             }
             //to win(change this  to 1 or 2 or 3 to open it)
             if(LoadSave.phase == 4){
