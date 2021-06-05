@@ -97,7 +97,10 @@ public class Player extends Entity{
 
    public void Camera(){
       World[0]=Pos[0]-960;
-      World[1]=Pos[1]-100;
+      if(getY()<1250)
+         World[1]=Pos[1]-100;
+      else
+         World[1]=Pos[1]-300;
 
       if(World[0]-Cam[0]>80*ratio[0]){
          Cam[0]=World[0]-80*ratio[0];
