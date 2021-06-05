@@ -92,6 +92,10 @@ public class Main extends Application {
          if (ke.getCode() == KeyCode.ENTER && openning.isStart == false){
             openning.start(root,stage,scene);
          }
+         if (ke.getCode() == KeyCode.ENTER && openning.isStart == true && openning.isBefore == false && openning.time >40){
+            openning.loadingOut(root);
+            openning.isBefore = true;
+         }
          if (ke.getCode() == KeyCode.ENTER && openning.isDead == true && openning.isReborn == false){
             openning.reborn(root);
             p.setPos(LoadSave.temp[0],LoadSave.temp[1]);
@@ -156,10 +160,13 @@ public class Main extends Application {
                }
                else if(openning.time >= 20 && openning.step == 1) forEach(root,openning,stage);
                else if(openning.time >= 40 && openning.step == 2) {
+                  openning.step++;
+                  openning.beforestory(root,stage);
+               }
+               else if(openning.isBefore == true && openning.step == 3){
+                  openning.step++;
                   root.getChildren().addAll(p.bloodbarBase,p.redBlood,p.bloodbar);
                   root.getChildren().addAll(sw.E_key);
-                  openning.step++;
-                  openning.loadingOut(root);
                   LoadSave.reset(s,p);
                   Music.change("ProjectMusic.mp3");
                }

@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class Openning{
 
     public boolean isStart = false;
+    public boolean isBefore = false;
     public boolean isDead = false;
     public boolean isReborn = false;
     public boolean isWin = false;
@@ -56,7 +57,7 @@ public class Openning{
     public void openningScreen(Group root, Stage stage, Scene scene){
 
         hintView.setX(stage.getWidth()/2-hint.getWidth()/2);
-        hintView.setY(stage.getHeight()*3/4-hint.getHeight()/2);
+        hintView.setY(stage.getHeight()*8/9-hint.getHeight()/2);
 
         titleView.setX(stage.getWidth()/2-title.getWidth()/2);
         titleView.setY(stage.getHeight()/3-title.getHeight()/2);
@@ -69,7 +70,7 @@ public class Openning{
 
     public void setImage(Stage stage){
         hintView.setX(stage.getWidth()/2-hint.getWidth()/2);
-        hintView.setY(stage.getHeight()*3/4-hint.getHeight()/2);
+        hintView.setY(stage.getHeight()*8/9-hint.getHeight()/2);
 
         titleView.setX(stage.getWidth()/2-title.getWidth()/2);
         titleView.setY(stage.getHeight()/3-title.getHeight()/2);
@@ -119,11 +120,29 @@ public class Openning{
         root.getChildren().add(titleView);
     }
 
+    public void beforestory(Group root,Stage stage){
+
+        root.getChildren().remove(bar);
+        root.getChildren().remove(stroke);
+        root.getChildren().remove(titleView);
+
+        title = new Image("pic/beforetitle.png");
+        titleView = new ImageView(title);
+
+        titleView.setX(stage.getWidth()/2-title.getWidth()/2);
+        titleView.setY(stage.getHeight()/2-title.getHeight()/2);
+        root.getChildren().add(titleView);
+
+        hintView.setY(stage.getHeight()*36/37-hint.getHeight()/2);
+        root.getChildren().add(hintView);
+    }
+
     public void loadingOut(Group root){
         root.getChildren().remove(screenView);
         root.getChildren().remove(bar);
         root.getChildren().remove(stroke);
         root.getChildren().remove(titleView);
+        root.getChildren().remove(hintView);
     }
 
     public void deadScreen(Group root, Stage stage){
