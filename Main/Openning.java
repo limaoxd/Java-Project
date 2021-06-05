@@ -226,7 +226,7 @@ public class Openning{
 
         root.getChildren().add(dScreen);
         root.getChildren().add(titleView);
-        root.getChildern().add(hintView);
+        root.getChildren().add(hintView);
     }
 
     public void winstart(Group root){
