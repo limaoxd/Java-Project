@@ -1,24 +1,14 @@
 package entity;
-import static java.lang.System.out;
+
 import java.io.FileInputStream; 
 import java.io.FileNotFoundException;
-import java.io.UnsupportedEncodingException;
 import java.lang.Math;
-
-import javax.swing.LayoutFocusTraversalPolicy;
-import javax.swing.text.html.StyleSheet;
-
-import javafx.application.Application;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.scene.transform.Scale;
 public class Trigger extends Entity{
     public boolean infoWindow ;
     public Text information;
@@ -31,7 +21,8 @@ public class Trigger extends Entity{
     public Image E_keyImage;
     public ImageView E_key;
     public int conversationCount;
-    public boolean resetCount;
+    public boolean resetCount1;
+    public boolean resetCount2;
     public Image spriteLaughImage;
     public Image spriteLaughFlip;
     public ImageView spritelaugh;
@@ -61,7 +52,8 @@ public class Trigger extends Entity{
         information.setVisible(false);
         information.setFont(Font.font(null,25));
         conversationCount = 0;
-        resetCount = true;
+        resetCount1 = true;
+        resetCount2 = true;
 
   
         E_keyImage = new Image(new FileInputStream("pic/e-key.png"));
@@ -98,61 +90,80 @@ public class Trigger extends Entity{
         setPos(Pos[0], Pos[1]);
         if(Math.abs(getX-Pos[0])<200 && infoWindow){
             if(!finishGame){
-                switch(conversationCount){
-                    case 1:
-                        information.setText("......哦,真是稀奇啊，如果是頭腦正常的人應該不會過來這裡.");
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 2:
-                        information.setText("要是你和之前的笨蛋們一樣，想要在這充滿危險的古城找到寶藏的話");
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 3:
-                        information.setText("那就去吧，然後淒慘的死去吧. 呵呵呵");
-                        if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
-                        else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 4:
-                        information.setText("怎麼了？決定放棄了？");
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 5:
-                        information.setText("呵呵呵 OUO");
-                        if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
-                        else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 6:
-                        information.setText("那裡面充滿各種危險的機關，大砲，陷阱，各種機關.");
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        break;
-                    case 7:
-                        information.setText("沒有進去是明智的選擇,哈哈哈.....");
-                        if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
-                        else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
-                        messageBase.setVisible(true);
-                        information.setVisible(true);
-                        E_key.setVisible(false);
-                        firstMeet = false;
-                        
-                        break;
-                    default:
-                        information.setText("沒有進去是明智的選擇,哈哈哈.....");
-                        if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
-                        else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
-                        messageBase.setVisible(false);
-                        information.setVisible(false);
-                        break;
+                if(firstMeet){
+                    switch(conversationCount){
+                        case 1:
+                            information.setText("......哦,真是稀奇啊，如果是頭腦正常的人應該不會過來這裡.");
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 2:
+                            information.setText("要是你和之前的笨蛋們一樣，想要在這充滿危險的古城找到寶藏的話");
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 3:
+                            information.setText("那就去吧，然後淒慘的死去吧. 呵呵呵");
+                            if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
+                            else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 4:
+                            messageBase.setVisible(false);
+                            information.setVisible(false);
+                            E_key.setVisible(false);
+                            exclamationMark.setVisible(false);
+                            break;
+                        default:
+                            messageBase.setVisible(false);
+                            information.setVisible(false);
+                            E_key.setVisible(false);
+                            exclamationMark.setVisible(false);
+                            firstMeet = false;
+                            break;
+
+                    }
+                }else{
+                    if(resetCount1)  {conversationCount = 1; resetCount1 = false;}
+                    switch(conversationCount){
+                        case 1:
+                            information.setText("怎麼了？決定放棄了？");
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 2:
+                            information.setText("呵呵呵 OUO");
+                            if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
+                            else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 3:
+                            information.setText("那裡面充滿各種危險的機關，大砲，陷阱，各種機關.");
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            break;
+                        case 4:
+                            information.setText("沒有進去是明智的選擇,哈哈哈.....");
+                            if(getX-Pos[0]>0) sprite.setImage(spriteLaughImage);
+                            else if(getX-Pos[0]<0) sprite.setImage(spriteLaughFlip);
+                            messageBase.setVisible(true);
+                            information.setVisible(true);
+                            E_key.setVisible(false);
+                            break;
+                        default:
+                            conversationCount = 0;
+                            messageBase.setVisible(false);
+                            information.setVisible(false);
+                            E_key.setVisible(false);
+
+                    }
                 }
+   
+                
             }else{
-                if(resetCount)  {conversationCount = 1; resetCount = false;}
+                if(resetCount2)  {conversationCount = 1; resetCount2 = false;}
                 messageBase.setVisible(true);
                 information.setVisible(true);
                 switch(conversationCount){
