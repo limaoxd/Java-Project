@@ -133,7 +133,7 @@ public class Openning{
         titleView.setY(stage.getHeight()/2-title.getHeight()/2);
         root.getChildren().add(titleView);
 
-        hintView.setY(stage.getHeight()*36/37-hint.getHeight()/2);
+        hintView.setY(stage.getHeight()*18/19-hint.getHeight()/2);
         root.getChildren().add(hintView);
     }
 
@@ -155,6 +155,9 @@ public class Openning{
 
         deadMBaseView.setX(stage.getWidth()/2-deadMBase.getWidth()/2);
         deadMBaseView.setY(stage.getHeight()/2-deadMBase.getHeight()/2);
+
+        hintView.setX(stage.getWidth()/2-hint.getWidth()/2);
+        hintView.setY(stage.getHeight()*8/9-hint.getHeight()/2);
 
         time = 0;
         isDead = true;
@@ -242,6 +245,9 @@ public class Openning{
 
         titleView.setX(stage.getWidth()/2-title.getWidth()/2);
         titleView.setY(stage.getHeight()/2-title.getHeight()/2);
+
+        hintView.setX(stage.getWidth()/2-hint.getWidth()/2);
+        hintView.setY(stage.getHeight()*8/9-hint.getHeight()/2);
 
         root.getChildren().add(dScreen);
         root.getChildren().add(titleView);

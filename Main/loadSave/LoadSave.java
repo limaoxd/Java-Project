@@ -66,8 +66,8 @@ public class LoadSave {
                 s.posy = 2350;
                 break;
             case 2:
-                s.posx = 4100;
-                s.posy = 1750;
+                s.posx = 4561;
+                s.posy = 2350;
                 break;
             case 3:
                 s.posx = 107;
