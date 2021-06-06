@@ -132,6 +132,7 @@ public class Main extends Application {
       stage.setFullScreen(true);
       stage.setTitle("Emerald_Pendant");
       stage.setScene(scene);
+      stage.getIcons().add(new Image("pic/project_icon.png"));
       stage.show();
       openning.setImage(stage);
 
