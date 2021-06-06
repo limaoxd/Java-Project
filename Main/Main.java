@@ -117,7 +117,6 @@ public class Main extends Application {
                   g.isSwitchOpened=true;
                   sw.isSwitchOpened=true;
                }
-               
             }
          }
       });
