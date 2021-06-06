@@ -48,7 +48,7 @@ public class Main extends Application {
    private int Ablock_now=7,Ablock_pre=0;
 
    public Main() throws FileNotFoundException{
-      p = new Player(960,500);//960
+      p = new Player(1400,500);//960
       t = new Trigger(2400,285);
       int cannonX=8850,cannonY=450;
       c = new Cannon(cannonX,cannonY);
@@ -130,7 +130,7 @@ public class Main extends Application {
       });
 
       stage.setFullScreen(true);
-      stage.setTitle("test");
+      stage.setTitle("Emerald_Pendant");
       stage.setScene(scene);
       stage.show();
       openning.setImage(stage);

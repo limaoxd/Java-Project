@@ -52,9 +52,7 @@ public class Player extends Entity{
       bloodbar = new ImageView(blood);
       hitbox = new Rectangle();
       hitbox.setFill(Color.TRANSPARENT);
-      /*hitbox.setStroke(Color.LIGHTGREEN);
-      hitbox.setStrokeWidth(2);
-      sprite.setSmooth(true);*/
+      //sprite.setSmooth(true);
       bloodbar.setSmooth(true);
       //sprite.setPreserveRatio(true);
       setSize(200,280);
@@ -102,10 +100,10 @@ public class Player extends Entity{
       else
          World[1]=Pos[1]-300;
 
-      if(World[0]-Cam[0]>80*ratio[0]){
+      if(World[0]-Cam[0]>80*ratio[0]&&Pos[0]<12150){
          Cam[0]=World[0]-80*ratio[0];
       }
-      else if(World[0]-Cam[0]<-80*ratio[0]){
+      else if(World[0]-Cam[0]<-80*ratio[0]&&Pos[0]>950){
          Cam[0]=World[0]+80*ratio[0];
       }
       if(World[1]-Cam[1]>300*ratio[1]){
