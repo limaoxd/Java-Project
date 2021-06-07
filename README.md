@@ -8,8 +8,8 @@ Program-Design II project
 
 編譯
 
-javac --module-path C:/javafx-sdk-16/lib --add-modules javafx.controls,javafx.media -encoding UTF8 Main.java
+javac --module-path 你的sdk的lib位置 --add-modules javafx.controls,javafx.media -encoding UTF8 Main.java
 
 執行
 
-java --module-path C:/javafx-sdk-16/lib --add-modules javafx.controls,javafx.media Main
+java --module-path 你的sdk的lib位置 --add-modules javafx.controls,javafx.media Main
